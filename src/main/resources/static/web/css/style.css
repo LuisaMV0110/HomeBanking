@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Source Sans Pro', sans-serif;
+}
+.account{
+background: rgb(9,9,121);
+background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
+}
+.manager{
+background: rgb(9,9,121);
+background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);    
+}
+.tableAccount{
+background-color: rgba(240, 248, 255, 0.963);
+border-radius: 2%;
+margin: 0 6rem 0 6rem;
+min-height: 60vh;
+box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.338);
+}
+.table_client{
+background-color: aliceblue;
+margin: 0 10rem 0 10rem;
+min-height: 20vh;
+border-radius: 1rem;
+}
+td{
+text-align: center;
+}
+.contH1Account{
+min-height: 16vh;
+}
+.accountH1{
+color: aliceblue;
+text-shadow: 1px 5px 5px rgba(0, 0, 0, 0.473);
+font-size: 3rem;
+}
+.accountH2{
+color: rgba(32, 77, 255, 0.699);
+text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.304);
+font-size: 2.3rem;
+}
+#json{
+height: 20rem;
+width: 35rem;
+overflow:scroll;
+border: 1px rgb(47, 78, 255) solid;
+background-color: aliceblue;
+border-radius: 1rem;
+}
+#form{
+width: 30rem;
+}
+.formjson{
+margin: 5rem;
+padding-top: 2rem;
+margin-bottom: 3rem;
+background-color: rgba(240, 248, 255, 0.963);
+border-radius: 1rem;
+}
+@media screen and (max-width:768px){
+.tableAccount{
+margin: 0 2rem 0 2rem;
+}  
+.accountH1{
+font-size: 2rem;
+}
+.accountH2{
+font-size: 1.5rem;
+}
+}
+@media screen and (max-width:408px){
+.tableAccount{
+margin: 0 1rem 0 1rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
