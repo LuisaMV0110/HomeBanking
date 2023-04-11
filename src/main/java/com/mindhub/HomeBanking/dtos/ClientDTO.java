@@ -10,7 +10,7 @@ public class ClientDTO {
     private String firstName;
     private String lastName;
     private String email;
-    Set<AccountDTO> accounts;
+    private Set<AccountDTO> accounts;
     public ClientDTO(Client client) {
         this.id = client.getId();
         this.firstName = client.getFirstName();
