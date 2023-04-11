@@ -20,12 +20,11 @@ public class Transaction {
     @JoinColumn(name="account_id")
     private Account account;
     public Transaction(){}
-    public Transaction(TransactionType type, double amount, String description, LocalDateTime date, Account account){
+    public Transaction(TransactionType type, double amount, String description, LocalDateTime date){
         this.type = type;
         this.amount = amount;
         this.description = description;
         this.date = date;
-        this.account = account;
     }
     public long getId() {return id;}
     public TransactionType getType() {return type;}
