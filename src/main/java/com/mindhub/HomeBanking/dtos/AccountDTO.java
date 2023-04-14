@@ -12,7 +12,7 @@ public class AccountDTO {
     private String number;
     private LocalDateTime creationDate;
     private double balance;
-    Set<TransactionDTO> transactions;
+    private Set<TransactionDTO> transactions;
     public AccountDTO(Account account){
         this.id = account.getId();
         this.number = account.getNumber();
