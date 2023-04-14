@@ -6,20 +6,33 @@ padding: 0;
 box-sizing: border-box;
 font-family: 'Source Sans Pro', sans-serif;
 }
+.main_account{
+min-height: 80vh;
+}
 .account{
-background: rgb(9,9,121);
-background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
+background-image: url(../img/abstract-envelope.png);
 }
 .manager{
 background: rgb(9,9,121);
 background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);    
 }
 .tableAccount{
-background-color: rgba(240, 248, 255, 0.963);
+background-color: #0a5cb8;
 border-radius: 2%;
-margin: 0 6rem 0 6rem;
-min-height: 60vh;
-box-shadow: 1px 5px 5px rgba(0, 0, 0, 0.338);
+width: 50rem;
+margin: 3rem 0rem 3rem 0rem;
+max-width: 60rem;
+min-height: 20rem;
+box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
+}
+.tableLoans{
+background-color: #1466c3;
+border-radius: 2%;
+margin: 0rem 0rem 3rem 0rem;
+width: 50rem;
+max-width: 60rem;
+min-height: 20rem;
+box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 }
 .table_client{
 background-color: aliceblue;
@@ -27,8 +40,9 @@ margin: 0 10rem 0 10rem;
 min-height: 20vh;
 border-radius: 1rem;
 }
-td{
+td,th{
 text-align: center;
+color: aliceblue;
 }
 .contH1Account{
 min-height: 16vh;
@@ -39,8 +53,8 @@ text-shadow: 1px 5px 5px rgba(0, 0, 0, 0.473);
 font-size: 3rem;
 }
 .accountH2{
-color: rgba(32, 77, 255, 0.699);
-text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.304);
+color: rgb(255, 255, 255);
+text-shadow: 1px 3px 5px rgba(255, 255, 255, 0.489);
 font-size: 2.3rem;
 }
 #json{
@@ -61,9 +75,22 @@ margin-bottom: 3rem;
 background-color: rgba(240, 248, 255, 0.963);
 border-radius: 1rem;
 }
+/* Footer */
+footer{
+background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgb(0, 76, 255) 100%); 
+min-height: 20vh;
+position: relative;
+}
 @media screen and (max-width:768px){
 .tableAccount{
-margin: 0 2rem 0 2rem;
+margin: 1rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
 }  
 .accountH1{
 font-size: 2rem;
@@ -74,12 +101,22 @@ font-size: 1.5rem;
 }
 @media screen and (max-width:408px){
 .tableAccount{
-margin: 0 1rem 0 1rem;
+margin: 1rem 0rem 1rem 0rem;
+width: 18rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 18rem;
+min-height: 12rem;
 } 
 th{
 font-size: 0.7rem;
 }
 td{
 font-size: 0.8rem;
+}
+footer{
+min-height: 20vh;
 }
 }

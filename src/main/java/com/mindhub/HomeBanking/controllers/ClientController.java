@@ -18,18 +18,22 @@ import static java.util.stream.Collectors.toList;
 
 
 @RestController
+@RequestMapping("/api")
 public class ClientController {
     @Autowired
     private ClientRepository clientRepository;
 
-    @RequestMapping("/api/clients")
+    @RequestMapping("/clients")
     public List<ClientDTO> getClients() {
-        return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
+        return clientRepository.findAll()
+                .stream()
+                .map(client -> new ClientDTO(client))
+                .collect(toList());
     }
 
-    @RequestMapping("/api/clients/{id}")
-    public ClientDTO getClient(@PathVariable Long id) {
+    @RequestMapping("/clients/{id}")
+    public Optional<ClientDTO> getClient(@PathVariable Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
-        return optionalClient.map(client -> new ClientDTO(client)).orElse(null);
+        return optionalClient.map(client -> new ClientDTO(client));
     };
 }

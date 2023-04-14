@@ -9,7 +9,8 @@ const app = createApp({
         amount: '',
         description: '',
         params: '',
-        accountId: ''
+        accountId: '',
+        accountId2: []
         }
     },
     created(){
@@ -23,6 +24,7 @@ loadData(){
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get('id');
             this.accountId = response.data.find(account=> account.id == this.id);
+            this.accountId2 = this.accountId.transactions.sort((x,y) => y.id - x.id);
     }).catch(err => console.log(err));
     },
     formatCurrency(amount){

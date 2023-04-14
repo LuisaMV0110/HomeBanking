@@ -10,7 +10,12 @@ const app = createApp({
         firstName: '',
         lastName: '',
         params: '',
-        accountId: []
+        accountId: '',
+        accountId2:[],
+        loans: [],
+        name:'',
+        amount: '',
+        payments:''
         }
     },
     created(){
@@ -19,11 +24,13 @@ const app = createApp({
     methods:{
 loadData(){
         axios
-        .get('http://localhost:8080/api/clients')
+        .get('http://localhost:8080/api/clients'+ this.id)
         .then(response => {
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get('id');
             this.accountId = response.data.find(account=> account.id == this.id);
+            this.accountId2 = this.accountId.accounts.sort((x,y) => x.id - y.id);
+            this.loans = this.accountId.loans.sort((x,y) => x.id - y.id);
     }).catch(err => console.log(err));
     },
     formatCurrency(balance){

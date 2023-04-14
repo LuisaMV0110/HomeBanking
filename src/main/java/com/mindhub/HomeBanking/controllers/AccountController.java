@@ -26,8 +26,8 @@ public class AccountController {
                 .collect(toList());
     }
     @RequestMapping("/api/accounts/{id}")
-    public AccountDTO getAccount(@PathVariable Long id){
+    public Optional<AccountDTO> getAccount(@PathVariable Long id){
         Optional<Account> optionalAccount = accountRepository.findById(id);
-        return optionalAccount.map(account -> new AccountDTO(account)).orElse(null);
+        return optionalAccount.map(account -> new AccountDTO(account));
     };
 }
