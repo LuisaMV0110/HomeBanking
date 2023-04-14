@@ -14,7 +14,7 @@
 <body class="account">
     <main id="app">
         <section class="contH1Account d-flex align-items-center justify-content-center mt-3">
-        <h1 class="text-center accountH1">¡Hi, this account is {{transactionId.number}}!</h1>
+        <h1 class="text-center accountH1">¡Hi, this account is {{accountId.number}}!</h1>
         </section>
         <div class="d-flex flex-column align-items-center justify-content-center tableAccount"> 
             <h2 class="accountH2 mb-4">Your Transactions</h2>      
@@ -27,7 +27,7 @@
                         <th class="text-center">Hour</th>
                     </tr>
                 </thead>
-                <tbody v-for="transaction of transactionId.transactions">
+                <tbody v-for="transaction of accountId.transactions">
                     <tr>
                         <td v-if="transaction.type=='CREDIT'" class="table-success">{{"+" + formatCurrency(transaction.amount)}}</td>
                         <td v-else class="table-danger">{{"-" + formatCurrency(transaction.amount)}}</td>

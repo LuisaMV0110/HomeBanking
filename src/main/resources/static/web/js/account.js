@@ -9,7 +9,7 @@ const app = createApp({
         amount: '',
         description: '',
         params: '',
-        transactionId: []
+        accountId: ''
         }
     },
     created(){
@@ -18,11 +18,11 @@ const app = createApp({
     methods:{
 loadData(){
         axios
-        .get('http://localhost:8080/api/accounts')
+        .get('http://localhost:8080/api/accounts/' + this.id)
         .then(response => {
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get('id');
-            this.transactionId = response.data.find(transaction=> transaction.id == this.id);
+            this.accountId = response.data.find(account=> account.id == this.id);
     }).catch(err => console.log(err));
     },
     formatCurrency(amount){

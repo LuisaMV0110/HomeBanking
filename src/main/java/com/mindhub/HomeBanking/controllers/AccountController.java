@@ -20,11 +20,14 @@ public class AccountController {
 
     @RequestMapping("/api/accounts")
     public List<AccountDTO> getAccounts(){
-        return accountRepository.findAll().stream().map(AccountDTO::new).collect(toList());
+        return accountRepository.findAll()
+                .stream()
+                .map(account -> new AccountDTO(account))
+                .collect(toList());
     }
     @RequestMapping("/api/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         Optional<Account> optionalAccount = accountRepository.findById(id);
-        return optionalAccount.map(AccountDTO::new).orElse(null);
+        return optionalAccount.map(account -> new AccountDTO(account)).orElse(null);
     };
 }
