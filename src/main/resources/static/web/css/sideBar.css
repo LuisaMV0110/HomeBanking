@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Source Sans Pro', sans-serif;
+}
+.sidebar{
+position: fixed;
+top:0;
+left: 0;
+height: 100%;
+width: 16rem;
+background-color: rgba(42, 42, 249, 0.612);
+box-shadow: 0 5px 20px white;
+}
+.sidebar .logo-details{
+height: 60px;
+width: 100%;
+}
+.sidebar .logo-details i{
+font-size: 30px;
+color: white;
+height: 50px;
+min-width: 78px;
+text-align: center;
+line-height: 50px;
+}
+.sidebar .logo-details .logo-name{
+font-size: 22px;
+font-weight: 600;
+}
