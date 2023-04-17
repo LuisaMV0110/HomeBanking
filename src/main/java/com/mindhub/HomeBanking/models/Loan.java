@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toSet;
+
 @Entity
 public class Loan {
     @Id
@@ -28,7 +30,7 @@ public class Loan {
     }
     @JsonIgnore
     public Set<Client> getClients(){
-        return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(Collectors.toSet());
+        return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(toSet());
     }
     public Set<ClientLoan> getClientLoans() {
         return clientLoans;

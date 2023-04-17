@@ -10,8 +10,8 @@ const app = createApp({
         firstName: '',
         lastName: '',
         params: '',
-        accountId: '',
-        accountId2:[],
+        ClientId: '',
+        accountId:[],
         loans: [],
         name:'',
         amount: '',
@@ -28,9 +28,9 @@ loadData(){
         .then(response => {
             this.params = new URLSearchParams(location.search);
             this.id = this.params.get('id');
-            this.accountId = response.data.find(account=> account.id == this.id);
-            this.accountId2 = this.accountId.accounts.sort((x,y) => x.id - y.id);
-            this.loans = this.accountId.loans.sort((x,y) => x.id - y.id);
+            this.ClientId = response.data.find(account=> account.id == this.id);
+            this.accountId = this.ClientId .accounts
+            this.loans = this.ClientId.loans
     }).catch(err => console.log(err));
     },
     formatCurrency(balance){

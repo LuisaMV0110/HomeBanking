@@ -19,9 +19,8 @@ background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
 .tableAccount{
 background-color: #0a5cb8;
 border-radius: 2%;
-width: 50rem;
+width: 55rem;
 margin: 3rem 0rem 3rem 0rem;
-max-width: 60rem;
 min-height: 20rem;
 box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 }
@@ -29,8 +28,7 @@ box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 background-color: #1466c3;
 border-radius: 2%;
 margin: 0rem 0rem 3rem 0rem;
-width: 50rem;
-max-width: 60rem;
+width: 55rem;
 min-height: 20rem;
 box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 }

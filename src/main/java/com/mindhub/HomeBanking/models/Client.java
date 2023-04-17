@@ -5,7 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toSet;
 
 @Entity
 public class Client {
@@ -20,6 +21,8 @@ public class Client {
     private Set<Account> accounts = new HashSet<>();
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ClientLoan> clientLoans = new HashSet<>();
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<Card> cards = new HashSet<>();
     public Client(){}
 
     public Client(String first, String last){
@@ -32,7 +35,7 @@ public class Client {
         this.email = email;
     }
     public Set<Loan> getLoans(){
-        return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(Collectors.toSet());
+        return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(toSet());
     }
     public long getId() {return id;}
     public String getFirstName() {
@@ -57,9 +60,7 @@ public class Client {
     public Set<ClientLoan> getClientLoans() {
         return clientLoans;
     }
-    public void setClientLoans(Set<ClientLoan> clientLoans) {
-        this.clientLoans = clientLoans;
-    }
+    public Set<Card> getCards() {return cards;}
     public void addAccount(Account account) {
         account.setClient(this);
         accounts.add(account);
@@ -67,6 +68,10 @@ public class Client {
     public void addClientLoan(ClientLoan clientLoan) {
         clientLoan.setClient(this);
         clientLoans.add(clientLoan);
+    }
+    public void addCard(Card card){
+        card.setClient(this);
+        cards.add(card);
     }
     @Override
     public String toString() {
@@ -76,6 +81,8 @@ public class Client {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", accounts=" + accounts +
+                ", clientLoans=" + clientLoans +
+                ", cards=" + cards +
                 '}';
     }
 }
