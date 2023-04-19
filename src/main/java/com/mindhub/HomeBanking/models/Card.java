@@ -33,14 +33,6 @@ public class Card {
         this.thruDate = thruDate;
     }
 
-    public Card(String cardHolder,CardType type, CardColor color, LocalDate fromDate, LocalDate thruDate) {
-        this.cardHolder = cardHolder;
-        this.type = type;
-        this.color = color;
-        this.fromDate = fromDate;
-        this.thruDate = thruDate;
-    }
-
     public long getId() {
         return id;
     }

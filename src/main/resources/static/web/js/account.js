@@ -3,14 +3,13 @@ const { createApp } = Vue;
 const app = createApp({
     data(){
         return{
-        id: '',
+        id: new URLSearchParams(location.search).get('id'),
         type: '',
         date: '',
         amount: '',
         description: '',
-        params: '',
         accountId: '',
-        accountId2: []
+        transactions: []
         }
     },
     created(){
@@ -21,10 +20,8 @@ loadData(){
         axios
         .get('http://localhost:8080/api/accounts/' + this.id)
         .then(response => {
-            this.params = new URLSearchParams(location.search);
-            this.id = this.params.get('id');
-            this.accountId = response.data.find(account=> account.id == this.id);
-            this.accountId2 = this.accountId.transactions.sort((x,y) => y.id - x.id);
+            this.accountId = response.data;
+            this.transactions = this.accountId.transactions.sort((x,y) => y.id - x.id);
     }).catch(err => console.log(err));
     },
     formatCurrency(amount){

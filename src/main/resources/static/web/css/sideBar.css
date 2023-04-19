@@ -1,33 +1,181 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
 *{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-font-family: 'Source Sans Pro', sans-serif;
+font-family: 'Anuphan', sans-serif;
 }
-.sidebar{
-position: fixed;
-top:0;
-left: 0;
-height: 100%;
-width: 16rem;
-background-color: rgba(42, 42, 249, 0.612);
-box-shadow: 0 5px 20px white;
+p{
+margin-bottom: 0 !important;
 }
-.sidebar .logo-details{
-height: 60px;
+.sideBar{
 width: 100%;
+min-height: 100%;
+max-width: 220px;
+background: white;
+box-shadow: 2px 0px 10px rgba(255, 255, 255, 0.63);
+position: absolute;
+z-index: 1;
+transition: 0.3s ease-in-out;
 }
-.sidebar .logo-details i{
-font-size: 30px;
-color: white;
-height: 50px;
-min-width: 78px;
-text-align: center;
-line-height: 50px;
+.sideBar .imgbox{
+position: relative;
+height: 120px;
+width: 100%;
+margin-bottom: 20px;
+z-index: -1;
 }
-.sidebar .logo-details .logo-name{
+.sideBar .imgbox img{
+position: absolute;
+width: 100%;
+height: 100%;
+object-fit: cover;
+padding: 5px;
+border-radius: 12px;
+}
+.sideBar .navBar{
+width: 100%;
+padding: 0 10px;
+list-style: none;
+}
+.sideBar .bankname{
+position: relative;
+width: 100%;
+color: rgb(0, 17, 255);
+padding: 10px;
+border-radius: 10px;
+margin-top: 1rem;
+}
+.bankname i{
+position: absolute;
+font-size: 24px;
+cursor: pointer;
+color: rgb(0, 38, 255);
+top: 50%;
+transform: translateY(-50%);
+}
+#check:checked ~ .sideBar .bankname i{
+display: none;
+}
+.bankname i:hover{
+color: rgb(0, 145, 255);
+}
+.sideBar .bankname p{
+margin-left: 35px;
 font-size: 22px;
-font-weight: 600;
+font-weight: 400;
+transform: scale(1);
+transform-origin: left;
+transition: 0.3s;
+}
+#check:checked ~ .sideBar .bankname p{
+transform: scale(0);
+}
+.sideBar .navBar li{
+width: 100%;
+display: inline-flex;
+margin: 5px 0;
+}
+.sideBar .navBar li a{
+width: 100%;
+display: inline-flex;
+text-decoration: none;
+color: rgb(0, 20, 200);
+text-transform: capitalize;
+padding: 5px 5px;
+border-radius: 10px;
+}
+.sideBar .navBar li:hover a{
+background:blue ;
+color: aliceblue;
+box-shadow: 0 0 10px rgba(0, 0, 255, 0.726);
+}
+.sideBar .navBar li a i{
+margin: auto 0;
+font-size: 20px;
+width: 40px;
+text-align: center;
+}
+#check:checked ~ .sideBar .navBar li a i{
+width: 44px;    
+font-size: 24px;
+text-align: center;
+}
+.sideBar .navBar li a p{
+font-size: 20px;
+transform: scale(1);
+transform-origin: left;
+transition: 0.3s;
+}
+#check:checked ~ .sideBar .navBar li a p{
+display: none; 
+}
+
+/* ------------------- */
+.hide{
+appearance: none;
+display: none;
+visibility: hidden;
+}
+
+.sideBar label #arrow{
+position: absolute;
+width: 35px;
+height: 35px;
+line-height: 35px;
+right: -15px;
+font-size: 25px;
+background: white;
+box-shadow: 0 0 5px rgba(0,0,0,0.7);
+text-align: center;
+top: 100px;
+border-radius: 50px;
+color: rgb(0, 38, 255);
+transition: 0.3s;
+}
+#check:checked ~ .sideBar label #arrow{
+transform: rotate(180deg);
+}
+#check:checked ~ .sideBar{
+max-width: 60px;
+}
+#check:checked ~ .sideBar .navBar{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+/* ------------- */
+.sideBar .navBar li span{
+position: absolute;
+display: block;
+background: white;
+border-radius: 8px;
+padding: 5px 8px;
+width: 6rem;
+text-align: center;
+text-transform: capitalize;
+color: blue;
+transition: 0.2s;
+transform: translateX(100px);
+left: 80px;
+box-shadow: 0 3px 10px rgba(255, 255, 255, 0.445);
+visibility: hidden;
+opacity: 0;
+}
+#check:checked ~ .sideBar .navBar li:hover span{
+visibility: visible;
+opacity: 1;  
+transform: translateX(-12px);
+}
+.sideBar .navBar li span::before{
+position: absolute;
+content: '';
+border: 8px solid white;
+border-top-color:transparent;
+border-bottom-color:transparent;
+border-left-color:transparent;
+left: -14px;
+top: 50%;
+transform: translateY(-50%);
 }

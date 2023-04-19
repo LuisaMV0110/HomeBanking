@@ -3,19 +3,18 @@ const { createApp } = Vue;
 const app = createApp({
     data(){
         return{
-        id: '',
+        id: new URLSearchParams(location.search).get('id'),
         number: '',
         creationDate: '',
         balance: '',
         firstName: '',
         lastName: '',
-        params: '',
-        ClientId: '',
+        clientId: '',
         accountId:[],
         loans: [],
         name:'',
         amount: '',
-        payments:''
+        payments:'',
         }
     },
     created(){
@@ -24,20 +23,18 @@ const app = createApp({
     methods:{
 loadData(){
         axios
-        .get('http://localhost:8080/api/clients'+ this.id)
+        .get('http://localhost:8080/api/clients/'+ this.id)
         .then(response => {
-            this.params = new URLSearchParams(location.search);
-            this.id = this.params.get('id');
-            this.ClientId = response.data.find(account=> account.id == this.id);
-            this.accountId = this.ClientId .accounts
-            this.loans = this.ClientId.loans
+            this.clientId = response.data
+            this.accountId = this.clientId.accounts.sort((x,y) => x.id - y.id);
+            this.loans = this.clientId.loans.sort((x,y) => x.id - y.id);
     }).catch(err => console.log(err));
     },
     formatCurrency(balance){
         let options = { style: 'currency', currency: 'USD' };
         let numberFormat = new Intl.NumberFormat('en-US', options);
         return numberFormat.format(balance);
-}, 
+},   
 }
 })
 .mount('#app');

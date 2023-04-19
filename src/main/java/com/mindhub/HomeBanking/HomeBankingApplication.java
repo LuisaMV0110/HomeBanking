@@ -24,7 +24,7 @@ public class HomeBankingApplication {
 			Client client1 = new Client("Melba","Morel","melba@mindhub.com");
 			client.save(client1);
 			Card card1 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.DEBIT,CardColor.GOLD,"4017-6313-8032-6087",436,LocalDate.now(), LocalDate.now().plusYears(5));
-			Card card2 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.CREDIT,CardColor.TITANIUM,LocalDate.now(),LocalDate.now().plusYears(5));
+			Card card2 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.CREDIT,CardColor.TITANIUM,"6313-4017-8032-6087",476,LocalDate.now(),LocalDate.now().plusYears(5));
 			Account account1 = new Account("VIN001", LocalDateTime.now(),5000);
 			Account account2 = new Account("VIN002", LocalDateTime.now().plusDays(1),7500);
 

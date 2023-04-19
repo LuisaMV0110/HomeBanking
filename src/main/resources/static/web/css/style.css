@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
 
 *{
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-font-family: 'Source Sans Pro', sans-serif;
-}
-.main_account{
-min-height: 80vh;
+font-family: 'Anuphan', sans-serif;
 }
 .account{
 background-image: url(../img/abstract-envelope.png);
+}
+.main_account{
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 .manager{
 background: rgb(9,9,121);
@@ -21,7 +23,7 @@ background-color: #0a5cb8;
 border-radius: 2%;
 width: 55rem;
 margin: 3rem 0rem 3rem 0rem;
-min-height: 20rem;
+min-height: 16rem;
 box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 }
 .tableLoans{
@@ -29,7 +31,7 @@ background-color: #1466c3;
 border-radius: 2%;
 margin: 0rem 0rem 3rem 0rem;
 width: 55rem;
-min-height: 20rem;
+min-height: 16rem;
 box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
 }
 .table_client{
@@ -47,7 +49,7 @@ min-height: 16vh;
 }
 .accountH1{
 color: aliceblue;
-text-shadow: 1px 5px 5px rgba(0, 0, 0, 0.473);
+text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.473);
 font-size: 3rem;
 }
 .accountH2{
@@ -76,8 +78,19 @@ border-radius: 1rem;
 /* Footer */
 footer{
 background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgb(0, 76, 255) 100%); 
-min-height: 20vh;
+min-height: 12vh;
+z-index: 10;
 position: relative;
+}
+.social{
+width: 10rem;  
+display: flex;
+align-items: center;
+justify-content: space-around;  
+gap: 1rem;
+}
+.social a{
+font-size: 2rem;
 }
 @media screen and (max-width:768px){
 .tableAccount{
@@ -97,15 +110,103 @@ font-size: 2rem;
 font-size: 1.5rem;
 }
 }
-@media screen and (max-width:408px){
+@media screen and (min-width:769px) and (max-width:1023px){
 .tableAccount{
 margin: 1rem 0rem 1rem 0rem;
-width: 18rem;
+width: 35rem;
 min-height: 12rem;
 } 
 .tableLoans{
 margin: 0rem 0rem 1rem 0rem;
-width: 18rem;
+width: 35rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:550px) and (max-width:768px){
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:409px) and (max-width:1024px){
+footer{
+min-height: 20vh;
+justify-content: center;
+align-items: center;
+}
+}
+@media screen and (min-width:424px) and (max-width:550px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 28rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 28rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:409px) and (max-width:425px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 20rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 20rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (max-width:408px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 19.7rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 19.7rem;
 min-height: 12rem;
 } 
 th{
@@ -116,5 +217,11 @@ font-size: 0.8rem;
 }
 footer{
 min-height: 20vh;
+justify-content: center;
+align-items: center;
+}
+.social_2 h5{
+font-size: .9rem;
+text-align: center;
 }
 }
