@@ -2,10 +2,12 @@ package com.mindhub.HomeBanking;
 
 import com.mindhub.HomeBanking.models.*;
 import com.mindhub.HomeBanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,14 +16,17 @@ import java.util.Set;
 
 @SpringBootApplication
 public class HomeBankingApplication {
+	@Autowired
+    private PasswordEncoder passwordEnconder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
+
 	@Bean
 	public CommandLineRunner initData(ClientRepository client, AccountRepository account, TransactionRepository transaction, LoanRepository loan, ClientLoanRepository clientLoan, CardRepository card){
 		return(args) -> {
-			Client client1 = new Client("Melba","Morel","melba@mindhub.com");
+			Client client1 = new Client("Melba","Morel","melba@mindhub.com", passwordEnconder.encode("melba123"));
 			client.save(client1);
 			Card card1 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.DEBIT,CardColor.GOLD,"4017-6313-8032-6087",436,LocalDate.now(), LocalDate.now().plusYears(5));
 			Card card2 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.CREDIT,CardColor.TITANIUM,"6313-4017-8032-6087",476,LocalDate.now(),LocalDate.now().plusYears(5));
@@ -57,7 +62,7 @@ public class HomeBankingApplication {
 			transaction.save(transaction3);
 			transaction.save(transaction4);
 
-			Client client2 = new Client("Nicoll","Laguna","Nicoll@gmail.com");
+			Client client2 = new Client("Nicoll","Laguna","Nicoll@gmail.com",passwordEnconder.encode("nicoll1503"));
 			client.save(client2);
 
 			Card card3 = new Card(client2.getFirstName() + " " + client2.getLastName(),CardType.CREDIT,CardColor.SILVER,"5287-0668-8884-8458",315,LocalDate.now(), LocalDate.now().plusYears(5));
