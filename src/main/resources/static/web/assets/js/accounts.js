@@ -3,38 +3,40 @@ const { createApp } = Vue;
 const app = createApp({
     data(){
         return{
-        id: new URLSearchParams(location.search).get('id'),
-        number: '',
-        creationDate: '',
-        balance: '',
-        firstName: '',
-        lastName: '',
-        clientId: '',
-        accountId:[],
+        id: '',
+        data: '',
+        accounts:[],
         loans: [],
-        name:'',
-        amount: '',
-        payments:'',
+        totalBalance: null
         }
     },
     created(){
     this.loadData()
     },
     methods:{
-loadData(){
+    loadData(){
         axios
-        .get('http://localhost:8080/api/clients/'+ this.id)
+        .get('http://localhost:8080/api/clients/current')
         .then(response => {
-            this.clientId = response.data
-            this.accountId = this.clientId.accounts.sort((x,y) => x.id - y.id);
-            this.loans = this.clientId.loans.sort((x,y) => x.id - y.id);
+            this.data = response.data
+            this.accounts = this.data.accounts.sort((x,y) => x.id - y.id);
+            this.loans = this.data.loans.sort((x,y) => x.id - y.id);
+            for(account of this.accounts){
+                this.totalBalance += account.balance
+            }
     }).catch(err => console.log(err));
     },
     formatCurrency(balance){
         let options = { style: 'currency', currency: 'USD' };
         let numberFormat = new Intl.NumberFormat('en-US', options);
         return numberFormat.format(balance);
-},   
+        
+},  
+    signOut() {
+        axios.post('/api/logout')
+        .then(response => window.location.href="/web/index.html")
+        .catch(error => console.log(error));
+    }
 }
 })
 .mount('#app');

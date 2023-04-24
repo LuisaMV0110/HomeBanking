@@ -51,7 +51,7 @@
     <div class="sidebar">
         <div class="profile-info">
             <img src="./assets/img/user-image2.png" class="profile-image" alt="">
-            <h4 v-if="clientId">{{clientId.firstName}} {{clientId.lastName.slice(0,1)}}.</h4>
+            <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="./accounts.html?id=1"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
@@ -62,7 +62,7 @@
     <main class="content">
         <div class="main_account d-flex flex-column justify-content-center align-items-center mb-2">
             <section class="cardTitle">
-                <h1 class="cardH1 text-center mt-2">Your Cards {{clientId.firstName}}</h1>
+                <h1 class="cardH1 text-center mt-2">Your Cards {{data.firstName}}</h1>
             </section>
             <section class="sectionCard">
                 <div class="containerCards d-flex justify-content-evenly flex-wrap">

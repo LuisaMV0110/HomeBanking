@@ -3,15 +3,8 @@ const { createApp } = Vue;
 const app = createApp({
     data(){
         return{
-        id: new URLSearchParams(location.search).get('id'),
-        clientId: '',
-        type:'',
-        color:'',
-        fromDate: '',
-        thruDate:'',
-        cardHolder: '',
-        number:'',
-        cvv:'',
+        id: '',
+        data: '',
         cardId:[],
         debit:[],
         credit:[],
@@ -23,10 +16,10 @@ const app = createApp({
     methods:{
 loadData(){
         axios
-        .get('http://localhost:8080/api/clients/'+ this.id)
+        .get('http://localhost:8080/api/clients/current')
         .then(response => {
-            this.clientId = response.data
-            this.cardId = this.clientId.cards
+            this.data = response.data
+            this.cardId = this.data.cards
             this.debit = this.cardId.filter(card => card.type == "DEBIT");
             this.credit = this.cardId.filter(card => card.type == "CREDIT");
     }).catch(err => console.log(err));

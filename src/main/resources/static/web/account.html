@@ -48,7 +48,7 @@
     <div class="sidebar">
         <div class="profile-info">
             <img src="./assets/img/user-image2.png" class="profile-image" alt="">
-            <h4 v-if="clientId">{{clientId.firstName}} {{clientId.lastName.slice(0,1)}}.</h4>
+            <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="./accounts.html?id=1"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>

@@ -1,3 +1,37 @@
+const { createApp } = Vue
+
+createApp({
+data() {
+        return {
+            /* Sign In */
+            email: '',
+            password: '',
+            /* Sign Up */
+            firstName: '',
+            lastName: '',
+            emailUp: '',
+            passwordUp: ''
+        }
+    },
+methods: {
+    signIn(){
+        axios.post('/api/login',`email=${this.email}&password=${this.password}`)
+        .then(response => window.location.href="/web/accounts.html")
+        .catch(error => console.log(error))         
+    },
+    signUp(){
+        axios.post('/api/clients',`firstName=${this.firstName}&lastName=${this.lastName}&email=${this.emailUp}&password=${this.passwordUp}`)
+        .then(response => 
+            axios.post('/api/login',`email=${this.emailUp}&password=${this.passwordUp}`)
+            .then(response => window.location.href="/web/accounts.html")
+            .catch(error => console.log(error)) )
+        .catch(error => console.log(error))
+    }
+},
+
+}).mount("#app");
+
+
 /*  Video Slider */
 const menuBtn = document.querySelector(".menu-btn");
 const navigation = document.querySelector(".navigation");

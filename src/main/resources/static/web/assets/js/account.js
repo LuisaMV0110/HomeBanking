@@ -3,12 +3,8 @@ const { createApp } = Vue;
 const app = createApp({
     data(){
         return{
-        id: new URLSearchParams(location.search).get('id'),
-        type: '',
-        date: '',
-        amount: '',
-        description: '',
-        accountId: '',
+        id: '',
+        accounts: '',
         transactions: []
         }
     },
@@ -18,9 +14,9 @@ const app = createApp({
     methods:{
 loadData(){
         axios
-        .get('http://localhost:8080/api/accounts/' + this.id)
+        .get('http://localhost:8080/api/accounts/current')
         .then(response => {
-            this.accountId = response.data;
+            this.accounts = response.data;
             this.transactions = this.accountId.transactions.sort((x,y) => y.id - x.id);
     }).catch(err => console.log(err));
     },
@@ -32,6 +28,3 @@ loadData(){
 }})
 
 .mount('#app');
-/*     transactionClass(type){
-        return `transaction-row ${type=="CREDIT"?"CREDIT":"DEBIT"}`
-    }, */

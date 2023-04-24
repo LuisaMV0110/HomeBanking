@@ -20,7 +20,7 @@
     <title>Mind Blue | Home</title>
     <!-- Think, buy and charge money in blue. -->
 </head>
-<body>
+<body id="app">
     <header>
         <a href="" class="brand"><img class="Logo" src="./assets/img/LogoL.png" alt="">Mind <span>Blue</span></a>
         <div class="menu-btn"></div>
@@ -61,14 +61,14 @@
                 <i class="fa-solid fa-xmark form-close"></i>
                 <!-- login -->
                 <div class="form login-form">
-                    <form action="#">
+                    <form @submit.prevent="signIn">
                         <h2>Login</h2>
                         <div class="input-box">
-                            <input type="email" placeholder="Enter your email" required>
+                            <input type="email" placeholder="Enter your email" name="email" v-model="email" required>
                             <i class="fa-solid fa-envelope email"></i>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Enter your password" required>
+                            <input type="password" placeholder="Enter your password" name="password" v-model="password" required>
                             <i class="fa-solid fa-key password"></i>
                             <i class="fa-regular fa-eye-slash pw-hide"></i>
                         </div>
@@ -79,32 +79,32 @@
                             </span>
                             <a href="#" class="forgot-pw">Forgot password?</a>
                         </div>
-                        <button class="btn-log">Login Now</button>
+                        <button type="submit" class="btn-log">Login Now</button>
                         <div class="login-signup">Don't have an account? <a href="" id="signup">Sign Up</a></div>
                     </form>
                 </div>
                 <!-- Sign Up -->
                 <div class="form signup-form">
-                    <form action="#">
+                    <form @submit.prevent="signUp">
                         <h2>Sign Up</h2>
                         <div class="input-box">
-                            <input type="text" placeholder="Enter your first name" required>
-                            <i class="fa-solid fa-f fname"></i>
+                            <input type="text" placeholder="Enter your first name" v-model="firstName" required>
+                            <i class="fa-sharp fa-solid fa-address-card fname"></i>
                         </div>                    
                         <div class="input-box">
-                            <input type="text" placeholder="Enter your last name" required>
-                            <i class="fa-solid fa-l lname"></i>
+                            <input type="text" placeholder="Enter your last name" v-model="lastName"required>
+                            <i class="fa-sharp fa-solid fa-address-card lname"></i>
                         </div>
                         <div class="input-box">
-                            <input type="email" placeholder="Enter your email" required>
+                            <input type="email" placeholder="Enter your email" v-model="emailUp" required>
                             <i class="fa-solid fa-envelope email"></i>
                         </div>
                         <div class="input-box">
-                            <input type="password" placeholder="Create password" required>
+                            <input type="password" placeholder="Create password" v-model="passwordUp" required>
                             <i class="fa-solid fa-key password"></i>
                             <i class="fa-regular fa-eye-slash pw-hide"></i>
                         </div>
-                        <button class="btn-log">Login Now</button>
+                        <button type="submit" class="btn-log">Login Now</button>
                         <div class="login-signup">Already have an account? <a href="" id="login">Login</a></div>
                     </form>
                 </div>

@@ -19,7 +19,8 @@
     <script defer src="./assets/js/accounts.js"></script>
     <title>Mind Blue | Accounts</title>
 </head>
-<body class="account" id="app">
+<body class="account">
+    <div id="app">
     <input type="checkbox" id="check">
     <header class="headerNav">
         <label for="check">
@@ -29,7 +30,7 @@
             <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind <span>Blue</span></h3>  
         </div>
         <div class="rigth-area">
-            <a href="./index.html" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+            <a href="" class="logout-btn" @click="signOut"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
         </div>
     </header>
     <div class="mobile-nav">
@@ -48,7 +49,7 @@
     <div class="sidebar">
         <div class="profile-info">
             <img src="./assets/img/user-image2.png" class="profile-image" alt="">
-            <h4 v-if="clientId">{{clientId.firstName}} {{clientId.lastName.slice(0,1)}}.</h4>
+            <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="#"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
@@ -70,7 +71,7 @@
                         <th class="text-center">Transactions</th>
                     </tr>
                 </thead>
-                <tbody v-for="account of accountId">
+                <tbody v-for="account of accounts">
                     <tr>
                         <td>{{account.number}}</td>
                         <td>{{account.creationDate.slice(0,10)}}</td>
@@ -123,5 +124,6 @@
             });
         });
     </component>
+</div>
 </body>
 </html>
