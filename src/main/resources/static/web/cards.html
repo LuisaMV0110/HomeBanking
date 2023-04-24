@@ -32,7 +32,7 @@
             <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind <span>Blue</span></h3>  
         </div>
         <div class="rigth-area">
-            <a href="./index.html" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+            <a href="" @click="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
         </div>
     </header>
     <div class="mobile-nav">
@@ -41,7 +41,7 @@
             <i class="fa-solid fa-bars" id="nav-btn"></i>
         </div>
         <div class="mobile-nav-items">
-            <a href="./accounts.html?id=1"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+            <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
@@ -53,7 +53,7 @@
             <img src="./assets/img/user-image2.png" class="profile-image" alt="">
             <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
-        <a href="./accounts.html?id=1"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+        <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>

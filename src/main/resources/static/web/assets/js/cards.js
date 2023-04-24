@@ -24,6 +24,11 @@ loadData(){
             this.credit = this.cardId.filter(card => card.type == "CREDIT");
     }).catch(err => console.log(err));
     },
+    signOut() {
+        axios.post('/api/logout')
+        .then(response => window.location.href="/web/index.html")
+        .catch(error => console.log(error));
+    }
 }
 })
 .mount('#app');
