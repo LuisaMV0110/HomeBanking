@@ -130,10 +130,10 @@ width: (100% - 250px);
 margin-top: 70px;
 padding: 20px;
 margin-left: 250px;
-background-image: url(../img/abstract-envelope.png);
+background-image: url(../img/Fondo2.png);
 background-position: center;
 background-size: cover;
-height: 100vh;
+min-height: 100vh;
 transition: 0.5s;
 }
 #check:checked ~ .content{

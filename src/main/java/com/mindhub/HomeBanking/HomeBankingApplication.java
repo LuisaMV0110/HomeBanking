@@ -64,8 +64,8 @@ public class HomeBankingApplication {
 
 			Card card3 = new Card(client2.getFirstName() + " " + client2.getLastName(),CardType.CREDIT,CardColor.SILVER,"5287-0668-8884-8458",315,LocalDate.now(), LocalDate.now().plusYears(5));
 
-			Account account3 = new Account("VIN003", LocalDateTime.now(),50000);
-			Account account4 = new Account("VIN004", LocalDateTime.now().plusDays(4),100000);
+			Account account3 = new Account("VIN001", LocalDateTime.now(),50000);
+			Account account4 = new Account("VIN002", LocalDateTime.now().plusDays(4),100000);
 
 			client2.addAccount(account3);
 			client2.addAccount(account4);
@@ -100,6 +100,8 @@ public class HomeBankingApplication {
 			transaction.save(transaction9);
 			transaction.save(transaction10);
 
+			Client client3 = new Client("Luisa", "Mendoza","luisafmv321@gmail.com", passwordEncoder.encode("luisa0110"));
+			client.save(client3);
 			Loan loan1 = new Loan("Mortgage",500000, Set.of(12,24,36,48,60));
 			Loan loan2 = new Loan("Personal",100000, Set.of(6,12,24));
 			Loan loan3 = new Loan("Automotive",300000, Set.of(6,12,24,36));

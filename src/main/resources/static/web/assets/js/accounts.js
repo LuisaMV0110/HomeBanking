@@ -7,6 +7,7 @@ const app = createApp({
         data: '',
         accounts:[],
         loans: [],
+        cards:[],
         totalBalance: null
         }
     },
@@ -18,7 +19,8 @@ const app = createApp({
         axios
         .get('http://localhost:8080/api/clients/current')
         .then(response => {
-            this.data = response.data
+            this.data = response.data;
+            this.cards = this.data.cards;
             this.accounts = this.data.accounts.sort((x,y) => x.id - y.id);
             this.loans = this.data.loans.sort((x,y) => x.id - y.id);
             for(account of this.accounts){

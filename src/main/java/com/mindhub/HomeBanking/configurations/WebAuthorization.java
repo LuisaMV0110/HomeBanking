@@ -19,11 +19,9 @@ public class WebAuthorization{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/api/login").permitAll()
-                .antMatchers( HttpMethod.POST, "/web/index.html").permitAll()
-                .antMatchers("/api/logout").hasAuthority("CLIENT")
-                .antMatchers("/web/accounts.html" , "/web/account.html" , "/web/cards.html").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST ,"/web/accounts.html" , "/web/account.html" , "/web/cards.html").hasAuthority("ADMIN")
+                .antMatchers( HttpMethod.POST,"/api/login","/api/logout").permitAll()
+                .antMatchers( "/web/index.html").permitAll()
+                .antMatchers("/web/accounts.html" , "/web/account.html" , "/web/cards.html").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console").hasAuthority("ADMIN");
         http.formLogin()
                 .usernameParameter("email")

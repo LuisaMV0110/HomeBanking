@@ -57,7 +57,23 @@
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
         <a href=""><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
-    <main class="content">
+    <main class="content d-flex align-items-center justify-content-center flex-column">
+        <div class="card-client">
+            <div class="imgbx">
+                <img src="./assets/img/user-image2.png" alt="">
+            </div>
+            <div class="content-client">
+                <div class="details-client">
+                    <h2 v-if="data">{{data.firstName}} {{data.lastName}}<br><span>MindBlue Client</span></h2>
+                    <div class="data-client">
+                        <h3 v-if="data">{{accounts.length}}<br><span>Accounts</span></h3>
+                        <h3 v-if="data">{{loans.length}}<br><span>Loans</span></h3>
+                        <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
+                        <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="main_account me-4">
         <div class="d-flex flex-column align-items-center justify-content-center tableAccount"> 
             <h2 class="accountH2">Your Accounts</h2>      
