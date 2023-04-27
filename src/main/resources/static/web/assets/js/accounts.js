@@ -38,6 +38,29 @@ const app = createApp({
         axios.post('/api/logout')
         .then(response => window.location.href="/web/index.html")
         .catch(error => console.log(error));
+    },
+    addAccount(){
+        Swal.fire({
+            title: 'Are you sure to create a new account?',
+            text: "You won't be able to revert this!",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, create it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/api/clients/current/accounts')
+                .then(response => window.location.href="/web/accounts.html")
+                .catch(error => {Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                  })})
+            }
+          })
+
+    .catch(error => console.log(error))
     }
 }
 })

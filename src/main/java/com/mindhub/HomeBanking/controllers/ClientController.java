@@ -30,27 +30,18 @@ public class ClientController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/clients/current")
+    @GetMapping("/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
-    @RequestMapping("/clients")
+    @GetMapping("/clients")
     public List<ClientDTO> getClients() {
         return clientRepository.findAll().stream().map(client -> new ClientDTO(client)).collect(toList());
     }
-    @RequestMapping("/clients/{id}")
+    @GetMapping("/clients/{id}")
     public Optional<ClientDTO> getClient(@PathVariable Long id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
         return optionalClient.map(client -> new ClientDTO(client));
-    }
-    private final String LETTERS = "abcdefghijklmnopqrstuvwxyz";
-    private final char[] ALPHANUMERIC = (LETTERS + LETTERS.toUpperCase() + "0123456789").toCharArray();
-    private String generateRandomAlphanumeric(int length){
-        StringBuilder result = new StringBuilder();
-        for(int i = 0; i < length; i++){
-            result.append(ALPHANUMERIC[new Random().nextInt(ALPHANUMERIC.length)]);
-        }
-        return result.toString();
     }
     @PostMapping("/clients")
     public ResponseEntity<Object> register(
@@ -62,14 +53,11 @@ public class ClientController {
         if (clientRepository.findByEmail(email) != null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
-        Random randomNumber = new Random();
-        int min = 1000;
-        int max = 9999;
-        int number = randomNumber.nextInt((max-min) + 1) + min;
-        if (accountRepository.findByNumber(generateRandomAlphanumeric(3) + number )== null){
+        String number = Account.randomNumber();
+        if (accountRepository.findByNumber(number)== null){
             Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
             clientRepository.save(newClient);
-            Account newAccount = new Account(generateRandomAlphanumeric(3) + number, LocalDateTime.now(), 0.00);
+            Account newAccount = new Account(number, LocalDateTime.now(), 0.00);
             newClient.addAccount(newAccount);
             accountRepository.save(newAccount);
         }

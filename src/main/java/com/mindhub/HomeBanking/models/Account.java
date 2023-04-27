@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 @Entity
@@ -29,6 +30,13 @@ private double balance;
         this.creationDate = date;
         this.balance = balance;
     }
+    public static String randomNumber(){
+        Random randomNumber = new Random();
+        int min = 0;
+        int max = 999999;
+        return ("VIN-" + randomNumber.nextInt(max + min));
+    }
+
     public long getId() {
         return id;
     }

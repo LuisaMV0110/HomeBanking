@@ -15,6 +15,7 @@
     crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="./assets/js/accounts.js"></script>
     <title>Mind Blue | Accounts</title>
@@ -43,7 +44,7 @@
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-            <a href=""><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
+            <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -55,10 +56,11 @@
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        <a href=""><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
+        <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
     <main class="content d-flex align-items-center justify-content-center flex-column">
-        <div class="card-client">
+        <div v-if="accounts.length <= 2">
+        <div class="card-client" style="height: 270px;">
             <div class="imgbx">
                 <img src="./assets/img/user-image2.png" alt="">
             </div>
@@ -71,8 +73,28 @@
                         <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
                         <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
                     </div>
+                    <button class="btn-create-account" @click="addAccount"><i class="fa-sharp fa-solid fa-users"></i>Create a new Account</button>
                 </div>
             </div>
+        </div>
+        </div>
+        <div v-else>
+                    <div class="card-client" style="height: 230px;">
+                        <div class="imgbx">
+                            <img src="./assets/img/user-image2.png" alt="">
+                        </div>
+                        <div class="content-client">
+                            <div class="details-client">
+                                <h2 v-if="data">{{data.firstName}} {{data.lastName}}<br><span>MindBlue Client</span></h2>
+                                <div class="data-client">
+                                    <h3 v-if="data">{{accounts.length}}<br><span>Accounts</span></h3>
+                                    <h3 v-if="data">{{loans.length}}<br><span>Loans</span></h3>
+                                    <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
+                                    <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
+                                </div>
+                        </div>
+                </div>
+                </div>
         </div>
         <div class="main_account me-4">
         <div class="d-flex flex-column align-items-center justify-content-center tableAccount"> 

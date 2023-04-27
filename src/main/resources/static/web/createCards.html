@@ -18,7 +18,7 @@
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="./assets/js/cards.js"></script>
+    <script defer src="./assets/js/createCards.js"></script>
     <title>Mind Blue | Cards</title>
 </head>
 
@@ -44,8 +44,8 @@
             <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
-            <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-            <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
+            <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+            <a href="#"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -56,87 +56,66 @@
         <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
-        <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
+        <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+        <a href="#"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
     <main class="content">
         <div class="main_account d-flex flex-column justify-content-center align-items-center mb-2">
             <section class="cardTitle">
-                <h1 class="cardH1 text-center mt-2">Your Cards {{data.firstName}}</h1>
+                <h1 class="cardH1 text-center mt-2">Create Cards {{data.firstName}}</h1>
             </section>
             <section class="sectionCard">
                 <div class="containerCards d-flex justify-content-evenly flex-wrap">
-                <section>
-                <h2 class="accountH1 text-center">Debit Card(s)</h2>
-                <div class="containerCard" v-if="debit.length > 0" v-for="data of debit">
-                    <div class="card front-face" :class="data.color">
-                        <header class="headerCard">
-                            <span class="logoCard">
-                                <img src="./assets/img/Card/logo.png" alt="">
-                                <h5>{{data.type}}</h5>
-                            </span>
-                            <img src="./assets/img/Card/chip.png" alt="" class="chip">
-                        </header>
-                        <div class="card-details">
-                            <div class="name-number">
-                                <h6>Card Number</h6>
-                                <h5 class="number">{{data.number}}</h5>
-                                <h5 class="name">{{data.cardHolder}}</h5>
-                            </div>
-                            <div class="valid-date">
-                                <h6>Valid Thru</h6>
-                                <h5>{{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card back-face" :class="data.color">
-                        <h6>
-                            For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
-                        </h6>
-                        <span class="magnetic-strip"></span>
-                        <div class="signature"><i>{{data.cvv}}</i></div>
-                        <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
-                    </div>
-                </div>
-                <div v-else>
-                    <h3 class="accountH2">You don't have debit card</h3>
-                </div>
+                <section class="select-Cards d-flex flex-column">
+                <h2 class="create-CardH2 text-center">Select type and color</h2>
+                <form action="" @submit.prevent="createCards" class="d-flex flex-column">
+                    <select  v-model="selectType" @change="previewCardType">
+                        <option selected disabled value="">Choose the type of your card</option>
+                        <option value="1">CREDIT</option>
+                        <option value="2">DEBIT</option>
+                    </select>
+                    <select  v-model="selectColor" @change="previewCardColor">
+                        <option selected disabled value="">Choose a color for your card</option>
+                        <option value="1">TITANIUM</option>
+                        <option value="2">GOLD</option>
+                        <option value="3">SILVER</option>
+                    </select>
+                    <button type="submit">Create Card</button>
+                </form>
             </section>
                 <section>
-                <h2 class="accountH1 text-center">Credit Card(s)</h2>   
-                <div class="containerCard" v-if="credit.length > 0" v-for="data of credit">
-                    <div class="card front-face" :class="data.color">
+                <h2 class="create-CardH2 text-center">Preview of your card</h2>
+                <h6 class="create-CardH2 text-center" style="font-size: 0.9rem;">(The other data is created automatically)</h6>  
+                <div class="containerCard">
+                    <div class="card front-face" :class="color">
                         <header class="headerCard">
                             <span class="logoCard">
                                 <img src="./assets/img/Card/logo.png" alt="">
-                                <h5>{{data.type}}</h5>
+                                <h5>{{type}}</h5>
                             </span>
                             <img src="./assets/img/Card/chip.png" alt="" class="chip">
                         </header>
                         <div class="card-details">
                             <div class="name-number">
                                 <h6>Card Number</h6>
-                                <h5 class="number">{{data.number}}</h5>
-                                <h5 class="name">{{data.cardHolder}}</h5>
+                                <h5 class="number">0000 0000 0000 0000</h5>
+                                <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
                             </div>
                             <div class="valid-date">
                                 <h6>Valid Thru</h6>
-                                <h5>{{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}</h5>
+                                <h5>00/00</h5>
                             </div>
                         </div>
                     </div>
-                    <div class="card back-face" :class="data.color">
+                    <div class="card back-face" :class="color">
                         <h6>
                             For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
                         </h6>
                         <span class="magnetic-strip"></span>
-                        <div class="signature"><i>{{data.cvv}}</i></div>
+                        <div class="signature"><i>000</i></div>
                         <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
                     </div>
                 </div>
-            <div v-else>
-                <h3 class="accountH2">You don't have credit card</h3>
-            </div>
         </section>
     </div>
             </section>

@@ -27,8 +27,8 @@ public class HomeBankingApplication {
 			client.save(client1);
 			Card card1 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.DEBIT,CardColor.GOLD,"4017-6313-8032-6087",436,LocalDate.now(), LocalDate.now().plusYears(5));
 			Card card2 = new Card(client1.getFirstName() + " " + client1.getLastName(),CardType.CREDIT,CardColor.TITANIUM,"6313-4017-8032-6087",476,LocalDate.now(),LocalDate.now().plusYears(5));
-			Account account1 = new Account("VIN001", LocalDateTime.now(),5000);
-			Account account2 = new Account("VIN002", LocalDateTime.now().plusDays(1),7500);
+			Account account1 = new Account("VIN-001", LocalDateTime.now(),5000);
+			Account account2 = new Account("VIN-002", LocalDateTime.now().plusDays(1),7500);
 
 			client1.addAccount(account1);
 			client1.addAccount(account2);
@@ -64,8 +64,8 @@ public class HomeBankingApplication {
 
 			Card card3 = new Card(client2.getFirstName() + " " + client2.getLastName(),CardType.CREDIT,CardColor.SILVER,"5287-0668-8884-8458",315,LocalDate.now(), LocalDate.now().plusYears(5));
 
-			Account account3 = new Account("VIN001", LocalDateTime.now(),50000);
-			Account account4 = new Account("VIN002", LocalDateTime.now().plusDays(4),100000);
+			Account account3 = new Account("VIN-003", LocalDateTime.now(),50000);
+			Account account4 = new Account("VIN-004", LocalDateTime.now().plusDays(4),100000);
 
 			client2.addAccount(account3);
 			client2.addAccount(account4);
