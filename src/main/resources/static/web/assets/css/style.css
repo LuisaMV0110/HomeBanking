@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&family=Kanit:ital,wght@1,100&family=Raleway:ital,wght@0,200;0,400;1,200;1,400&family=Sono:wght@300;600&family=Source+Sans+Pro:wght@300;400&display=swap');
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Anuphan', sans-serif;
+}
+
+/* Accounts Style */
+.card-client{
+margin-top: 5rem;
+position: relative;
+width: 370px;
+background-color: aliceblue;
+border-radius: 20px;
+box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+}
+.imgbx{
+position: absolute;
+left: 50%;
+top: -50px;
+transform: translateX(-50%);
+width: 120px;
+height: 120px;
+background: #0a5cb8;
+border-radius: 20px;
+box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+overflow: hidden;
+transition: 0.5s;
+}
+.card-client .imgbx:hover{
+width: 140px;
+height: 140px;
+}
+.imgbx img{
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+.card-client .content-client{
+position: absolute;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+overflow: hidden;
+}
+.card-client .content-client .details-client{
+padding: 20px;
+text-align: center;
+width: 100%;
+}
+.card-client:hover .content-client .details-client{
+transform: translateY(0px);
+}
+.card-client .content-client .details-client h2{
+font-size: 1.25em;
+font-weight: 600;
+color: #000653d7;
+line-height: 1.2em;
+}
+.card-client .content-client .details-client h2 span{
+font-size: 0.75em;
+font-weight: 500;
+opacity: 0.7;
+}
+.card-client .content-client .details-client .data-client{
+display: flex;
+justify-content: space-between;
+margin: 10px 0;
+}
+.card-client .content-client .details-client .data-client h3{
+font-size: 1.1em;
+line-height: 1.2em;
+color: #0a5cb8;
+font-weight: 600;
+}
+.card-client .content-client .details-client .data-client h3 span{
+font-size: 0.95em;
+font-weight: 400;
+opacity: 0.8;
+}
+/* Button create account */
+.btn-create-account{
+padding: 5px;
+background: #003785;
+text-decoration: none;
+color: aliceblue;
+border-radius: 10px;
+font-size: 15px;
+font-weight: 600;
+transition: all 0.3s;
+box-shadow: 0 2px 5px rgb(42, 118, 250);
+}
+.btn-create-account:hover{
+transform: scale(1.1);
+background: aliceblue;
+color: #003785;
+box-shadow: 0 2px 5px rgb(0, 42, 255);
+}
+.btn-create-account i{
+padding-left: 5px;
+}
+/* Button create cards */
+.btn-create-cards{
+padding: 5px;
+text-decoration: none;
+border-radius: 10px;
+font-size: 20px;
+font-weight: 600;
+transition: all 0.3s;
+background: aliceblue;
+color: #003785;
+box-shadow: 0 2px 5px rgb(0, 42, 255);
+}
+.btn-create-cards:hover{
+transform: scale(1.1);
+color: aliceblue;
+background: #003785;
+box-shadow: 0 2px 5px rgb(42, 118, 250);
+}
+.btn-create-cards i{
+padding-left: 5px;
+}
+/*Create cards*/
+.create-CardH2{
+color: rgb(255, 255, 255);
+text-shadow: 1px 3px 5px rgba(255, 255, 255, 0.489);
+font-size: 2rem;
+font-weight: 500;
+}
+.select-card-form{
+display: flex;
+justify-content: center;
+position: relative;
+width: 310px;
+height: 50px;
+}
+.select-box{
+border: none;
+border-radius: 5px;
+outline: none;
+appearance: none;    
+padding: 0 30px 0 15px;
+width: 100%;
+color: #003785;
+background: white;
+font-size:  20px;
+text-align: center;
+}
+.select-card-form .icon-container{
+width: 50px;
+height: 100%;
+position: absolute;
+border-radius: 5px;
+right: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: aliceblue;
+pointer-events: none;
+}
+.icon-container i{
+font-size: 25px;
+color: #004ab1;
+}
+/* Revisar */
+.main_account{
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.tableAccount{
+background-color: #0a5cb8;
+border-radius: 2%;
+width: 55rem;
+margin: 3rem 0rem 3rem 0rem;
+min-height: 16rem;
+box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
+}
+.tableLoans{
+background-color: #1466c3;
+border-radius: 2%;
+margin: 0rem 0rem 3rem 0rem;
+width: 55rem;
+min-height: 16rem;
+box-shadow: 1px 5px 10px rgba(255, 255, 255, 0.454);
+}
+.table_client{
+background-color: aliceblue;
+margin: 0 10rem 0 10rem;
+min-height: 20vh;
+border-radius: 1rem;
+}
+td,th{
+text-align: center;
+color: aliceblue;
+}
+.contH1Account{
+min-height: 16vh;
+}
+.accountH1{
+color: aliceblue;
+text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.473);
+font-size: 3rem;
+}
+.accountH2{
+color: rgb(255, 255, 255);
+text-shadow: 1px 3px 5px rgba(255, 255, 255, 0.489);
+font-size: 2.3rem;
+}
+#json{
+height: 20rem;
+width: 35rem;
+overflow:scroll;
+border: 1px rgb(47, 78, 255) solid;
+background-color: aliceblue;
+border-radius: 1rem;
+}
+#form{
+width: 30rem;
+}
+.formjson{
+margin: 5rem;
+padding-top: 2rem;
+margin-bottom: 3rem;
+background-color: rgba(240, 248, 255, 0.963);
+border-radius: 1rem;
+}
+/* Footer */
+footer{
+background: radial-gradient(circle, rgba(9,9,121,1) 7%, rgb(0, 76, 255) 100%); 
+min-height: 12vh;
+z-index: 10;
+position: relative;
+}
+.social{
+width: 10rem;  
+display: flex;
+align-items: center;
+justify-content: space-around;  
+gap: 1rem;
+}
+.social a{
+font-size: 2rem;
+}
+@media screen and (max-width:768px){
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+}  
+.accountH1{
+font-size: 2rem;
+}
+.accountH2{
+font-size: 1.5rem;
+}
+}
+@media screen and (min-width:769px) and (max-width:1023px){
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 35rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 35rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:550px) and (max-width:768px){
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 25rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:409px) and (max-width:1024px){
+footer{
+min-height: 20vh;
+justify-content: center;
+align-items: center;
+}
+}
+@media screen and (min-width:424px) and (max-width:550px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 28rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 28rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (min-width:409px) and (max-width:425px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 20rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 20rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+}
+@media screen and (max-width:408px){
+.main_account{
+align-items: end;
+}
+.tableAccount{
+margin: 1rem 0rem 1rem 0rem;
+width: 19.7rem;
+min-height: 12rem;
+} 
+.tableLoans{
+margin: 0rem 0rem 1rem 0rem;
+width: 19.7rem;
+min-height: 12rem;
+} 
+th{
+font-size: 0.7rem;
+}
+td{
+font-size: 0.8rem;
+}
+footer{
+min-height: 20vh;
+justify-content: center;
+align-items: center;
+}
+.social_2 h5{
+font-size: .9rem;
+text-align: center;
+}
+}

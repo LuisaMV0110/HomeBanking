@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toSet;
+
 public class AccountDTO {
     private long id;
     private String number;
@@ -18,7 +20,7 @@ public class AccountDTO {
         this.number = account.getNumber();
         this.creationDate = account.getCreationDate();
         this.balance = account.getBalance();
-        this.transactions= account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(Collectors.toSet());
+        this.transactions= account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(toSet());
     }
     public long getId() {
         return id;

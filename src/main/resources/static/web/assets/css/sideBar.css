@@ -1,0 +1,216 @@
+.headerNav{
+z-index: 1;
+position: fixed;
+background: white;
+padding: 0px 5px 25px 5px;
+width: calc(100% - 0%);
+top: 0;
+height: 70px;
+}
+.left-area{
+display: flex;
+align-items: center;
+margin-top: -10px;
+margin-left: 30px;
+}
+.left-area h3{
+margin: 0;
+text-transform: uppercase;
+font-size: 24px;
+font-weight: 900;
+color: #1465bb;
+}
+.left-area span{
+color:#2196f3;
+}
+.Logo{
+width: 50px;
+}
+.logout-btn{
+padding: 5px;
+background: #003785;
+text-decoration: none;
+color: aliceblue;
+float: right;
+margin-top: -42px;
+margin-right: 40px;
+border-radius: 10px;
+font-size: 15px;
+font-weight: 600;
+transition: all 0.3s;
+box-shadow: 0 2px 5px rgb(42, 118, 250);
+}
+.logout-btn:hover{
+transform: scale(1.1);
+background: aliceblue;
+color: #003785;
+box-shadow: 0 2px 5px rgb(0, 42, 255);
+}
+.logout-btn i{
+padding-left: 5px;
+}
+.sidebar{
+z-index: 1;
+top: 0;
+background: aliceblue;
+margin-top: 70px;
+padding-top: 30px;
+position: fixed;
+left: 0;
+width: 250px;
+height: calc(100% - 9%);
+transition: all 0.5s;
+overflow-y: auto;
+}
+.profile-info{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.sidebar .profile-info .profile-image{
+width: 100px;
+height: 100px;
+border-radius: 100px;
+margin-bottom: 10px;
+}
+.sidebar h4{
+color: #003785;
+margin-top: 0;
+margin-bottom: 20px;
+}
+.sidebar a{
+color:#1465bb;
+display: block;
+width: 100%;
+line-height: 60px;
+text-decoration: none;
+padding-left: 40px;
+box-sizing: border-box;
+font-size: 18px;
+transition: 0.5s;
+transition-property: background;
+}
+.sidebar a:hover{
+background: #003785;
+color: aliceblue;
+}
+.sidebar i{
+padding-right: 10px;
+}
+label #sidebar-btn{
+z-index: 1;
+color: #003785;
+position: fixed;
+cursor: pointer;
+left: 300px;
+font-size: 20px;
+margin: 12px 33px;
+transition: all 0.3s;
+}
+label #sidebar-btn:hover{
+color: #21c2f3;
+}
+#check:checked ~ .sidebar{
+left: -185px;
+}
+#check:checked ~ .sidebar a span{
+display: none;
+}
+#check:checked ~ .sidebar a{
+font-size: 20px;
+margin-left: 165px;
+width: 100%;
+}
+#check{
+display: none;
+}
+.content{
+width: (100% - 250px);
+margin-top: 70px;
+padding: 20px;
+margin-left: 250px;
+background-image: url(../img/Fondo2.png);
+background-position: center;
+background-size: cover;
+min-height: 100vh;
+transition: 0.5s;
+}
+#check:checked ~ .content{
+margin-left: 60px;
+}
+#check:checked ~ .sidebar .profile-info{
+display: none;
+}
+.mobile-nav{
+display: none;
+}
+@media screen and (max-width:780px){
+.sidebar{
+display: none;
+}
+#sidebar-btn{
+display: none;
+}
+.content{
+margin-left: 0;
+margin-top: 0;
+padding: 10px 20px;
+transition: 0s;
+}
+#check:checked ~ .content{
+margin-left: 0;
+}
+.mobile-nav{
+display: block;
+width: calc(100% - 0%);
+}
+.nav-bar{
+background: aliceblue;
+width: (100% - 0px);
+margin-top: 70px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px 20px;
+}
+.nav-bar .mobile-profile-image{
+width: 50px;
+height: 50px;
+border-radius: 50%;
+}
+.nav-bar #nav-btn{
+color: #003785;
+font-size: 22px;
+cursor: pointer;
+transition: .5s;
+transition-property: color;
+}
+.nav-bar #nav-btn:hover{
+color: #21c2f3;
+}
+.mobile-nav-items{
+display: none;
+}
+.mobile-nav-items a{
+color:#1465bb;
+display:block;
+text-align: center;
+letter-spacing: 1px;
+line-height: 60px;
+text-decoration: none;
+box-sizing: border-box;
+transition: .5s;
+}
+.mobile-nav-items a:hover{
+background: #003785;
+color: aliceblue;
+}
+.logout-btn{
+margin-right: 5px;
+}
+.active{
+display: block;
+transition: 0.5s;
+}
+}
