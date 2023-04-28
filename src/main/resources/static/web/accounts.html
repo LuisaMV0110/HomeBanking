@@ -28,10 +28,10 @@
             <i class="fa-solid fa-bars" id="sidebar-btn"></i>
         </label>
         <div class="left-area">
-            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind <span>Blue</span></h3>  
+            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind<span>Blue</span></h3>  
         </div>
         <div class="rigth-area">
-            <a href="" class="logout-btn" @click="signOut"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+            <a href="" class="logout-btn" @click.prevent="signOut"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
         </div>
     </header>
     <div class="mobile-nav">
@@ -44,7 +44,6 @@
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-            <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -56,7 +55,6 @@
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
     <main class="content d-flex align-items-center justify-content-center flex-column">
         <div v-if="accounts.length <= 2">
@@ -73,7 +71,7 @@
                         <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
                         <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
                     </div>
-                    <button class="btn-create-account" @click="addAccount"><i class="fa-sharp fa-solid fa-users"></i>Create a new Account</button>
+                    <button class="btn-create-account" @click="addAccount"><i class="fa-sharp fa-solid fa-users me-1"></i>Create a new Account</button>
                 </div>
             </div>
         </div>
@@ -115,7 +113,7 @@
                         <td>{{account.creationDate.slice(0,10)}}</td>
                         <td>{{account.creationDate.slice(11,16)}}</td>
                         <td>{{formatCurrency(account.balance)}}</td>
-                        <td><a class="fa-solid fa-money-check-dollar text-decoration-none text-white" :href="'./account.html?id='+account.id"></a></td>
+                        <td><a class="fa-solid fa-money-bill-transfer text-decoration-none text-white" :href="'./account.html?id='+account.id"></a></td>
                     </tr>
                 </tbody>
             </table>
@@ -140,7 +138,7 @@
             </table>
         </div>
         <div v-else>
-            <h3 class="accountH2">You have no loans in this account</h3>
+            <h3 class="accountH2">You don't have loans in this account</h3>
         </div>
     </div>
     </main>

@@ -35,11 +35,29 @@ const app = createApp({
             let numberFormat = new Intl.NumberFormat('en-US', options);
             return numberFormat.format(amount);
     },  
-signOut() {
-    axios.post('/api/logout')
-    .then(response => window.location.href="/web/index.html")
-    .catch(error => console.log(error));
-}
+    signOut() {
+        Swal.fire({
+            title: 'Are you sure to logout?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/api/logout')
+                    .then(response => window.location.href = "/web/index.html")
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: error.response.data,
+                        })
+                    })
+            }
+        })
+            .catch(error => console.log(error))
+    },
 }})
 
 .mount('#app');

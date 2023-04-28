@@ -105,11 +105,68 @@ box-shadow: 0 2px 5px rgb(0, 42, 255);
 .btn-create-account i{
 padding-left: 5px;
 }
-/* Tittle Create cards */
+/* Button create cards */
+.btn-create-cards{
+padding: 5px;
+text-decoration: none;
+border-radius: 10px;
+font-size: 20px;
+font-weight: 600;
+transition: all 0.3s;
+background: aliceblue;
+color: #003785;
+box-shadow: 0 2px 5px rgb(0, 42, 255);
+}
+.btn-create-cards:hover{
+transform: scale(1.1);
+color: aliceblue;
+background: #003785;
+box-shadow: 0 2px 5px rgb(42, 118, 250);
+}
+.btn-create-cards i{
+padding-left: 5px;
+}
+/*Create cards*/
 .create-CardH2{
 color: rgb(255, 255, 255);
 text-shadow: 1px 3px 5px rgba(255, 255, 255, 0.489);
-font-size: 1.8rem;
+font-size: 2rem;
+font-weight: 500;
+}
+.select-card-form{
+display: flex;
+justify-content: center;
+position: relative;
+width: 310px;
+height: 50px;
+}
+.select-box{
+border: none;
+border-radius: 5px;
+outline: none;
+appearance: none;    
+padding: 0 30px 0 15px;
+width: 100%;
+color: #003785;
+background: white;
+font-size:  20px;
+text-align: center;
+}
+.select-card-form .icon-container{
+width: 50px;
+height: 100%;
+position: absolute;
+border-radius: 5px;
+right: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: aliceblue;
+pointer-events: none;
+}
+.icon-container i{
+font-size: 25px;
+color: #004ab1;
 }
 /* Revisar */
 .main_account{

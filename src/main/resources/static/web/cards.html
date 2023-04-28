@@ -17,6 +17,7 @@
     crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="./assets/js/cards.js"></script>
     <title>Mind Blue | Cards</title>
@@ -29,10 +30,10 @@
             <i class="fa-solid fa-bars" id="sidebar-btn"></i>
         </label>
         <div class="left-area">
-            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind <span>Blue</span></h3>  
+            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind<span>Blue</span></h3>  
         </div>
         <div class="rigth-area">
-            <a href="" @click="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+            <a href="" @click.prevent="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
         </div>
     </header>
     <div class="mobile-nav">
@@ -45,7 +46,6 @@
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-            <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -57,18 +57,19 @@
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
     <main class="content">
         <div class="main_account d-flex flex-column justify-content-center align-items-center mb-2">
-            <section class="cardTitle">
-                <h1 class="cardH1 text-center mt-2">Your Cards {{data.firstName}}</h1>
+            <section class="cardTitle d-flex flex-column align-items-center mb-3">
+                <h1 class="cardH1 text-center mt-2" style="font-weight: 600;-webkit-text-stroke: .7px #003785;">Your Cards {{data.firstName}}</h1>
+                <a v-if="cardId.length <= 5" class="btn-create-cards" href="./createCards.html"><i class="fa-regular fa-credit-card me-1"></i>Create Card</a>
             </section>
             <section class="sectionCard">
                 <div class="containerCards d-flex justify-content-evenly flex-wrap">
                 <section>
-                <h2 class="accountH1 text-center">Debit Card(s)</h2>
-                <div class="containerCard" v-if="debit.length > 0" v-for="data of debit">
+                <h2 v-if="debit.length <=1" class="accountH1 text-center">Debit Card</h2>
+                <h2 v-else class="accountH1 text-center">Debit Cards</h2>
+                <div class="containerCard mb-4" v-if="debit.length > 0" v-for="data of debit">
                     <div class="card front-face" :class="data.color">
                         <header class="headerCard">
                             <span class="logoCard">
@@ -103,8 +104,9 @@
                 </div>
             </section>
                 <section>
-                <h2 class="accountH1 text-center">Credit Card(s)</h2>   
-                <div class="containerCard" v-if="credit.length > 0" v-for="data of credit">
+                <h2 v-if="credit.length <=1" class="accountH1 text-center">Credit Card</h2> 
+                <h2 v-else class="accountH1 text-center">Credit Cards</h2>  
+                <div class="containerCard mb-4" v-if="credit.length > 0" v-for="data of credit">
                     <div class="card front-face" :class="data.color">
                         <header class="headerCard">
                             <span class="logoCard">

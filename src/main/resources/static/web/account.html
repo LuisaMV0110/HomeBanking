@@ -15,6 +15,7 @@
     crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="./assets/js/account.js"></script>
     <title>Mind Blue | Transactions</title>
@@ -27,10 +28,10 @@
             <i class="fa-solid fa-bars" id="sidebar-btn"></i>
         </label>
         <div class="left-area">
-            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind <span>Blue</span></h3>  
+            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind<span>Blue</span></h3>  
         </div>
         <div class="rigth-area">
-            <a href="" @click="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+            <a href="" @click.prevent="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
         </div>
     </header>
     <div class="mobile-nav">
@@ -43,7 +44,6 @@
             <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-            <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -55,7 +55,6 @@
         <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        <a href="./createCards.html"><i class="fa-regular fa-credit-card"></i><span>New Cards</span></a>
     </div>
     <main class="content">
         <div class="main_account d-flex flex-column align-items-center justify-content-center">
