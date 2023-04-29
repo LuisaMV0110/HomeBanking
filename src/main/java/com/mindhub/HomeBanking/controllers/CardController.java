@@ -1,6 +1,5 @@
 package com.mindhub.HomeBanking.controllers;
 
-import com.mindhub.HomeBanking.dtos.AccountDTO;
 import com.mindhub.HomeBanking.dtos.CardDTO;
 import com.mindhub.HomeBanking.dtos.ClientDTO;
 import com.mindhub.HomeBanking.models.*;
@@ -13,9 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import static java.util.stream.Collectors.toList;
 
@@ -42,14 +39,14 @@ public class CardController {
             return new ResponseEntity<>("Number already in use", HttpStatus.FORBIDDEN);
         }
         Client client = clientRepository.findByEmail(authentication.getName());
-        if (clientRepository.findByEmail(authentication.getName()).getCards().size() <= 5){
+        if (client.getCards().size() <= 5){
             for (Card card : client.getCards()) {
                 if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
                     return new ResponseEntity<>("You already have a card of the same type and color", HttpStatus.FORBIDDEN);
                 }
             }
-        Card newCard = new Card(clientRepository.findByEmail(authentication.getName()).getFirstName() + " " + clientRepository.findByEmail(authentication.getName()).getLastName(), CardType.valueOf(type), CardColor.valueOf(color), cardNumber, cvvNumber, LocalDate.now(), LocalDate.now().plusYears(5));
-        clientRepository.findByEmail(authentication.getName()).addCard(newCard);
+        Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), CardType.valueOf(type), CardColor.valueOf(color), cardNumber, cvvNumber, LocalDate.now(), LocalDate.now().plusYears(5));
+            client.addCard(newCard);
         cardRepository.save(newCard);
     }
         else{
