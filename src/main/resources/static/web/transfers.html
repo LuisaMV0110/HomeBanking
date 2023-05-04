@@ -19,8 +19,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="./assets/js/createCards.js"></script>
-    <title>Mind Blue | Cards</title>
+    <script defer src="./assets/js/transfers.js"></script>
+    <title>Mind Blue | Transfers</title>
 </head>
 
 <body id="app" class="account">
@@ -43,7 +43,7 @@
         </div>
         <div class="mobile-nav-items">
             <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-            <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+            <a href="#"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
         </div>
@@ -54,79 +54,63 @@
             <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-        <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+        <a href="#"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
     </div>
     <main class="content d-flex align-items-center justify-content-center">
         <div class="containerAccounts d-flex flex-column justify-content-center align-items-center mt-5 mb-2">
             <section class="cardTitle">
-                <h1 class="cardH1 text-center mt-2">Create Cards {{data.firstName}}</h1>
+                <h1 class="cardH1 text-center mt-2">Make transfers {{data.firstName}}</h1>
             </section>
             <section class="sectionCard">
-                <div class="containerCards d-flex justify-content-evenly flex-wrap">
-                <section class="select-Cards d-flex flex-column">
-                <h2 class="create-CardH2 text-center mb-3">Select type and color</h2>
-                <form action="" @submit.prevent="createCards" class="d-flex flex-column align-items-center mt-4">
-                    <div class="select-card-form mb-4">
-                    <select class="select-box" v-model="selectType" @change="previewCardType">
-                        <option selected disabled value="">Type</option>
-                        <option value="1">CREDIT</option>
-                        <option value="2">DEBIT</option>
-                    </select>
-                    <div class="icon-container">
-                        <i class="fa-solid fa-caret-down"></i>
+                <div class="mainTransfer">
+                    <input type="checkbox" id="checkTransfer" aria-hidden="true">
+                    <div class="yourAccount">
+                        <form class="d-flex flex-column align-items-center" @submit.prevent="addTransfers">
+                            <label for="checkTransfer" aria-hidden="true">To your accounts</label>
+                                <div class="select-card-form mb-4">
+                                <select class="select-box" v-model="initialAccount">
+                                    <option selected disabled value="">Initial Account</option>
+                                    <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                </select>
+                                <div class="icon-container">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                                </div>
+                                <div class="select-card-form mb-4">
+                                    <select class="select-box" v-model="destinateAccount">
+                                        <option selected disabled value="">Destinate Account</option>
+                                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                </select>
+                                <div class="icon-container">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                                </div>
+                                <input class="mb-4" type="number" v-model="amount" name="amount" placeholder="Amount" required>
+                                <input class="mb-4"type="text" name="description" v-model="description" placeholder="Description">
+                                <button class="btn-create-cards" type="submit">Transfer</button>
+                        </form>
                     </div>
-                    </div>
-                    <div class="select-card-form mb-4">
-                    <select class="select-box" v-model="selectColor" @change="previewCardColor">
-                        <option selected disabled value="">Color</option>
-                        <option value="1">TITANIUM</option>
-                        <option value="2">GOLD</option>
-                        <option value="3">SILVER</option>
-                    </select>
-                    <div class="icon-container">
-                        <i class="fa-solid fa-caret-down"></i>
-                    </div>
-                    </div>
-                    <button class="btn-create-cards" type="submit">Create Card</button>
-                </form>
-            </section>
-                <section class="d-flex flex-column align-items-center">
-                <h2 class="create-CardH2 text-center">Preview of your card</h2>
-                <h6 class="create-CardH2 text-center" style="font-size: 1rem;">(The other data is created automatically)</h6>  
-                <div class="containerCard">
-                    <div class="card front-face" :class="color">
-                        <header class="headerCard">
-                            <span class="logoCard">
-                                <img src="./assets/img/Card/logo.png" alt="">
-                                <h5>{{type}}</h5>
-                            </span>
-                            <img src="./assets/img/Card/chip.png" alt="" class="chip">
-                        </header>
-                        <div class="card-details">
-                            <div class="name-number">
-                                <h6>Card Number</h6>
-                                <h5 class="number">0000 0000 0000 0000</h5>
-                                <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
+                    <div class="otherAccount">
+                        <form class="d-flex flex-column align-items-center" @submit.prevent="addTransfers">
+                        <label for="checkTransfer" aria-hidden="true">To others Accounts</label>
+                        <div class="select-card-form mb-4">
+                            <select class="select-box" v-model="initialAccount">
+                                <option selected disabled value="">Initial Account</option>
+                                <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                            </select>
+                            <div class="icon-container">
+                                <i class="fa-solid fa-caret-down"></i>
                             </div>
-                            <div class="valid-date">
-                                <h6>Valid Thru</h6>
-                                <h5>00/00</h5>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card back-face" :class="color">
-                        <h6>
-                            For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
-                        </h6>
-                        <span class="magnetic-strip"></span>
-                        <div class="signature"><i>000</i></div>
-                        <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
+                            <input type="text" name="dAccount" v-model="destinateAccount" placeholder="Destinate Account | VIN-000" required>
+                            <input type="number" name="amount" v-model="amount" placeholder="Amount" required>
+                            <input type="text" name="description" v-model="description" placeholder="Description">
+                            <button class="btn-create-cards" type="submit">Transfer</button>
+                        </form>
                     </div>
                 </div>
-        </section>
-    </div>
             </section>
         </div>
     </main>

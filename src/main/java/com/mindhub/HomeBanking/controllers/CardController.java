@@ -23,21 +23,39 @@ public class CardController {
     CardRepository cardRepository;
     @Autowired
     private ClientRepository clientRepository;
-
+    public static String randomCardNumber(){
+        String cardNumber = "";
+        for (int i = 0; i < 4; i++) {
+            cardNumber += (int) (Math.random() * 8999 + 1000) + " ";
+        }
+        return cardNumber;
+    }
+    public static int randomCvv(){
+        int min = 100;
+        int max = 899;
+        return (int) (Math.random() * 899 + 100);
+    }
     @GetMapping("/clients/current/cards")
     public List<CardDTO> getCards (Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(toList());
     }
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
-        if (type.isEmpty() || color.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if ( !type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) {
+            return new ResponseEntity<>(type + " is an incorrect type of card", HttpStatus.FORBIDDEN);
         }
-        String cardNumber = Card.randomCardNumber();
-        int cvvNumber = Card.randomCvv();
-        if (cardRepository.findByNumber(cardNumber) != null) {
-            return new ResponseEntity<>("Number already in use", HttpStatus.FORBIDDEN);
+        if ( !color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) {
+            return new ResponseEntity<>(color + " is an incorrect color of card", HttpStatus.FORBIDDEN);
         }
+        String cardNumber;
+//        Evitar que se repitan números de tarjeta
+        do {
+            cardNumber = randomCardNumber();
+        }
+        while (cardRepository.findByNumber(cardNumber) != null);
+//        CVV
+        int cvvNumber = randomCvv();
+
         Client client = clientRepository.findByEmail(authentication.getName());
         if (client.getCards().size() <= 5){
             for (Card card : client.getCards()) {

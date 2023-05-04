@@ -126,18 +126,12 @@ width: 100%;
 display: none;
 }
 .content{
-width: (100% - 250px);
-margin-top: 70px;
-padding: 20px;
-margin-left: 250px;
+width: 100%;
+padding: 50px;
 background-image: url(../img/Fondo2.png);
 background-position: center;
 background-size: cover;
 min-height: 100vh;
-transition: 0.5s;
-}
-#check:checked ~ .content{
-margin-left: 60px;
 }
 #check:checked ~ .sidebar .profile-info{
 display: none;
@@ -151,15 +145,6 @@ display: none;
 }
 #sidebar-btn{
 display: none;
-}
-.content{
-margin-left: 0;
-margin-top: 0;
-padding: 10px 20px;
-transition: 0s;
-}
-#check:checked ~ .content{
-margin-left: 0;
 }
 .mobile-nav{
 display: block;

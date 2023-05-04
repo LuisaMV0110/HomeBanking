@@ -41,7 +41,7 @@
         </div>
         <div class="mobile-nav-items">
             <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-            <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
+            <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
         </div>
@@ -52,35 +52,39 @@
             <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-        <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
+        <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
         <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
     </div>
-    <main class="content">
-        <div class="main_account d-flex flex-column align-items-center justify-content-center">
-        <div class="d-flex flex-column align-items-center justify-content-center tableAccount"> 
-            <h2 class="accountH2 mb-4">Your Transactions</h2>      
-            <table class="table table-column mt-3">
-                <thead>
-                    <tr>
-                        <th class="text-center">Amount</th>
-                        <th class="text-center">Description</th>
-                        <th class="text-center">Date</th>
-                        <th class="text-center">Hour</th>
-                    </tr>
-                </thead>
-                <tbody v-for="transaction of transactions">
-                    <tr>
-                        <td v-if="transaction.type=='CREDIT'" class="table-success">{{"+" + formatCurrency(transaction.amount)}}</td>
-                        <td v-else class="table-danger">{{"-" + formatCurrency(transaction.amount)}}</td>
-                        <td>{{transaction.description}}</td>
-                        <td>{{transaction.date.slice(0,10)}}</td>
-                        <td>{{transaction.date.slice(11,16)}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <main class="content d-flex flex-column align-items-center justify-content-center">
+        <section class="containerTransaction d-flex flex-column align-items-center mt-5">     
+            <section class="table-header">
+                <h1>Your Transactions</h1>
+            </section>
+            <section class="table-body d-flex flex-column">
+                <table class="table_transactions">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Type</th>
+                            <th class="text-center">Amount</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="transaction  of transactions">
+                            <td class="text-center">{{transaction.type}}</td>
+                            <td class="text-center" v-if="transaction.type=='CREDIT'" style="color:rgb(0, 198, 26)"><strong>{{"+" + formatCurrency(transaction.amount)}}</strong></td>
+                            <td class="text-center" v-else style="color:rgb(255, 0, 0)"><strong>{{"-" + formatCurrency(transaction.amount)}}</strong></td>
+                            <td class="text-center">{{transaction.description}}</td>
+                            <td class="text-center">{{transaction.date.slice(0,10)}}</td>
+                            <td class="text-center">{{transaction.date.slice(11,16)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+    </section>
     </main>
     <footer class="d-flex justify-content-evenly align-items-center flex-wrap">
         <div class="social">

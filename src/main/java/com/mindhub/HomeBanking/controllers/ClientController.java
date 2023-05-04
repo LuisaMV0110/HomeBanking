@@ -29,7 +29,11 @@ public class ClientController {
     private AccountRepository accountRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+//    Método número aleatorio
+    public static String randomNumber(){
+        Random randomNumber = new Random();
+        return ("VIN-" + randomNumber.nextInt(999989 + 10));
+    }
     @GetMapping("/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
@@ -47,20 +51,24 @@ public class ClientController {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+        if (firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
         }
         if (clientRepository.findByEmail(email) != null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
-        String number = Account.randomNumber();
-        if (accountRepository.findByNumber(number)== null){
-            Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
-            clientRepository.save(newClient);
-            Account newAccount = new Account(number, LocalDateTime.now(), 0.00);
-            newClient.addAccount(newAccount);
-            accountRepository.save(newAccount);
+        String number;
+        do{
+            number = randomNumber();
         }
+        while (accountRepository.findByNumber(number) != null);
+
+        Client newClient = new Client(firstName, lastName, email, passwordEncoder.encode(password));
+        clientRepository.save(newClient);
+        Account newAccount = new Account(number, LocalDateTime.now(), 0.00);
+        newClient.addAccount(newAccount);
+        accountRepository.save(newAccount);
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

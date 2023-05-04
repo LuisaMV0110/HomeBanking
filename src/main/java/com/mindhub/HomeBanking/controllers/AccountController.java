@@ -28,7 +28,11 @@ public class AccountController {
     private AccountRepository accountRepository;
     @Autowired
     private ClientRepository clientRepository;
-
+    //    Método número aleatorio
+    public static String randomNumber(){
+        Random randomNumber = new Random();
+        return ("VIN-" + randomNumber.nextInt(999989 + 10));
+    }
     @GetMapping("/clients/current/accounts")
     public List<AccountDTO> getAccounts (Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getAccounts().stream().collect(toList());
@@ -40,10 +44,12 @@ public class AccountController {
     };
     @PostMapping("/clients/current/accounts")
     public ResponseEntity<Object> newAccount(Authentication authentication){
-        String number = Account.randomNumber();
-        if (accountRepository.findByNumber(number) != null) {
-            return new ResponseEntity<>("Number already in use", HttpStatus.FORBIDDEN);
+        String number;
+        do{
+            number = randomNumber();
         }
+        while (accountRepository.findByNumber(number) != null);
+
         if (clientRepository.findByEmail(authentication.getName()).getAccounts().size() <= 2){
             Account newAccount = new Account(number, LocalDateTime.now(), 0.00);
             clientRepository.findByEmail(authentication.getName()).addAccount(newAccount);
