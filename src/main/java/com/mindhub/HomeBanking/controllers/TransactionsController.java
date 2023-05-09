@@ -37,13 +37,13 @@ public class TransactionsController {
 
 //        Auth
         Client client = clientRepository.findByEmail((auth.getName()));
-        Account initialAccountAuth = accountRepository.findByNumber(initialAccount.toUpperCase());
-        Account destinateAccountAuth = accountRepository.findByNumber(destinateAccount.toUpperCase());
 
 //        Initial Account
         if(initialAccount.isBlank()){
             return new ResponseEntity<>("Please, select one of your accounts", HttpStatus.FORBIDDEN);
-        } else if (initialAccountAuth == null) {
+        }
+        Account initialAccountAuth = accountRepository.findByNumber(initialAccount.toUpperCase());
+        if (initialAccountAuth == null) {
             return new ResponseEntity<>("This account" + initialAccount + "doesn't exist", HttpStatus.FORBIDDEN);
         } else if (!client.getAccounts().contains(initialAccountAuth)){
             return new ResponseEntity<>("You are not the account owner", HttpStatus.FORBIDDEN);
@@ -51,13 +51,15 @@ public class TransactionsController {
 //       Destinate Account
         if(destinateAccount.isBlank()){
             return new ResponseEntity<>("Please, enter the account number to make the transfer", HttpStatus.FORBIDDEN);
-        } else if (destinateAccountAuth == null) {
+        }
+        Account destinateAccountAuth = accountRepository.findByNumber(destinateAccount.toUpperCase());
+        if (destinateAccountAuth == null) {
             return new ResponseEntity<>("This account" + destinateAccount + "doesn't exist", HttpStatus.FORBIDDEN);
         } else if (destinateAccountAuth.getNumber().equals(initialAccountAuth.getNumber())){
             return new ResponseEntity<>("You cannot send to the same account", HttpStatus.FORBIDDEN);
         }
 //        Amount
-        if (amount == null|| amount.isNaN()){
+        if (amount == null){
             return new ResponseEntity<>("Please, enter an amount", HttpStatus.FORBIDDEN);
         } else if( amount < 1 ){
             return new ResponseEntity<>("Please, enter an amount bigger than 0", HttpStatus.FORBIDDEN);

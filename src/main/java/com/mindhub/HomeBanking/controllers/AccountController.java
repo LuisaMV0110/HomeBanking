@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
 
+
+import static com.mindhub.HomeBanking.controllers.ClientController.randomNumber;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -28,11 +28,7 @@ public class AccountController {
     private AccountRepository accountRepository;
     @Autowired
     private ClientRepository clientRepository;
-    //    Método número aleatorio
-    public static String randomNumber(){
-        Random randomNumber = new Random();
-        return ("VIN-" + randomNumber.nextInt(999989 + 10));
-    }
+
     @GetMapping("/clients/current/accounts")
     public List<AccountDTO> getAccounts (Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getAccounts().stream().collect(toList());

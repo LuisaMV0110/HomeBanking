@@ -41,10 +41,10 @@ public class CardController {
     }
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
-        if ( !type.equalsIgnoreCase("CREDIT")  && !type.equalsIgnoreCase("DEBIT")) {
+        if ( !type.equals("CREDIT")  && !type.equals("DEBIT")) {
             return new ResponseEntity<>(type + " is an incorrect type of card", HttpStatus.FORBIDDEN);
         }
-        if ( !color.equalsIgnoreCase("TITANIUM") && !color.equalsIgnoreCase("GOLD") && !color.equalsIgnoreCase("SILVER")) {
+        if ( !color.equals("TITANIUM") && !color.equals("GOLD") && !color.equals("SILVER")) {
             return new ResponseEntity<>(color + " is an incorrect color of card", HttpStatus.FORBIDDEN);
         }
         String cardNumber;
