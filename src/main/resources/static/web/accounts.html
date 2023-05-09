@@ -48,7 +48,7 @@
             <div class="mobile-nav-items">
                 <a href="#"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
                 <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
-                <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+                <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
                 <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
             </div>
         </div>
@@ -59,7 +59,7 @@
             </div>
             <a href="#"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
             <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
-            <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+            <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
         </div>
         <main class="content d-flex align-items-center justify-content-center flex-column">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-                <div class="d-flex flex-column align-items-center justify-content-center cardsAccount mt-3">
+                <div class="d-flex flex-column align-items-center justify-content-center cardsAccount mt-4">
                     <h2 class="accountH2">Your Accounts</h2>
                     <div class="containerCardAccount">
                         <div class="cardAccount"  v-for="account of accounts">
@@ -117,7 +117,22 @@
                             </div>
                         </div>
                     </div>
+                    <section class="d-flex flex-column align-items-center justify-content-center">
+                        <h2 class="accountH2">Your Loans</h2>
+                        <div class="containerCardLoans">
+                            <div class="cardLoans"  v-for="loan of loans">
+                                <div class="cardLBox">
+                                    <div class="contentCardL">
+                                        <h2>0{{loans.indexOf(loan) + 1}}</h2>
+                                        <h3>{{loan.name}}</h3>
+                                        <p><span>Amount</span><br>{{formatCurrency(loan.amount)}}</p>
+                                        <p><span>Payments</span><br>{{loan.payments}}</p>
+                                </div>
+                            </div>
+                        </div>
+                </section>
                 </div>
+
         </section>
         </main>
         <footer class="d-flex justify-content-evenly align-items-center flex-wrap">

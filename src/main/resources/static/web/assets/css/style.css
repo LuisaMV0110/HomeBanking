@@ -400,6 +400,91 @@ background-color: #0000000b;
 tbody tr:hover{
 background-color: #fff6;
 }
+/* Cards Loans*/
+.containerCardLoans{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-wrap: wrap;
+max-width: 1200px;
+}
+.containerCardLoans .cardLoans{
+position: relative;
+width: 250px;
+height: 250px;
+box-shadow:  inset 5px 5px 5px rgba(0, 8, 118, 0.308), 
+             inset -5px -5px 5px rgba(255, 255, 255, 0.3),
+             5px 5px 5px rgba(0, 0, 0, 0.05),
+            -5px -5px 5px rgba(255, 255, 255, 0.3) ;
+border-radius: 15px;
+margin: 30px;
+}
+.containerCardLoans .cardLoans .cardLBox{
+position: absolute;
+top: 20px;
+left: 20px;
+right: 20px;
+bottom: 20px;
+background: aliceblue;
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+border-radius: 15px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: 0.5s;
+}
+.containerCardLoans .cardLoans:hover .cardLBox{
+transform: translateY(-50px);
+box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL{
+padding: 30px;
+text-align: center;
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL h2{
+position: absolute;
+top: -10px;
+right: 20px;
+font-size: 6em;
+font-weight: 900;
+color: rgba(0, 8, 99, 0.04);
+transition: 0.5s;
+pointer-events: none;
+}
+.containerCardLoans .cardLoans:hover .cardLBox .contentCardL h2{
+color: rgba(0, 8, 99, 0.07);
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL h3{
+font-size: 1.6em;
+color: #003785;
+z-index: 1;
+transition: 0.5s;
+font-weight: 700;
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL p span{
+font-size: 1.2em;
+font-weight: 600;
+color: #023e91;
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL p{
+font-size: 1em;
+font-weight: 300;
+color: #004ab1;
+z-index: 1;
+transition: 0.5s;
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL a{
+position: relative;
+display: inline-block;
+color: #004fbe;
+font-size: 1.7rem;
+transition: all 0.5s;
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+.containerCardLoans .cardLoans .cardLBox .contentCardL a:hover{
+color: #006aff;
+transform: scale(1.1);
+}
 /* Revisar */
 .containerAccounts{
 background-color: #006affa0;

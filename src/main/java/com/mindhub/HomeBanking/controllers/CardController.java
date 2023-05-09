@@ -3,8 +3,8 @@ package com.mindhub.HomeBanking.controllers;
 import com.mindhub.HomeBanking.dtos.CardDTO;
 import com.mindhub.HomeBanking.dtos.ClientDTO;
 import com.mindhub.HomeBanking.models.*;
-import com.mindhub.HomeBanking.repositories.CardRepository;
-import com.mindhub.HomeBanking.repositories.ClientRepository;
+import com.mindhub.HomeBanking.services.CardServices;
+import com.mindhub.HomeBanking.services.ClientServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +20,9 @@ import static java.util.stream.Collectors.toList;
 @RequestMapping("/api")
 public class CardController {
     @Autowired
-    CardRepository cardRepository;
+    CardServices cardServices;
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientServices clientServices;
     public static String randomCardNumber(){
         String cardNumber = "";
         for (int i = 0; i < 4; i++) {
@@ -37,7 +37,7 @@ public class CardController {
     }
     @GetMapping("/clients/current/cards")
     public List<CardDTO> getCards (Authentication authentication) {
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName())).getCards().stream().collect(toList());
+        return new ClientDTO(clientServices.findByEmail(authentication.getName())).getCards().stream().collect(toList());
     }
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
@@ -52,11 +52,11 @@ public class CardController {
         do {
             cardNumber = randomCardNumber();
         }
-        while (cardRepository.findByNumber(cardNumber) != null);
+        while (cardServices.findByNumberCard(cardNumber) != null);
 //        CVV
         int cvvNumber = randomCvv();
 
-        Client client = clientRepository.findByEmail(authentication.getName());
+        Client client = clientServices.findByEmail(authentication.getName());
         if (client.getCards().size() <= 5){
             for (Card card : client.getCards()) {
                 if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
@@ -65,7 +65,7 @@ public class CardController {
             }
         Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), CardType.valueOf(type), CardColor.valueOf(color), cardNumber, cvvNumber, LocalDate.now(), LocalDate.now().plusYears(5));
             client.addCard(newCard);
-        cardRepository.save(newCard);
+        cardServices.saveCard(newCard);
     }
         else{
             return new ResponseEntity<>("You cannot create more than 6 cards", HttpStatus.FORBIDDEN);

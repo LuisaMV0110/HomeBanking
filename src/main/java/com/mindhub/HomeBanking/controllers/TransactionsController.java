@@ -4,9 +4,9 @@ import com.mindhub.HomeBanking.models.Account;
 import com.mindhub.HomeBanking.models.Client;
 import com.mindhub.HomeBanking.models.Transaction;
 import com.mindhub.HomeBanking.models.TransactionType;
-import com.mindhub.HomeBanking.repositories.AccountRepository;
-import com.mindhub.HomeBanking.repositories.ClientRepository;
-import com.mindhub.HomeBanking.repositories.TransactionRepository;
+import com.mindhub.HomeBanking.services.AccountServices;
+import com.mindhub.HomeBanking.services.ClientServices;
+import com.mindhub.HomeBanking.services.TransactionServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +23,11 @@ import java.time.LocalDateTime;
 @RequestMapping("/api")
 public class TransactionsController {
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientServices clientServices;
     @Autowired
-    private AccountRepository accountRepository;
+    private AccountServices accountServices;
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionServices transactionServices;
 
     @Transactional
     @PostMapping("/transactions")
@@ -36,13 +36,13 @@ public class TransactionsController {
             @RequestParam String initialAccount, @RequestParam String destinateAccount){
 
 //        Auth
-        Client client = clientRepository.findByEmail((auth.getName()));
+        Client client = clientServices.findByEmail((auth.getName()));
 
 //        Initial Account
         if(initialAccount.isBlank()){
             return new ResponseEntity<>("Please, select one of your accounts", HttpStatus.FORBIDDEN);
         }
-        Account initialAccountAuth = accountRepository.findByNumber(initialAccount.toUpperCase());
+        Account initialAccountAuth = accountServices.findByNumber(initialAccount.toUpperCase());
         if (initialAccountAuth == null) {
             return new ResponseEntity<>("This account" + initialAccount + "doesn't exist", HttpStatus.FORBIDDEN);
         } else if (!client.getAccounts().contains(initialAccountAuth)){
@@ -52,7 +52,7 @@ public class TransactionsController {
         if(destinateAccount.isBlank()){
             return new ResponseEntity<>("Please, enter the account number to make the transfer", HttpStatus.FORBIDDEN);
         }
-        Account destinateAccountAuth = accountRepository.findByNumber(destinateAccount.toUpperCase());
+        Account destinateAccountAuth = accountServices.findByNumber(destinateAccount.toUpperCase());
         if (destinateAccountAuth == null) {
             return new ResponseEntity<>("This account" + destinateAccount + "doesn't exist", HttpStatus.FORBIDDEN);
         } else if (destinateAccountAuth.getNumber().equals(initialAccountAuth.getNumber())){
@@ -76,11 +76,11 @@ public class TransactionsController {
 //        Debit
         Transaction newTransactionD = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now());
         initialAccountAuth.addTransaction((newTransactionD));
-        transactionRepository.save(newTransactionD);
+        transactionServices.saveTransaction(newTransactionD);
 //        Credit
         Transaction newTransactionC = new Transaction(TransactionType.CREDIT, amount, description, LocalDateTime.now());
         destinateAccountAuth.addTransaction((newTransactionC));
-        transactionRepository.save(newTransactionC);
+        transactionServices.saveTransaction(newTransactionC);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
