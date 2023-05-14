@@ -596,6 +596,20 @@ align-items: center;
 font-size: .9rem;
 text-align: center;
 }
+.table-header h1{
+font-size: 1.5rem;
+text-align: center;
+}
+.cardH1{
+font-size: 2rem !important;
+}
+.yourAccount label{
+font-size: 1.6rem !important;
+}
+#checkTransfer:checked ~ .otherAccount label{
+font-size: 1.6em !important;
+margin: 20px;
+}
 }
 /* Revisar admin */
 #json{

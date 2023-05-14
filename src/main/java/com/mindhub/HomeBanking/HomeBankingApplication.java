@@ -15,12 +15,12 @@ import java.util.Set;
 
 @SpringBootApplication
 public class HomeBankingApplication {
-	@Autowired
-    private PasswordEncoder passwordEncoder;
+/*	@Autowired
+    private PasswordEncoder passwordEncoder;*/
 	public static void main(String[] args) {
 		SpringApplication.run(HomeBankingApplication.class, args);
 	}
-	@Bean
+/*	@Bean
 	public CommandLineRunner initData(ClientRepository client, AccountRepository account, TransactionRepository transaction, LoanRepository loan, ClientLoanRepository clientLoan, CardRepository card){
 		return(args) -> {
 			Client client1 = new Client("Melba","Morel","melba@mindhub.com", passwordEncoder.encode("melba"));
@@ -132,5 +132,5 @@ public class HomeBankingApplication {
 			loan3.addClientLoan(clientLoan4);
 			clientLoan.save(clientLoan4);
 		};
-	}
+	}*/
 }
