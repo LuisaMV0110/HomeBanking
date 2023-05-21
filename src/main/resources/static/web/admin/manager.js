@@ -3,10 +3,11 @@ const { createApp } = Vue;
 const app = createApp({
   data() {
     return {
-      clientsInfo: [],
-      firstName: "",
-      lastName: "",
-      email: "",
+      loansInfo: [],
+      name: "",
+      maxAmount: "",
+      payments: [],
+      interest: "",
       id: "",
     };
   },
@@ -14,32 +15,21 @@ const app = createApp({
     this.loadData();
   },
   methods: {
-    async loadData() {
-      try {
-        axios.get("http://localhost:8080/rest/clients").then((response) => {
-          this.clientsInfo = response.data._embedded.clients;
-        });
-      } catch {
-        (err) => console.log(err);
-      }
-    },
-    async postClient() {
-      try {
+loadData() {
         axios
-          .post("http://localhost:8080/rest/clients", {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            email: this.email,
-          })
-          .then((response) => {
-            this.loadData();
-          });
-      } catch {
-        (err) => console.log(err);
-      }
+        .get("http://localhost:8080/api/loans")
+        .then((response) => {
+          this.loansInfo = response.data.sort((x, y) => y.interest - x.interest);;
+
+        }).catch((err) => console.log(err));
+      },
+      formatCurrency(balance) {
+        let options = { style: "currency", currency: "USD" };
+        let numberFormat = new Intl.NumberFormat("en-US", options);
+        return numberFormat.format(balance);
+      },
     },
-    async addClient() {
-      this.postClient();
-    },
-  },
-}).mount("#app");
+
+})
+.mount("#app");
+

@@ -57,13 +57,18 @@ public class CardController {
         int cvvNumber = randomCvv();
 
         Client client = clientServices.findByEmail(authentication.getName());
+        int allCards = client.getCards().size();
+        int activeCards = (int) client.getCards().stream().filter(Card::isCardActivate).count();
+        if(allCards >= 10 || activeCards >= 10){
+            return new ResponseEntity<>("You have reached the maximum number of cards to create",HttpStatus.FORBIDDEN);
+        }
         if (client.getCards().size() <= 5){
             for (Card card : client.getCards()) {
-                if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color))) {
+                if (card.getType().equals(CardType.valueOf(type)) && card.getColor().equals(CardColor.valueOf(color)) && card.isCardActivate()) {
                     return new ResponseEntity<>("You already have a card of the same type and color", HttpStatus.FORBIDDEN);
                 }
             }
-        Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), CardType.valueOf(type), CardColor.valueOf(color), cardNumber, cvvNumber, LocalDate.now(), LocalDate.now().plusYears(5));
+        Card newCard = new Card(client.getFirstName() + " " + client.getLastName(), CardType.valueOf(type), CardColor.valueOf(color), cardNumber, cvvNumber, LocalDate.now(), LocalDate.now().plusYears(5),true);
             client.addCard(newCard);
         cardServices.saveCard(newCard);
     }
@@ -72,5 +77,22 @@ public class CardController {
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    @PutMapping("/clients/current/cards/{id}")
+    public ResponseEntity<Object> deleteCard(Authentication auth, @PathVariable long id){
+        Client client = clientServices.findByEmail((auth.getName()));
+        Card card = cardServices.findById(id);
+        if(!client.getCards().contains(card)){
+            return new ResponseEntity<>("Sorry, this card is not yours", HttpStatus.FORBIDDEN);
+        }
+        if (card == null){
+            return new ResponseEntity<>("Sorry, this card is not found", HttpStatus.FORBIDDEN);
+        }
+        if (!card.isCardActivate()){
+            return new ResponseEntity<>("Sorry, this card is inactive", HttpStatus.FORBIDDEN);
+        }
+        card.setCardActivate(false);
+        cardServices.saveCard(card);
+        return new ResponseEntity<>("Card removed", HttpStatus.ACCEPTED);
     }
 }

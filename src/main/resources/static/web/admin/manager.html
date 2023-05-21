@@ -4,63 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./web/css/style.css">
-    <link rel="shortcut icon" href="./web/img/FavIcon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./manager.css">
+    <link rel="shortcut icon" href="../assets/img/FavI.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-    <title>HomeBanking</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="./manager.js"></script>
+    <title>Mind Blue | Manager</title>
 </head>
 <body class="manager">
     <main id="app">
-        <h1 class="text-center text-light mt-2">Client Manager</h1>
-        <section class="formjson d-flex justify-content-evenly mt-4">
-        <form action="" id="form" class="d-flex flex-column col-sm-12 col-md-8 col-lg-6" @submit.prevent="addClient">
-            <div class="form-control-lg" id="name">
-                <label for="exampleFormControlInput1" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Name" v-model="firstName" required>
-            </div>
-            <div class="form-control-lg" id="lname">
-                <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="lname"  id="exampleFormControlInput2" placeholder="Last Name" v-model="lastName" required>
-            </div>
-            <div class="form-control-lg" id="email">
-                <label for="exampleFormControlInput1" class="form-label">Email</label>
-                <input type="text" class="form-control" name="email"  id="exampleFormControlInput3" placeholder="Email" v-model="email" required>
-            </div>
-            <div class="col-auto mb-2 button d-flex justify-content-end me-3">
-                <input type="submit" value="Add Client" class="btn btn-success">
-            </div>
-        </form>
-        <pre id="json" class="d-flex flex-column align-items-center">
-            <h2>Client REST Response</h2>
-            <p class="text-secondary">{{clientsInfo}}</p>
-        </pre>
-        </section>
-        <section class="d-flex flex-column align-items-center table_client">
-            <h2 class="text-center">Client List</h2>
+        <h1 class="text-center mt-2"> Manager</h1>
+        <section class="d-flex flex-column align-items-center">
+            <h2 class="text-center">Loan List</h2>
             <table class="table table-columns w-50">
                 <thead>
-                    <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody id="clientInfo" v-for="client of clientsInfo">
                 <tr>
-                    <td>{{client.firstName}}</td>
-                    <td>{{client.lastName}}</td>
-                    <td>{{client.email}}</td>
+                     <th>Name</th>
+                     <th>Max Amount</th>
+                     <th>Payments</th>
+                     <th>Interest</th>
+                </tr>
+                </thead>
+                <tbody v-for="loan of loansInfo">
+                <tr>
+                     <td>{{loan.name}}</td>
+                     <td>{{formatCurrency(loan.maxAmount)}}</td>
+                     <td>{{loan.payments.sort((x, y) => x - y)}}</td>
+                     <td>{{loan.interest}}</td>
                 </tr>
                 </tbody>
             </table>
         </section>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./manager.js"></script>
 </body>
 </html> 

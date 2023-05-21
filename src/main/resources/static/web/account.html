@@ -70,6 +70,7 @@
                             <th class="text-center">Description</th>
                             <th class="text-center">Date</th>
                             <th class="text-center">Hour</th>
+                            <th class="text-center">Total Balance</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +81,7 @@
                             <td class="text-center">{{transaction.description}}</td>
                             <td class="text-center">{{transaction.date.slice(0,10)}}</td>
                             <td class="text-center">{{transaction.date.slice(11,16)}}</td>
+                            <td class="text-center">{{formatCurrency(transaction.totalBalance)}}</td>
                         </tr>
                     </tbody>
                 </table>

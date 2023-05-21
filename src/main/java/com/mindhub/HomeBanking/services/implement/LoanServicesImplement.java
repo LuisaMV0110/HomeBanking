@@ -17,12 +17,12 @@ public class LoanServicesImplement implements LoanServices {
 @Autowired
 private LoanRepository loanRepository;
     @Override
-    public List<LoanDTO> getLoanDTO() {
-        return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());
-    }
+    public List<LoanDTO> getLoanDTO() {return loanRepository.findAll().stream().map(loan -> new LoanDTO(loan)).collect(toList());}
     @Override
-    public Loan findById(long id) {
-        return loanRepository.findById(id).orElse(null);
-    }
+    public void saveLoan(Loan loan) {loanRepository.save(loan);}
+    @Override
+    public Loan findById(long id) {return loanRepository.findById(id).orElse(null);}
+    @Override
+    public Loan findByName(String name) {return loanRepository.findByName(name);}
 
 }

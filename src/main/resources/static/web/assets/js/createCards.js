@@ -31,18 +31,18 @@ const app = createApp({
         .catch((err) => console.log(err));
     },
     previewCardType() {
-      if (this.selectType == 1) {
+      if (this.selectType == "CREDIT") {
         this.type = "CREDIT";
-      } else if (this.selectType == 2) {
+      } else if (this.selectType == "DEBIT") {
         this.type = "DEBIT";
       }
     },
     previewCardColor() {
-      if (this.selectColor == 1) {
+      if (this.selectColor == "TITANIUM") {
         this.color = "TITANIUM";
-      } else if (this.selectColor == 2) {
+      } else if (this.selectColor == "GOLD") {
         this.color = "GOLD";
-      } else if (this.selectColor == 3) {
+      } else if (this.selectColor == "SILVER") {
         this.color = "SILVER";
       }
     },

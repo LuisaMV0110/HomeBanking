@@ -18,6 +18,9 @@ font-size: 3rem;
 }
 .containerCards{
 width: 100%;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
 }
 .sectionCard{
 position: relative;

@@ -72,7 +72,7 @@
                                 <div class="select-card-form mb-4">
                                 <select class="select-box" v-model="initialAccount">
                                     <option selected disabled value="">Initial Account</option>
-                                    <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                    <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                                 </select>
                                 <div class="icon-container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -81,7 +81,7 @@
                                 <div class="select-card-form mb-4">
                                     <select class="select-box" v-model="destinateAccount">
                                         <option selected disabled value="">Destinate Account</option>
-                                        <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                        <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                                 </select>
                                 <div class="icon-container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -98,7 +98,7 @@
                         <div class="select-card-form mb-4">
                             <select class="select-box" v-model="initialAccount">
                                 <option selected disabled value="">Initial Account</option>
-                                <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                             </select>
                             <div class="icon-container">
                                 <i class="fa-solid fa-caret-down"></i>

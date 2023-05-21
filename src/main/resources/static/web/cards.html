@@ -68,17 +68,16 @@
         <h1 class="cardH1 text-center mt-2" style="font-weight: 600; -webkit-text-stroke: 0.7px #003785">
           Your Cards {{data.firstName}}
         </h1>
-        <a v-if="cardId.length <= 5" class="btn-create-cards" href="./createCards.html"><i
+        <a v-if="cardActive.length <= 5" class="btn-create-cards" href="./createCards.html"><i
             class="fa-regular fa-credit-card me-1"></i>Create Card</a>
       </section>
       <section class="sectionCard">
         <div class="containerCards d-flex justify-content-evenly flex-wrap">
           <section>
-            <h2 v-if="debit.length <=1" class="accountH1 text-center">
-              Debit Card
-            </h2>
+            <h2 v-if="debit.length <=1" class="accountH1 text-center">Debit Card</h2>
             <h2 v-else class="accountH1 text-center">Debit Cards</h2>
-            <div class="containerCard mb-4" v-if="debit.length > 0" v-for="data of debit">
+            <div class="d-flex flex-wrap align-items-center flex-column" v-if="debit.length > 0" v-for="data of debit">
+            <div class="containerCard mb-3">
               <div class="card front-face" :class="data.color">
                 <header class="headerCard">
                   <span class="logoCard">
@@ -94,6 +93,7 @@
                     <h5 class="name">{{data.cardHolder}}</h5>
                   </div>
                   <div class="valid-date">
+                    <h6 class="text-center text-danger fw-bold" v-if="data.thruDate <= actDate">Expired card</h6>
                     <h6>Valid Thru</h6>
                     <h5>
                       {{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}
@@ -115,6 +115,8 @@
                   minus. Deserunt odit accusamus debitis.
                 </h5>
               </div>
+            </div>
+            <button class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
             </div>
             <div v-else>
               <h3 class="accountH2">You don't have debit card</h3>
@@ -125,7 +127,8 @@
               Credit Card
             </h2>
             <h2 v-else class="accountH1 text-center">Credit Cards</h2>
-            <div class="containerCard mb-4" v-if="credit.length > 0" v-for="data of credit">
+            <div class="d-flex flex-wrap align-items-center flex-column" v-if="credit.length > 0" v-for="data of credit">
+            <div class="containerCard mb-3">
               <div class="card front-face" :class="data.color">
                 <header class="headerCard">
                   <span class="logoCard">
@@ -141,6 +144,7 @@
                     <h5 class="name">{{data.cardHolder}}</h5>
                   </div>
                   <div class="valid-date">
+                    <h6 class="text-center text-danger fw-bold" v-if="data.thruDate <= actDate">Expired card</h6>
                     <h6>Valid Thru</h6>
                     <h5>
                       {{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}
@@ -163,6 +167,8 @@
                 </h5>
               </div>
             </div>
+            <button href="" class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
+          </div>
             <div v-else>
               <h3 class="accountH2">You don't have credit card</h3>
             </div>

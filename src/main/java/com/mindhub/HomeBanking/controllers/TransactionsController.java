@@ -71,16 +71,25 @@ public class TransactionsController {
             description = "Transaction to " + destinateAccount;
         }
 //        Add transactions
-        initialAccountAuth.setBalance(initialAccountAuth.getBalance() - amount);
-        destinateAccountAuth.setBalance(destinateAccountAuth.getBalance() + amount);
+
+
+        double initialBalance = initialAccountAuth.getBalance() ;
+        double destinateBalance = destinateAccountAuth.getBalance();
 //        Debit
-        Transaction newTransactionD = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now());
+        Transaction newTransactionD = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now(),initialBalance,true);
         initialAccountAuth.addTransaction((newTransactionD));
+        newTransactionD.setTotalBalance(initialBalance - amount);
         transactionServices.saveTransaction(newTransactionD);
 //        Credit
-        Transaction newTransactionC = new Transaction(TransactionType.CREDIT, amount, description, LocalDateTime.now());
+        Transaction newTransactionC = new Transaction(TransactionType.CREDIT, amount, description, LocalDateTime.now(),destinateBalance,true);
         destinateAccountAuth.addTransaction((newTransactionC));
+        newTransactionC.setTotalBalance(destinateBalance + amount);
         transactionServices.saveTransaction(newTransactionC);
+
+        initialAccountAuth.setBalance(initialAccountAuth.getBalance() - amount);
+        destinateAccountAuth.setBalance(destinateAccountAuth.getBalance() + amount);
+
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

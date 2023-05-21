@@ -140,6 +140,12 @@ display: none;
 display: none;
 }
 @media screen and (max-width:780px){
+.left-area{
+margin-left: 5px;  
+}
+.left-area h3{
+font-size: 20px;
+}
 .sidebar{
 display: none;
 }

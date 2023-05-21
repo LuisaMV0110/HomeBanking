@@ -17,8 +17,21 @@ createApp({
     signIn() {
       axios
         .post("/api/login", `email=${this.email}&password=${this.password}`)
-        .then((response) => (window.location.href = "/web/accounts.html"))
+        .then((response) => {
+          if (this.email == 'luisafmv321@gmail.com') {
+            (window.location.href = "/web/admin/manager.html")
+          }else{
+            (window.location.href = "/web/accounts.html")
+          }
+      })
         .catch((error) => console.log(error));
+        /*         .post("/api/login", `email=${this.email}&password=${this.password}`)
+        .then(response => {
+          if (this.email == 'luisafmv321@gmail.com') {
+            window.location.replace = ("/web/admin/manager.html")
+          }else{
+            window.location.replace = ("/web/accounts.html")
+          } */
     },
     signUp() {
       axios

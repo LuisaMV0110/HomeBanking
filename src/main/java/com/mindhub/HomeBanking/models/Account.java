@@ -18,6 +18,8 @@ private long id;
 private String number;
 private LocalDateTime creationDate;
 private double balance;
+private boolean accountActive;
+private AccountType accountType;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id",nullable = false)
     private Client client;
@@ -25,10 +27,12 @@ private double balance;
     @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private Set<Transaction> transactions = new HashSet<>();
     public Account(){}
-    public Account(String number, LocalDateTime date, double balance){
+    public Account(String number, LocalDateTime date, double balance,boolean accountActive, AccountType accountType){
         this.number = number;
         this.creationDate = date;
         this.balance = balance;
+        this.accountActive = accountActive;
+        this.accountType = accountType;
     }
     public long getId() {
         return id;
@@ -49,6 +53,10 @@ private double balance;
         return balance;
     }
     public void setBalance(double balance) {this.balance = balance;}
+    public boolean isAccountActive() {return accountActive;}
+    public void setAccountActive(boolean accountActive) {this.accountActive = accountActive;}
+    public AccountType getAccountType() {return accountType;}
+    public void setAccountType(AccountType accountType) {this.accountType = accountType;}
     @JsonIgnore
     public Client getClient() {return client;}
     public void setClient(Client client) {this.client = client;}

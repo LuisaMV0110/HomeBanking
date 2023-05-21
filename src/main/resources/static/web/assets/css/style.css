@@ -95,7 +95,7 @@ max-width: 1200px;
 .containerCardAccount .cardAccount{
 position: relative;
 width: 250px;
-height: 350px;
+height: 380px;
 box-shadow:  inset 5px 5px 5px rgba(0, 8, 118, 0.308), 
              inset -5px -5px 5px rgba(255, 255, 255, 0.3),
              5px 5px 5px rgba(0, 0, 0, 0.05),
@@ -138,14 +138,14 @@ pointer-events: none;
 color: rgba(0, 8, 99, 0.07);
 }
 .containerCardAccount .cardAccount .cardABox .contentCardA h3{
-font-size: 1.6em;
+font-size: 1.5em;
 color: #003785;
 z-index: 1;
 transition: 0.5s;
 font-weight: 700;
 }
 .containerCardAccount .cardAccount .cardABox .contentCardA p span{
-font-size: 1.2em;
+font-size: 1.1em;
 font-weight: 600;
 color: #023e91;
 }
@@ -156,17 +156,27 @@ color: #004ab1;
 z-index: 1;
 transition: 0.5s;
 }
-.containerCardAccount .cardAccount .cardABox .contentCardA a{
+.containerCardAccount .cardAccount .cardABox .contentCardA .fa-money-bill-transfer{
 position: relative;
 display: inline-block;
 color: #004fbe;
 font-size: 1.7rem;
 transition: all 0.5s;
-box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
-.containerCardAccount .cardAccount .cardABox .contentCardA a:hover{
+.containerCardAccount .cardAccount .cardABox .contentCardA .fa-money-bill-transfer:hover:not(.btnDeleteA){
 color: #006aff;
 transform: scale(1.1);
+}
+.btnDeleteA{
+position: absolute;
+right: 5px;
+top: 10px;
+color: #004fbe;
+font-size: 1.7rem;
+transition: all 0.5s;
+}
+.btnDeleteA:hover{
+color: #006aff;
 }
 /* Button create account */
 .btn-create-account{
@@ -410,8 +420,8 @@ max-width: 1200px;
 }
 .containerCardLoans .cardLoans{
 position: relative;
-width: 250px;
-height: 250px;
+width: 290px;
+height: 290px;
 box-shadow:  inset 5px 5px 5px rgba(0, 8, 118, 0.308), 
              inset -5px -5px 5px rgba(255, 255, 255, 0.3),
              5px 5px 5px rgba(0, 0, 0, 0.05),
@@ -485,7 +495,7 @@ box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 color: #006aff;
 transform: scale(1.1);
 }
-/* Revisar */
+/* Contenedor y títulos */
 .containerAccounts{
 background-color: #006affa0;
 width: 70rem;
@@ -562,6 +572,16 @@ width: 25rem;
 margin-left: 0;
 }   
 }
+@media screen and (min-width:415px) and (max-width:576px){
+.modal-content{
+width: 60% !important;
+}
+.modalAccount{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+}
 @media screen and (min-width:320px) and (max-width:415px){
 .containerAccounts, .containerTransaction{
 width: 18rem;
@@ -577,6 +597,14 @@ flex-direction: column;
 }
 .select-card-form{
 width: 250px;
+}
+.modalAccount{
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+.modal-content{
+width: 80% !important;
 }
 }
 @media screen and (min-width:409px) and (max-width:1024px){
@@ -610,23 +638,4 @@ font-size: 1.6rem !important;
 font-size: 1.6em !important;
 margin: 20px;
 }
-}
-/* Revisar admin */
-#json{
-height: 20rem;
-width: 35rem;
-overflow:scroll;
-border: 1px rgb(47, 78, 255) solid;
-background-color: aliceblue;
-border-radius: 1rem;
-}
-#form{
-width: 30rem;
-}
-.formjson{
-margin: 5rem;
-padding-top: 2rem;
-margin-bottom: 3rem;
-background-color: rgba(240, 248, 255, 0.963);
-border-radius: 1rem;
 }

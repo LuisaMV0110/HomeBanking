@@ -22,9 +22,11 @@ public class WebAuthorization{
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 .antMatchers( "/web/index.html","/web/assets/js/index.js","/web/assets/css/index.css", "/web/assets/img/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards","/api/transactions","/api/logout","/api/loans").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers("/web/accounts.html" , "/web/account.html" , "/web/cards.html","/web/createCards.html","/web/transfers.html","/web/assets/js/**","/web/assets/css/**").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console/**").hasAuthority("ADMIN");
-//                .anyRequest().denyAll();
+                .antMatchers(HttpMethod.PUT, "/api/clients/current/cards","/api/accounts/{id}").hasAnyAuthority("ADMIN","CLIENT")
+                .antMatchers("/api/clients/current","/web/accounts.html" , "/web/account.html" , "/web/cards.html","/web/createCards.html","/web/transfers.html","/web/loan-application.html","/web/assets/js/**","/web/assets/css/**").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console/**", "/api/clients","/api/loans").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/manager/loans").hasAuthority("ADMIN")
+                .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")

@@ -11,7 +11,7 @@ public class LoanDTO {
     private String name;
     private double maxAmount;
     private Set<Integer> payments = new HashSet<>();
-
+    public double interest;
     public LoanDTO() {
     }
 
@@ -20,6 +20,7 @@ public class LoanDTO {
         this.name = loan.getName();
         this.maxAmount = loan.getMaxAmount();
         this.payments = loan.getPayments();
+        this.interest = loan.getInterest();
     }
 
     public long getId() {return id;}

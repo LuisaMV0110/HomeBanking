@@ -18,4 +18,6 @@ public class CardServicesImplement implements CardServices {
     public Card findByNumberCard(String number) {
         return cardRepository.findByNumber(number);
     }
+    @Override
+    public Card findById(long id) {return cardRepository.findById(id);}
 }
