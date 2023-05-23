@@ -29,10 +29,6 @@ public class AccountController {
     @Autowired
     private AccountServices accountServices;
     @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private TransactionRepository transactionRepository;
-    @Autowired
     private ClientServices clientServices;
     @Autowired
     private TransactionServices transactionServices;
@@ -73,7 +69,7 @@ public class AccountController {
         if (client == null) {
             return new ResponseEntity<>("You can't create an account because you're not a client.", HttpStatus.NOT_FOUND);
         }
-        Account account = accountRepository.findById(id);
+        Account account = accountServices.findById2(id);
         if (account == null) {
             return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
         }
@@ -82,7 +78,7 @@ public class AccountController {
         }
         account.setAccountActive(false);
         accountServices.saveAccount(account);
-        List<Transaction> transactions = transactionRepository.findByAccountId(id);
+        List<Transaction> transactions = transactionServices.findByAccountId(id);
         transactions.forEach(transaction -> {
             transaction.setTransactionActive(false);
             transactionServices.saveTransaction(transaction);

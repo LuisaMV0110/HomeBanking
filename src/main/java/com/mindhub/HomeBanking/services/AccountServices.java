@@ -9,5 +9,6 @@ public interface AccountServices {
 void saveAccount(Account account);
 Optional<AccountDTO> getAccountId(Long id);
 Optional<Account> findById(Long id);
+Account findById2(Long id);
 Account findByNumber(String number);
 }

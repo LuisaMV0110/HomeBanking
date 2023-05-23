@@ -8,4 +8,5 @@ import java.util.List;
 public interface TransactionServices {
     void saveTransaction (Transaction transaction);
     List<TransactionDTO> getTransactionDTO();
+    List <Transaction> findByAccountId(Long accountId);
 }

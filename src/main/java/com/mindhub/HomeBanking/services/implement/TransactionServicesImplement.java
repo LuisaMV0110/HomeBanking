@@ -20,9 +20,12 @@ public class TransactionServicesImplement implements TransactionServices {
     public void saveTransaction(Transaction transaction) {
         transactionRepository.save(transaction);
     }
-
     @Override
     public List<TransactionDTO> getTransactionDTO() {
         return transactionRepository.findAll().stream().map(transaction -> new TransactionDTO(transaction)).collect(toList());
+    }
+    @Override
+    public List<Transaction> findByAccountId(Long accountId) {
+        return transactionRepository.findByAccountId(accountId);
     }
 }

@@ -27,6 +27,11 @@ public class AccountServiceImplement implements AccountServices {
     public Optional<Account> findById(Long id) {
         return accountRepository.findById(id);
     }
+
+    @Override
+    public Account findById2(Long id) {
+        return accountRepository.findById(id).orElse(null);
+    }
     @Override
     public Account findByNumber(String number) {
         return accountRepository.findByNumber(number);
