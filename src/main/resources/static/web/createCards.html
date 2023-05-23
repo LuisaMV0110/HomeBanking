@@ -23,7 +23,8 @@
     <title>Mind Blue | Cards</title>
 </head>
 
-<body id="app" class="account">
+<body id="app" class="hidden">
+    <div class="loaderCenter" id="loader"><div class="lds-circle"><div></div></div></div>
     <input type="checkbox" id="check">
     <header class="headerNav">
         <label for="check">
@@ -43,8 +44,8 @@
         </div>
         <div class="mobile-nav-items">
             <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-            <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
-            <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+            <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+            <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
         </div>
     </div>
@@ -54,26 +55,25 @@
             <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
         </div>
         <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-        <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
-        <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+        <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+        <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
     </div>
-    <main class="content">
-        <div class="main_account d-flex flex-column justify-content-center align-items-center mb-2">
+    <main class="content d-flex align-items-center justify-content-center">
+        <div class="containerAccounts d-flex flex-column justify-content-center align-items-center mt-5 mb-2">
             <section class="cardTitle">
                 <h1 class="cardH1 text-center mt-2">Create Cards {{data.firstName}}</h1>
             </section>
             <section class="sectionCard">
                 <div class="containerCards d-flex justify-content-evenly flex-wrap">
                 <section class="select-Cards d-flex flex-column">
-                <h2 class="create-CardH2 text-center">Select type and color</h2>
-                <h6 class="create-CardH2 text-center" style="font-size: 1.1rem;width: 25rem;text-align: justify;">(Warning: Each type of card can have 3 cards of different colors. You cannot have 2 or more cards of the same color and of the same type.)</h6>
-                <form action="" @submit.prevent="createCards" class="d-flex flex-column align-items-center">
+                <h2 class="create-CardH2 text-center mb-3">Select type and color</h2>
+                <form action="" @submit.prevent="createCards" class="d-flex flex-column align-items-center mt-4">
                     <div class="select-card-form mb-4">
                     <select class="select-box" v-model="selectType" @change="previewCardType">
                         <option selected disabled value="">Type</option>
-                        <option value="1">CREDIT</option>
-                        <option value="2">DEBIT</option>
+                        <option value="CREDIT">CREDIT</option>
+                        <option value="DEBIT">DEBIT</option>
                     </select>
                     <div class="icon-container">
                         <i class="fa-solid fa-caret-down"></i>
@@ -82,9 +82,9 @@
                     <div class="select-card-form mb-4">
                     <select class="select-box" v-model="selectColor" @change="previewCardColor">
                         <option selected disabled value="">Color</option>
-                        <option value="1">TITANIUM</option>
-                        <option value="2">GOLD</option>
-                        <option value="3">SILVER</option>
+                        <option value="TITANIUM">TITANIUM</option>
+                        <option value="GOLD">GOLD</option>
+                        <option value="SILVER">SILVER</option>
                     </select>
                     <div class="icon-container">
                         <i class="fa-solid fa-caret-down"></i>
@@ -93,7 +93,7 @@
                     <button class="btn-create-cards" type="submit">Create Card</button>
                 </form>
             </section>
-                <section>
+                <section class="d-flex flex-column align-items-center">
                 <h2 class="create-CardH2 text-center">Preview of your card</h2>
                 <h6 class="create-CardH2 text-center" style="font-size: 1rem;">(The other data is created automatically)</h6>  
                 <div class="containerCard">

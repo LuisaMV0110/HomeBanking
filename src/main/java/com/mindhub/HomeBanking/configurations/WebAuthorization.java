@@ -19,11 +19,14 @@ public class WebAuthorization{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers( HttpMethod.POST,"/api/login","/api/logout").permitAll()
-                .antMatchers( "/web/index.html").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers("/web/accounts.html" , "/web/account.html" , "/web/cards.html","/web/createCards.html").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console/").hasAuthority("ADMIN");
+                .antMatchers(HttpMethod.POST,"/api/login","/api/register").permitAll()
+                .antMatchers( "/web/index.html","/web/assets/js/index.js","/web/assets/css/index.css", "/web/assets/img/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards","/api/transactions","/api/logout","/api/loans","/api/loan/pay").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/clients/current/cards","/api/accounts/{id}").hasAnyAuthority("ADMIN","CLIENT")
+                .antMatchers("/api/clients/current","/api/clients/current/accounts/{id}","/api/loans","/web/accounts.html" , "/web/account.html" , "/web/cards.html","/web/createCards.html","/web/transfers.html","/web/loan-application.html","/web/assets/js/**","/web/assets/css/**").hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console/**", "/api/clients").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/manager/loans").hasAuthority("ADMIN")
+                .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -31,19 +34,19 @@ public class WebAuthorization{
         // Añadir método para eliminar la cookie
         http.logout().logoutUrl("/api/logout").deleteCookies( "JSESSIONID" );
 
-        // turn off checking for CSRF tokens
+        // Desactiva la verificación de tokens csrf para evitar conflictos
         http.csrf().disable();
-        // disabling frameOptions so h2-console can be accessed
+        // Se desactiva la configuración por defecto para acceder a la H2-console
         http.headers().frameOptions().disable();
-        // if user is not authenticated, just send an authentication failure response
+        // Si el usuario no está autenticado envía un mensaje de error 401?
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-        // if login is successful, just clear the flags asking for authentication
+        // Se ejecuta cuando el usuario inicia sesión con éxito, y borra los atributos de autenticación almacenados en la sesión HTTP
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
-        // if login fails, just send an authentication failure response
+        // Se encarga de enviar una respuesta HTTP de error en caso de que se produzca un fallo en la autenticación.
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_BAD_REQUEST));
-        // if logout is successful, just send a success response
+        // Devuelve un código de estado HTTP 200 (OK) después de que el usuario haya cerrado sesión correctamente.
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-
+        // Es solicitado por el SecurityFilterChain
         return http.build();
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {

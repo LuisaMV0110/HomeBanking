@@ -2,165 +2,262 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/cards.css">
-    <link rel="stylesheet" href="./assets/css/sideBar.css">
-    <link rel="shortcut icon" href="./assets/img/FavI.ico" type="image/x-icon">
-    <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/cards.css">
+  <link rel="stylesheet" href="./assets/css/sideBar.css">
+  <link rel="shortcut icon" href="./assets/img/FavI.ico" type="image/x-icon">
+  <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
-    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script defer src="./assets/js/cards.js"></script>
-    <title>Mind Blue | Cards</title>
+  <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="./assets/js/cards.js"></script>
+  <title>Mind Blue | Cards</title>
 </head>
 
-<body id="app" class="account">
-    <input type="checkbox" id="check">
-    <header class="headerNav">
-        <label for="check">
-            <i class="fa-solid fa-bars" id="sidebar-btn"></i>
-        </label>
-        <div class="left-area">
-            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind<span>Blue</span></h3>  
-        </div>
-        <div class="rigth-area">
-            <a href="" @click.prevent="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
-        </div>
-    </header>
-    <div class="mobile-nav">
-        <div class="nav-bar">
-            <img src="./assets/img/user-image2.png" class="mobile-profile-image" alt="">
-            <i class="fa-solid fa-bars" id="nav-btn"></i>
-        </div>
-        <div class="mobile-nav-items">
-            <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-            <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
-            <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
-            <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
-        </div>
+<body id="app" class="hidden">
+  <div class="loaderCenter" id="loader"><div class="lds-circle"><div></div></div></div>
+  <input type="checkbox" id="check" />
+  <header class="headerNav">
+    <label for="check">
+      <i class="fa-solid fa-bars" id="sidebar-btn"></i>
+    </label>
+    <div class="left-area">
+      <img src="./assets/img/Logo.png" class="Logo" alt="" />
+      <h3>Mind<span>Blue</span></h3>
     </div>
-    <div class="sidebar">
-        <div class="profile-info">
-            <img src="./assets/img/user-image2.png" class="profile-image" alt="">
-            <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
-        </div>
-        <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
-        <a href=""><i class="fa-solid fa-money-bill-transfer"></i><span>Transfer</span></a>
-        <a href=""><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
-        <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+    <div class="rigth-area">
+      <a href="" @click.prevent="signOut" class="logout-btn"><i
+          class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
     </div>
-    <main class="content">
-        <div class="main_account d-flex flex-column justify-content-center align-items-center mb-2">
-            <section class="cardTitle d-flex flex-column align-items-center mb-3">
-                <h1 class="cardH1 text-center mt-2" style="font-weight: 600;-webkit-text-stroke: .7px #003785;">Your Cards {{data.firstName}}</h1>
-                <a v-if="cardId.length <= 5" class="btn-create-cards" href="./createCards.html"><i class="fa-regular fa-credit-card me-1"></i>Create Card</a>
-            </section>
-            <section class="sectionCard">
-                <div class="containerCards d-flex justify-content-evenly flex-wrap">
-                <section>
-                <h2 v-if="debit.length <=1" class="accountH1 text-center">Debit Card</h2>
-                <h2 v-else class="accountH1 text-center">Debit Cards</h2>
-                <div class="containerCard mb-4" v-if="debit.length > 0" v-for="data of debit">
-                    <div class="card front-face" :class="data.color">
-                        <header class="headerCard">
-                            <span class="logoCard">
-                                <img src="./assets/img/Card/logo.png" alt="">
-                                <h5>{{data.type}}</h5>
-                            </span>
-                            <img src="./assets/img/Card/chip.png" alt="" class="chip">
-                        </header>
-                        <div class="card-details">
-                            <div class="name-number">
-                                <h6>Card Number</h6>
-                                <h5 class="number">{{data.number}}</h5>
-                                <h5 class="name">{{data.cardHolder}}</h5>
-                            </div>
-                            <div class="valid-date">
-                                <h6>Valid Thru</h6>
-                                <h5>{{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card back-face" :class="data.color">
-                        <h6>
-                            For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
-                        </h6>
-                        <span class="magnetic-strip"></span>
-                        <div class="signature"><i>{{data.cvv}}</i></div>
-                        <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
-                    </div>
+  </header>
+  <div class="mobile-nav">
+    <div class="nav-bar">
+      <img src="./assets/img/user-image2.png" class="mobile-profile-image" alt="" />
+      <i class="fa-solid fa-bars" id="nav-btn"></i>
+    </div>
+    <div class="mobile-nav-items">
+      <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+      <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+      <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+      <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+    </div>
+  </div>
+  <div class="sidebar">
+    <div class="profile-info">
+      <img src="./assets/img/user-image2.png" class="profile-image" alt="" />
+      <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
+    </div>
+    <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+    <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+    <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+    <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+  </div>
+  <main class="content d-flex align-items-center justify-content-center">
+    <div class="containerAccounts d-flex align-items-center justify-content-center flex-column mt-5">
+      <section class="cardTitle d-flex flex-column align-items-center mb-3">
+        <h1 class="cardH1 text-center mt-2" style="font-weight: 600; -webkit-text-stroke: 0.7px #003785">
+          Your Cards {{data.firstName}}
+        </h1>
+        <a v-if="cardActive.length <= 5" class="btn-create-cards" href="./createCards.html"><i
+            class="fa-regular fa-credit-card me-1"></i>Create Card</a>
+      </section>
+      <section class="sectionCard">
+        <div class="containerCards d-flex justify-content-evenly flex-wrap">
+          <section>
+            <h2 v-if="debit.length <=1" class="accountH1 text-center">Debit Card</h2>
+            <h2 v-else class="accountH1 text-center">Debit Cards</h2>
+            <div class="d-flex flex-wrap align-items-center flex-column" v-if="debit.length > 0" v-for="data of debit">
+            <div class="containerCard mb-3">
+              <div class="card front-face" :class="data.color">
+                <header class="headerCard">
+                  <span class="logoCard">
+                    <img src="./assets/img/Card/logo.png" alt="" />
+                    <h5>{{data.type}}</h5>
+                  </span>
+                  <img src="./assets/img/Card/chip.png" alt="" class="chip" />
+                </header>
+                <div class="card-details">
+                  <div class="name-number">
+                    <h6>Card Number</h6>
+                    <h5 class="number">{{data.number}}</h5>
+                    <h5 class="name">{{data.cardHolder}}</h5>
+                  </div>
+                  <div class="valid-date">
+                    <h6 class="text-center text-danger fw-bold" v-if="data.thruDate <= actDate">Expired card</h6>
+                    <h6>Valid Thru</h6>
+                    <h5>
+                      {{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}
+                    </h5>
+                  </div>
                 </div>
-                <div v-else>
-                    <h3 class="accountH2">You don't have debit card</h3>
-                </div>
-            </section>
-                <section>
-                <h2 v-if="credit.length <=1" class="accountH1 text-center">Credit Card</h2> 
-                <h2 v-else class="accountH1 text-center">Credit Cards</h2>  
-                <div class="containerCard mb-4" v-if="credit.length > 0" v-for="data of credit">
-                    <div class="card front-face" :class="data.color">
-                        <header class="headerCard">
-                            <span class="logoCard">
-                                <img src="./assets/img/Card/logo.png" alt="">
-                                <h5>{{data.type}}</h5>
-                            </span>
-                            <img src="./assets/img/Card/chip.png" alt="" class="chip">
-                        </header>
-                        <div class="card-details">
-                            <div class="name-number">
-                                <h6>Card Number</h6>
-                                <h5 class="number">{{data.number}}</h5>
-                                <h5 class="name">{{data.cardHolder}}</h5>
-                            </div>
-                            <div class="valid-date">
-                                <h6>Valid Thru</h6>
-                                <h5>{{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card back-face" :class="data.color">
-                        <h6>
-                            For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
-                        </h6>
-                        <span class="magnetic-strip"></span>
-                        <div class="signature"><i>{{data.cvv}}</i></div>
-                        <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
-                    </div>
-                </div>
-            <div v-else>
-                <h3 class="accountH2">You don't have credit card</h3>
+              </div>
+              <div class="card back-face" :class="data.color">
+                <h6>
+                  For costumer service call +57 01 800 000 000 or email at
+                  mastercard@mindhub.com
+                </h6>
+                <span class="magnetic-strip"></span>
+                <div class="signature"><i>{{data.cvv}}</i></div>
+                <h5>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Facere earum est alias facilis cupiditate quia similique hic
+                  eveniet, perferendis repudiandae, vel nam beatae quo aperiam
+                  minus. Deserunt odit accusamus debitis.
+                </h5>
+              </div>
             </div>
-        </section>
+            <button class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
+            </div>
+            <div class="d-flex flex-column align-items-center" v-else>
+              <h3 class="accountH2 text-center" style="font-size: 1.5rem;">You don't have debit card</h3>
+              <div class="containerCard">
+                <div class="card front-face">
+                    <header class="headerCard">
+                        <span class="logoCard">
+                            <img src="./assets/img/Card/logo.png" alt="">
+                            <h5>DEBIT</h5>
+                        </span>
+                        <img src="./assets/img/Card/chip.png" alt="" class="chip">
+                    </header>
+                    <div class="card-details">
+                        <div class="name-number">
+                            <h6>Card Number</h6>
+                            <h5 class="number">0000 0000 0000 0000</h5>
+                            <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
+                        </div>
+                        <div class="valid-date">
+                            <h6>Valid Thru</h6>
+                            <h5>00/00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card back-face">
+                    <h6>
+                        For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
+                    </h6>
+                    <span class="magnetic-strip"></span>
+                    <div class="signature"><i>000</i></div>
+                    <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
+                </div>
+            </div>
+            </div>
+          </section>
+          <section>
+            <h2 v-if="credit.length <=1" class="accountH1 text-center">
+              Credit Card
+            </h2>
+            <h2 v-else class="accountH1 text-center">Credit Cards</h2>
+            <div class="d-flex flex-wrap align-items-center flex-column" v-if="credit.length > 0" v-for="data of credit">
+            <div class="containerCard mb-3">
+              <div class="card front-face" :class="data.color">
+                <header class="headerCard">
+                  <span class="logoCard">
+                    <img src="./assets/img/Card/logo.png" alt="" />
+                    <h5>{{data.type}}</h5>
+                  </span>
+                  <img src="./assets/img/Card/chip.png" alt="" class="chip" />
+                </header>
+                <div class="card-details">
+                  <div class="name-number">
+                    <h6>Card Number</h6>
+                    <h5 class="number">{{data.number}}</h5>
+                    <h5 class="name">{{data.cardHolder}}</h5>
+                  </div>
+                  <div class="valid-date">
+                    <h6 class="text-center text-danger fw-bold" v-if="data.thruDate <= actDate">Expired card</h6>
+                    <h6>Valid Thru</h6>
+                    <h5>
+                      {{data.thruDate.slice(5,7)}}/{{data.thruDate.slice(2,4)}}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <div class="card back-face" :class="data.color">
+                <h6>
+                  For costumer service call +57 01 800 000 000 or email at
+                  mastercard@mindhub.com
+                </h6>
+                <span class="magnetic-strip"></span>
+                <div class="signature"><i>{{data.cvv}}</i></div>
+                <h5>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                  Facere earum est alias facilis cupiditate quia similique hic
+                  eveniet, perferendis repudiandae, vel nam beatae quo aperiam
+                  minus. Deserunt odit accusamus debitis.
+                </h5>
+              </div>
+            </div>
+            <button href="" class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
+          </div>
+            <div class="d-flex flex-column align-items-center" v-else>
+              <h3 class="accountH2 text-center" style="font-size: 1.5rem;">You don't have credit card</h3>
+              <div class="containerCard">
+                <div class="card front-face">
+                    <header class="headerCard">
+                        <span class="logoCard">
+                            <img src="./assets/img/Card/logo.png" alt="">
+                            <h5>CREDIT</h5>
+                        </span>
+                        <img src="./assets/img/Card/chip.png" alt="" class="chip">
+                    </header>
+                    <div class="card-details">
+                        <div class="name-number">
+                            <h6>Card Number</h6>
+                            <h5 class="number">0000 0000 0000 0000</h5>
+                            <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
+                        </div>
+                        <div class="valid-date">
+                            <h6>Valid Thru</h6>
+                            <h5>00/00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card back-face">
+                    <h6>
+                        For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
+                    </h6>
+                    <span class="magnetic-strip"></span>
+                    <div class="signature"><i>000</i></div>
+                    <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
+                </div>
+            </div>
+            </div>
+          </section>
+        </div>
+      </section>
     </div>
-            </section>
-        </div>
-    </main>
-    <footer class="d-flex justify-content-evenly align-items-center flex-wrap">
-        <div class="social">
-            <a href="https://www.instagram.com" target="_blank" class="fa-brands fa-instagram text-decoration-none text-white"></a>
-            <a href="https://www.facebook.com" target="_blank" class="fa-brands fa-facebook text-decoration-none text-white"></a>
-            <a href="https://github.com/LuisaMV0110" target="_blank" class="fa-brands fa-github text-decoration-none text-white"></a>
-        </div>
-        <section class="social_2 d-flex">
-            <a class="text-decoration-none text-white" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
-            "> <h5>&copy; 2023 Luisa Mendoza. All Rights Reserved</h5></a>
-        </section>
-    </footer>
-    <component :is="'script'">
-        $(document).ready(function(){
-            $('#nav-btn').click(function(){
-                $('.mobile-nav-items').toggleClass('active');
-            });
-        });
-    </component>
+  </main>
+  <footer class="d-flex justify-content-evenly align-items-center flex-wrap">
+    <div class="social">
+      <a href="https://www.instagram.com" target="_blank"
+        class="fa-brands fa-instagram text-decoration-none text-white"></a>
+      <a href="https://www.facebook.com" target="_blank"
+        class="fa-brands fa-facebook text-decoration-none text-white"></a>
+      <a href="https://github.com/LuisaMV0110" target="_blank"
+        class="fa-brands fa-github text-decoration-none text-white"></a>
+    </div>
+    <section class="social_2 d-flex">
+      <a class="text-decoration-none text-white" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
+            ">
+        <h5>&copy; 2023 Luisa Mendoza. All Rights Reserved</h5>
+      </a>
+    </section>
+  </footer>
+  <component :is="'script'">
+    $(document).ready(function(){ $('#nav-btn').click(function(){
+    $('.mobile-nav-items').toggleClass('active'); }); });
+  </component>
 </body>
+
 </html>

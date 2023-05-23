@@ -12,25 +12,29 @@ background: linear-gradient(90deg, rgba(126,126,126,1) 40%, rgba(126, 126, 126, 
 }
 .cardH1{
 color: aliceblue;
+font-weight: 600;
 text-shadow: 5px 5px 5px rgba(255, 255, 255, 0.473);
 font-size: 3rem;
 }
 .containerCards{
 width: 100%;
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
 }
 .sectionCard{
 position: relative;
-min-height: 85vh;
-width: 90%;
+width: 100%;
+min-height: 60vh;
 display: flex;
 align-items: center;
 justify-content: center;
 flex-wrap: wrap;
 color: aliceblue;
-background-color: rgba(0, 0, 255, 0.308);
-box-shadow: 0 25px 45px rgba(25, 163, 249, 0.479);
 border-radius: 15px;
 perspective: 1000px;
+gap: 2rem;
+margin-bottom: 3rem;
 }
 .containerCard{
 position: relative;
@@ -121,7 +125,7 @@ background:repeating-linear-gradient(#fff, #fff 3px, #efefef 0px, #efefef 9px);
 .signature i{
 color: black;
 font-size: 14px;
-margin-right: -29px;
+margin-right: -32px;
 padding: 4px 6px;
 border-radius: 4px;
 background-color: aliceblue;
@@ -131,13 +135,64 @@ z-index: -1;
 font-size: 8px;
 margin-top: 15px;
 }
-
-@media screen and (max-width:400px){
+@media screen and (min-width:415px) and (max-width:485px){
 .containerCard{
-height: 225px;
-width: 325px;
+height: 200px;
+width: 300px;
+margin-left: 0.3rem;
 }
-.sectionCard{
-width: 92%;
+.front-face .card-details{
+margin-top: 10px;
+}
+.front-face .card-details h5.name{
+margin-top: 10px;
+font-size: 1rem;
+}
+.front-face .card-details h5.number{
+font-size: 1rem;
+}
+.front-face .logoCard img{
+width: 40;
+}
+.front-face .chip{
+width: 40;
+}
+.valid-date h5{
+font-size: 1rem;
+}
+.card.back-face h5{
+margin-top: 10px;
+}
+}
+@media screen and (max-width:415px){
+.containerCard{
+height: 190px;
+width: 240px;
+}
+.front-face .card-details{
+margin-top: 10px;
+}
+.front-face .card-details h5.name{
+margin-top: 10px;
+font-size: 1rem;
+}
+.front-face .card-details h5.number{
+font-size: 1rem;
+}
+.front-face .logoCard img{
+width: 40;
+}
+.front-face .chip{
+width: 40;
+}
+.valid-date h5{
+font-size: 1rem;
+}
+.card.back-face h5{
+font-size: 7px;
+margin-top: 5px;
+}
+.card.back-face .signature{
+margin-top: 60px;
 }
 }

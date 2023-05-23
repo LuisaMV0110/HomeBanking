@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/cards.css">
+    <link rel="stylesheet" href="./assets/css/sideBar.css">
+    <link rel="shortcut icon" href="./assets/img/FavI.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="./assets/js/loan-application.js"></script>
+    <title>Mind Blue | Loans</title>
+</head>
+
+<body id="app" class="hidden">
+    <div class="loaderCenter" id="loader"><div class="lds-circle"><div></div></div></div>
+    <input type="checkbox" id="check">
+    <header class="headerNav">
+        <label for="check">
+            <i class="fa-solid fa-bars" id="sidebar-btn"></i>
+        </label>
+        <div class="left-area">
+            <img src="./assets/img/Logo.png" class="Logo" alt=""><h3>Mind<span>Blue</span></h3>  
+        </div>
+        <div class="rigth-area">
+            <a href="" @click.prevent="signOut" class="logout-btn"><i class="fa-sharp fa-solid fa-right-from-bracket fa-flip-horizontal"></i><span>Logout</span></a>
+        </div>
+    </header>
+    <div class="mobile-nav">
+        <div class="nav-bar">
+            <img src="./assets/img/user-image2.png" class="mobile-profile-image" alt="">
+            <i class="fa-solid fa-bars" id="nav-btn"></i>
+        </div>
+        <div class="mobile-nav-items">
+            <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+            <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+            <a href="#"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+            <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="profile-info">
+            <img src="./assets/img/user-image2.png" class="profile-image" alt="">
+            <h4 v-if="data">{{data.firstName}} {{data.lastName.slice(0,1)}}.</h4>
+        </div>
+        <a href="./accounts.html"><i class="fa-sharp fa-solid fa-users"></i><span>Accounts</span></a>
+        <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
+        <a href="#"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
+        <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+    </div>
+    <main class="content d-flex align-items-center justify-content-center">
+        <div class="containerAccounts d-flex flex-column justify-content-center align-items-center mt-5 mb-2">
+            <section class="cardTitle">
+                <h1 class="cardH1 text-center mt-2">Apply for loans {{data.firstName}}</h1>
+            </section>
+            <section class="sectionCard">
+                <div class="mainTransfer">
+                    <input type="checkbox" id="checkTransfer" aria-hidden="true">
+                    <div class="yourAccount">
+                        <form class="d-flex flex-column align-items-center" @submit.prevent="addLoans">
+                            <label class="loanLabel" for="checkTransfer" aria-hidden="true" style="font-size: 1.9rem;">Required information</label>
+                                <div class="select-card-form mb-4">
+                                <select class="select-box" v-model="typeLoan" @change="filterPayments">
+                                    <option selected disabled value="">Loans available</option>
+                                    <template v-for="loan of loans">
+                                    <option :value="loan.name">{{loan.name}}</option>
+                                </template>
+                                </select>
+                                <div class="icon-container">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                                </div>
+                                <div class="select-card-form mb-4">
+                                    <select class="select-box" v-model="payments">
+                                        <option selected disabled value="">Payments</option>
+                                        <option v-for="payment of paymentsSort" :value="payment">{{payment}}</option>
+                                </select>
+                                <div class="icon-container">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                                </div>
+                                <div class="select-card-form mb-4">
+                                    <select class="select-box" v-model="destinateAccount">
+                                        <option selected disabled value="">Destinate Account</option>
+                                        <option v-for="account of accounts" :value="account.number">{{account.number}}</option>
+                                </select>
+                                <div class="icon-container">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                                </div>
+                                <input class="mb-4" type="number" v-model="amount" name="amount" placeholder="Amount" required>
+                                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                <a href="" class="btn-create-cards" type="button" data-bs-toggle="modal" data-bs-target="#loanApplyModal">View request<i class="fa-regular fa-eye"></i></a>
+                                <button class="btn-create-cards" type="submit">Apply Loan<i class="fa-solid fa-coins"></i></button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <div class="modal fade modalAccount2" id="loanApplyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modalAccount">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-4 text-center" id="exampleModalLabel">Loan Application Details</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center align-items-center gap-3">
+                        <ol style="list-style: none;">
+                            <li class=""><span class="fw-semibold">Name: </span>{{paymentsFilter.name}}</li>
+                            <li class=""><span class="fw-semibold">Requested Amount: </span>{{formatCurrency(amount)}}</li>
+                            <li class=""><span class="fw-semibold">Payments: </span>{{payments}}</li>
+                            <li class=""><span class="fw-semibold">Destinate Account: </span>{{destinateAccount}}</li>
+                            <li class=""><span class="fw-semibold">Monthly Payment Amount: </span>{{formatCurrency(((amount * (paymentsFilter.interest + (payments * 0.01)))/payments).toFixed(2))}}</li>
+                            <li class=""><span class="fw-semibold">Total Amount: </span>{{formatCurrency((amount * (paymentsFilter.interest + (payments * 0.01))).toFixed(2))}}</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </main>
+    <footer class="d-flex justify-content-evenly align-items-center flex-wrap">
+        <div class="social">
+            <a href="https://www.instagram.com" target="_blank" class="fa-brands fa-instagram text-decoration-none text-white"></a>
+            <a href="https://www.facebook.com" target="_blank" class="fa-brands fa-facebook text-decoration-none text-white"></a>
+            <a href="https://github.com/LuisaMV0110" target="_blank" class="fa-brands fa-github text-decoration-none text-white"></a>
+        </div>
+        <section class="social_2 d-flex">
+            <a class="text-decoration-none text-white" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
+            "> <h5>&copy; 2023 Luisa Mendoza. All Rights Reserved</h5></a>
+        </section>
+    </footer>
+    <component :is="'script'">
+        $(document).ready(function(){
+            $('#nav-btn').click(function(){
+                $('.mobile-nav-items').toggleClass('active');
+            });
+        });
+    </component>
+</body>
+</html>

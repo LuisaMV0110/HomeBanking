@@ -11,4 +11,5 @@ import java.util.Set;
 @RepositoryRestResource
 public interface CardRepository extends JpaRepository<Card,Long> {
     Card findByNumber(String number);
+    Card findById(long id);
 }

@@ -5,7 +5,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Random;
 
 @Entity
 public class Card {
@@ -20,25 +19,12 @@ public class Card {
     private int cvv;
     private LocalDate fromDate;
     private LocalDate thruDate;
+    private boolean cardActivate;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="client_id", nullable = false)
     private Client client;
-    public static String randomCardNumber(){
-        String cardNumber = "";
-        for (int i = 0; i < 4; i++) {
-            int min = 1000;
-            int max = 8999;
-            cardNumber += (int) (Math.random() * max + min) + " ";
-        }
-        return cardNumber;
-    }
-    public static int randomCvv(){
-            int min = 100;
-            int max = 899;
-        return (int) (Math.random() * max + min);
-    }
     public Card(){}
-    public Card(String cardHolder,CardType type, CardColor color, String number, int cvv, LocalDate fromDate, LocalDate thruDate) {
+    public Card(String cardHolder,CardType type, CardColor color, String number, int cvv, LocalDate fromDate, LocalDate thruDate, boolean cardActivate) {
         this.cardHolder = cardHolder;
         this.type = type;
         this.color = color;
@@ -46,8 +32,8 @@ public class Card {
         this.cvv = cvv;
         this.fromDate = fromDate;
         this.thruDate = thruDate;
+        this.cardActivate = cardActivate;
     }
-
     public long getId() {
         return id;
     }
@@ -99,7 +85,8 @@ public class Card {
     public void setClient(Client client) {
         this.client = client;
     }
-
+    public boolean isCardActivate() {return cardActivate;}
+    public void setCardActivate(boolean cardActivate) {this.cardActivate = cardActivate;}
     @Override
     public String toString() {
         return "Card{" +
@@ -111,6 +98,7 @@ public class Card {
                 ", cvv=" + cvv +
                 ", fromDate=" + fromDate +
                 ", thruDate=" + thruDate +
+                ", cardActivate=" + cardActivate +
                 ", client=" + client +
                 '}';
     }
