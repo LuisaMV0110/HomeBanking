@@ -17,26 +17,17 @@ createApp({
     signIn() {
       axios
         .post("/api/login", `email=${this.email}&password=${this.password}`)
-        .then((response) => {
-          if (this.email == 'luisafmv321@gmail.com') {
-            (window.location.href = "/web/admin/manager.html")
-          }else{
-            (window.location.href = "/web/accounts.html")
-          }
-      })
-        .catch((error) => console.log(error));
-        /*         .post("/api/login", `email=${this.email}&password=${this.password}`)
-        .then(response => {
-          if (this.email == 'luisafmv321@gmail.com') {
-            window.location.replace = ("/web/admin/manager.html")
-          }else{
-            window.location.replace = ("/web/accounts.html")
-          } */
+        .then((response) => (window.location.href = "/web/accounts.html"))
+        .catch((error) => Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "wrong email or password",
+        }));
     },
     signUp() {
       axios
         .post(
-          "/api/clients",
+          "/api/register",
           `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.emailUp}&password=${this.passwordUp}`
         )
         .then((response) =>
@@ -44,12 +35,15 @@ createApp({
             .post(
               "/api/login",
               `email=${this.emailUp}&password=${this.passwordUp}`
-            )
+            ))
             .then((response) => (window.location.href = "/web/accounts.html"))
-            .catch((error) => console.log(error))
-        )
-        .catch((error) => console.log(error));
+        .catch((error) => Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.response.data,
+        }));
     },
+    
   },
 }).mount("#app");
 

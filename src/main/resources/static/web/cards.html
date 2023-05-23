@@ -25,7 +25,8 @@
   <title>Mind Blue | Cards</title>
 </head>
 
-<body id="app" class="account">
+<body id="app" class="hidden">
+  <div class="loaderCenter" id="loader"><div class="lds-circle"><div></div></div></div>
   <input type="checkbox" id="check" />
   <header class="headerNav">
     <label for="check">
@@ -118,8 +119,38 @@
             </div>
             <button class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
             </div>
-            <div v-else>
-              <h3 class="accountH2">You don't have debit card</h3>
+            <div class="d-flex flex-column align-items-center" v-else>
+              <h3 class="accountH2 text-center" style="font-size: 1.5rem;">You don't have debit card</h3>
+              <div class="containerCard">
+                <div class="card front-face">
+                    <header class="headerCard">
+                        <span class="logoCard">
+                            <img src="./assets/img/Card/logo.png" alt="">
+                            <h5>DEBIT</h5>
+                        </span>
+                        <img src="./assets/img/Card/chip.png" alt="" class="chip">
+                    </header>
+                    <div class="card-details">
+                        <div class="name-number">
+                            <h6>Card Number</h6>
+                            <h5 class="number">0000 0000 0000 0000</h5>
+                            <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
+                        </div>
+                        <div class="valid-date">
+                            <h6>Valid Thru</h6>
+                            <h5>00/00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card back-face">
+                    <h6>
+                        For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
+                    </h6>
+                    <span class="magnetic-strip"></span>
+                    <div class="signature"><i>000</i></div>
+                    <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
+                </div>
+            </div>
             </div>
           </section>
           <section>
@@ -169,8 +200,38 @@
             </div>
             <button href="" class="btn-create-cards mb-3" @click.prevent="deleteCard(data.id)"><i class="fa-solid fa-arrow-up"></i> Delete card <i class="fa-solid fa-credit-card"></i></button>
           </div>
-            <div v-else>
-              <h3 class="accountH2">You don't have credit card</h3>
+            <div class="d-flex flex-column align-items-center" v-else>
+              <h3 class="accountH2 text-center" style="font-size: 1.5rem;">You don't have credit card</h3>
+              <div class="containerCard">
+                <div class="card front-face">
+                    <header class="headerCard">
+                        <span class="logoCard">
+                            <img src="./assets/img/Card/logo.png" alt="">
+                            <h5>CREDIT</h5>
+                        </span>
+                        <img src="./assets/img/Card/chip.png" alt="" class="chip">
+                    </header>
+                    <div class="card-details">
+                        <div class="name-number">
+                            <h6>Card Number</h6>
+                            <h5 class="number">0000 0000 0000 0000</h5>
+                            <h5 class="name">{{data.firstName}} {{data.lastName}}</h5>
+                        </div>
+                        <div class="valid-date">
+                            <h6>Valid Thru</h6>
+                            <h5>00/00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="card back-face">
+                    <h6>
+                        For costumer service call +57 01 800 000 000 or email at mastercard@mindhub.com
+                    </h6>
+                    <span class="magnetic-strip"></span>
+                    <div class="signature"><i>000</i></div>
+                    <h5>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facere earum est alias facilis cupiditate quia similique hic eveniet, perferendis repudiandae, vel nam beatae quo aperiam minus. Deserunt odit accusamus debitis.</h5>
+                </div>
+            </div>
             </div>
           </section>
         </div>

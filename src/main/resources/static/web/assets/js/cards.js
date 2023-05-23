@@ -80,3 +80,7 @@ const app = createApp({
     },
   },
 }).mount("#app");
+window.onload = function(){
+  $('#loader').fadeOut();
+  $('body').removeClass('hidden');
+}

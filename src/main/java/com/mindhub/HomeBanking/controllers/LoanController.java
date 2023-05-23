@@ -4,6 +4,7 @@ import com.mindhub.HomeBanking.dtos.LoanApplicationDTO;
 import com.mindhub.HomeBanking.dtos.LoanDTO;
 import com.mindhub.HomeBanking.models.*;
 import com.mindhub.HomeBanking.services.*;
+import com.mindhub.HomeBanking.utils.LoanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -44,6 +46,7 @@ public class LoanController {
         Client client = clientServices.findByEmail(auth.getName());
         Account account = accountServices.findByNumber(loanApplicationDTO.getDestinateAccount());
         Loan loan = loanServices.findById(loanApplicationDTO.getLoanID());
+        Set<ClientLoan> clientLoans =  client.getClientLoans().stream().filter(clientLoan -> clientLoan.getLoan().getName().equalsIgnoreCase(loan.getName()) && clientLoan.getFinalAmount() > 0).collect(Collectors.toSet());
 
         if (amount == 0 || payments == 0){
             return new ResponseEntity<>("Invalid loan application data", HttpStatus.FORBIDDEN);
@@ -60,16 +63,18 @@ public class LoanController {
         if (account == null){
             return  new ResponseEntity<>("Account not found",HttpStatus.FORBIDDEN);
         }
-        String authenticatedUsername = auth.getName();
         if (!account.getClient().equals(client)){
             return new ResponseEntity<>("Destination account does not belong to authenticated user",HttpStatus.FORBIDDEN);
         }
-        ClientLoan existingClientLoan =clientLoanServices.findByLoanAndClient(loan,client);
-        if (existingClientLoan != null){
-            return new ResponseEntity<>("Loan Application already exists",HttpStatus.FORBIDDEN);
+        if (clientLoans.size() == 5){
+            return new ResponseEntity<>("You cannot have 5 active loans",HttpStatus.FORBIDDEN);
         }
-        int totalAmount = (int)(amount* loan.interest);
-        ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getAmount(),loanApplicationDTO.getPayments(),loan.getName(),loanApplicationDTO.getAmount() * loan.getInterest());
+        if (clientLoans.size() > 0){
+            return new ResponseEntity<>("You already have a loan of this type",HttpStatus.FORBIDDEN);
+        }
+
+        double totalAmount = loanApplicationDTO.getAmount() * LoanUtils.calculateInterest(loanApplicationDTO.getPayments(), loan.getInterest());
+        ClientLoan clientLoan = new ClientLoan(loanApplicationDTO.getAmount(),loanApplicationDTO.getPayments(),loan.getName(), totalAmount);
         clientLoan.setClient(client);
         clientLoan.setLoan(loan);
         clientLoanServices.saveClientLoan(clientLoan);
@@ -118,7 +123,7 @@ public class LoanController {
         Client client = clientServices.findByEmail(auth.getName());
         ClientLoan clientLoan = clientLoanServices.getClientLoan(id);
         Account authAccount = accountServices.findByNumber(account);
-        String description = "Pay " + clientLoan.getLoan().getName().toLowerCase() + "Loan";
+        String description = "Pay " + clientLoan.getLoan().getName().toLowerCase() + " loan";
 
         if (client == null){
             return new ResponseEntity<>("Sorry, this client does not exist",HttpStatus.FORBIDDEN);
@@ -138,6 +143,17 @@ public class LoanController {
         }
         authAccount.setBalance(authAccount.getBalance() - amount);
 
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, amount, description, LocalDateTime.now(), authAccount.getBalance(),true);
+        authAccount.addTransaction(newTransaction);
+        transactionServices.saveTransaction(newTransaction);
+
+        clientLoan.setPayments((clientLoan.getPayments()) - 1);
+        if (clientLoan.getPayments() == 0){
+            clientLoan.setFinalAmount(0.0);
+
+        } else{
+            clientLoan.setFinalAmount(clientLoan.getFinalAmount() - amount);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

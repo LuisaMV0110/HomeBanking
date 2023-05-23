@@ -11,6 +11,7 @@ const app = createApp({
       payments:"",
       typeLoan:"",
       paymentsFilter:[],
+      paymentsSort:[],
       amount:"",
       destinateAccount:""
     };
@@ -46,9 +47,9 @@ const app = createApp({
         this.paymentsFilter = this.loans.filter(loan => {
             return this.typeLoan.includes(loan.name);
         })[0];
+        this.paymentsSort = this.paymentsFilter.payments.sort((x, y) => x - y)
     },
     addLoans() {
-
       Swal.fire({
         title: "Are you sure to apply at this loan " + this.typeLoan +" ?",
         text: "You will not be able to apply for another of this type until you pay the debt in full",
@@ -104,3 +105,7 @@ const app = createApp({
 
 }
 }).mount("#app");
+window.onload = function(){
+  $('#loader').fadeOut();
+  $('body').removeClass('hidden');
+}

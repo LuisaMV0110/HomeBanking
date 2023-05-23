@@ -10,6 +10,7 @@ import com.mindhub.HomeBanking.repositories.TransactionRepository;
 import com.mindhub.HomeBanking.services.AccountServices;
 import com.mindhub.HomeBanking.services.ClientServices;
 import com.mindhub.HomeBanking.services.TransactionServices;
+import com.mindhub.HomeBanking.utils.AccountUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static com.mindhub.HomeBanking.controllers.ClientController.randomNumber;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -52,14 +51,14 @@ public class AccountController {
         Client client = clientServices.findByEmail(authentication.getName());
         String number;
         do{
-            number = randomNumber();
+            number = AccountUtils.getRandomNumber();
         }
         while (accountServices.findByNumber(number) != null);
 
         int totalAccounts = client.getAccounts().size();
         int activeAccounts = (int) client.getAccounts().stream().filter(Account::isAccountActive).count();
 
-        if (totalAccounts >= 8 || activeAccounts >= 3) {
+        if (totalAccounts >= 6 || activeAccounts >= 3) {
             return new ResponseEntity<>("Client already has the maximum number of accounts allowed.",HttpStatus.FORBIDDEN);
         }
             Account newAccount = new Account(number, LocalDateTime.now(), 0.00,true,accountType);

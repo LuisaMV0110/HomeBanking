@@ -23,7 +23,8 @@
     <title>Mind Blue | Loans</title>
 </head>
 
-<body id="app" class="account">
+<body id="app" class="hidden">
+    <div class="loaderCenter" id="loader"><div class="lds-circle"><div></div></div></div>
     <input type="checkbox" id="check">
     <header class="headerNav">
         <label for="check">
@@ -64,11 +65,11 @@
                 <h1 class="cardH1 text-center mt-2">Apply for loans {{data.firstName}}</h1>
             </section>
             <section class="sectionCard">
-                <div class="mainTransfer" style="height: 500px;">
+                <div class="mainTransfer">
                     <input type="checkbox" id="checkTransfer" aria-hidden="true">
                     <div class="yourAccount">
                         <form class="d-flex flex-column align-items-center" @submit.prevent="addLoans">
-                            <label for="checkTransfer" aria-hidden="true" style="font-size: 1.8rem;">Required information</label>
+                            <label class="loanLabel" for="checkTransfer" aria-hidden="true" style="font-size: 1.9rem;">Required information</label>
                                 <div class="select-card-form mb-4">
                                 <select class="select-box" v-model="typeLoan" @change="filterPayments">
                                     <option selected disabled value="">Loans available</option>
@@ -83,7 +84,7 @@
                                 <div class="select-card-form mb-4">
                                     <select class="select-box" v-model="payments">
                                         <option selected disabled value="">Payments</option>
-                                        <option v-for="payment of paymentsFilter.payments" :value="payment">{{payment}}</option>
+                                        <option v-for="payment of paymentsSort" :value="payment">{{payment}}</option>
                                 </select>
                                 <div class="icon-container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -99,12 +100,37 @@
                                 </div>
                                 </div>
                                 <input class="mb-4" type="number" v-model="amount" name="amount" placeholder="Amount" required>
-                                <h5>Total loan : $ <span>{{amount*1.2}}</span></h5>
-                                <button class="btn-create-cards" type="submit">Apply</button>
+                                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                                <a href="" class="btn-create-cards" type="button" data-bs-toggle="modal" data-bs-target="#loanApplyModal">View request<i class="fa-regular fa-eye"></i></a>
+                                <button class="btn-create-cards" type="submit">Apply Loan<i class="fa-solid fa-coins"></i></button>
+                                </div>
                         </form>
                     </div>
                 </div>
             </section>
+            <div class="modal fade modalAccount2" id="loanApplyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modalAccount">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-4 text-center" id="exampleModalLabel">Type of Account</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex justify-content-center align-items-center gap-3">
+                        <ol style="list-style: none;">
+                            <li class=""><span class="fw-semibold">Name: </span>{{paymentsFilter.name}}</li>
+                            <li class=""><span class="fw-semibold">Requested Amount: </span>{{formatCurrency(amount)}}</li>
+                            <li class=""><span class="fw-semibold">Payments: </span>{{payments}}</li>
+                            <li class=""><span class="fw-semibold">Destinate Account: </span>{{destinateAccount}}</li>
+                            <li class=""><span class="fw-semibold">Monthly Payment Amount: </span>{{formatCurrency(((amount * (paymentsFilter.interest + (payments * 0.01)))/payments).toFixed(2))}}</li>
+                            <li class=""><span class="fw-semibold">Total Amount: </span>{{formatCurrency((amount * (paymentsFilter.interest + (payments * 0.01))).toFixed(2))}}</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </main>
     <footer class="d-flex justify-content-evenly align-items-center flex-wrap">

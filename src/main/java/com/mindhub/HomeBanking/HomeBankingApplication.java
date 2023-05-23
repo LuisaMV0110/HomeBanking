@@ -2,6 +2,7 @@ package com.mindhub.HomeBanking;
 
 import com.mindhub.HomeBanking.models.*;
 import com.mindhub.HomeBanking.repositories.*;
+import com.mindhub.HomeBanking.utils.LoanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -106,19 +107,19 @@ public class HomeBankingApplication {
 
 			Client client3 = new Client("Luisa", "Mendoza","luisafmv321@gmail.com", passwordEncoder.encode("luisa"));
 			client.save(client3);
-			Loan loan1 = new Loan("Mortgage",500000, Set.of(12,24,36,48,60),1.3);
-			Loan loan2 = new Loan("Personal",100000, Set.of(6,12,24),1.1);
-			Loan loan3 = new Loan("Automotive",300000, Set.of(6,12,24,36),1.2);
+			Loan loan1 = new Loan("Mortgage",500000, Set.of(12,24,36,48,60),1.2);
+			Loan loan2 = new Loan("Personal",100000, Set.of(6,12,24),1.05);
+			Loan loan3 = new Loan("Automotive",300000, Set.of(6,12,24,36),1.15);
 
 			loan.save(loan1);
 			loan.save(loan2);
 			loan.save(loan3);
 
-			ClientLoan clientLoan1 = new ClientLoan(400000,60, 400000 * loan1.getInterest());
-			ClientLoan clientLoan2 = new ClientLoan(50000,12, 50000 * loan2.getInterest());
+			ClientLoan clientLoan1 = new ClientLoan(400000,60, 400000 * LoanUtils.calculateInterest(60,loan1.getInterest()));
+			ClientLoan clientLoan2 = new ClientLoan(50000,12, 50000 * LoanUtils.calculateInterest(12,loan2.getInterest()));
 
-			ClientLoan clientLoan3 = new ClientLoan(100000,24, 100000 * loan3.getInterest());
-			ClientLoan clientLoan4 = new ClientLoan(200000,36, 200000 * loan3.getInterest());
+			ClientLoan clientLoan3 = new ClientLoan(100000,24, 100000 * LoanUtils.calculateInterest(24,loan3.getInterest()));
+			ClientLoan clientLoan4 = new ClientLoan(200000,36, 200000 * LoanUtils.calculateInterest(36,loan3.getInterest()));
 
 			client1.addClientLoan(clientLoan1);
 			loan1.addClientLoan(clientLoan1);

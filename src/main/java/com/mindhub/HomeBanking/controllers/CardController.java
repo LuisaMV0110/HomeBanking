@@ -5,6 +5,7 @@ import com.mindhub.HomeBanking.dtos.ClientDTO;
 import com.mindhub.HomeBanking.models.*;
 import com.mindhub.HomeBanking.services.CardServices;
 import com.mindhub.HomeBanking.services.ClientServices;
+import com.mindhub.HomeBanking.utils.CardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -23,18 +23,6 @@ public class CardController {
     CardServices cardServices;
     @Autowired
     private ClientServices clientServices;
-    public static String randomCardNumber(){
-        String cardNumber = "";
-        for (int i = 0; i < 4; i++) {
-            cardNumber += (int) (Math.random() * 8999 + 1000) + " ";
-        }
-        return cardNumber;
-    }
-    public static int randomCvv(){
-        int min = 100;
-        int max = 899;
-        return (int) (Math.random() * 899 + 100);
-    }
     @GetMapping("/clients/current/cards")
     public List<CardDTO> getCards (Authentication authentication) {
         return new ClientDTO(clientServices.findByEmail(authentication.getName())).getCards().stream().collect(toList());
@@ -50,11 +38,11 @@ public class CardController {
         String cardNumber;
 //        Evitar que se repitan números de tarjeta
         do {
-            cardNumber = randomCardNumber();
+            cardNumber = CardUtils.getCardNumber();
         }
         while (cardServices.findByNumberCard(cardNumber) != null);
 //        CVV
-        int cvvNumber = randomCvv();
+        int cvvNumber = CardUtils.getCvv();
 
         Client client = clientServices.findByEmail(authentication.getName());
         int allCards = client.getCards().size();

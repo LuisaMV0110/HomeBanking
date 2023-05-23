@@ -13,32 +13,74 @@
     crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script defer src="./manager.js"></script>
     <title>Mind Blue | Manager</title>
 </head>
 <body class="manager">
-    <main id="app">
-        <h1 class="text-center mt-2"> Manager</h1>
+    <main class="mainManager" id="app">
+        <h1 class="text-center mt-2 accountH1"> Manager</h1>
+        <a class="btn-create-cards ms-5" href="../accounts.html">Home Banking</a>
         <section class="d-flex flex-column align-items-center">
-            <h2 class="text-center">Loan List</h2>
-            <table class="table table-columns w-50">
-                <thead>
-                <tr>
-                     <th>Name</th>
-                     <th>Max Amount</th>
-                     <th>Payments</th>
-                     <th>Interest</th>
-                </tr>
-                </thead>
-                <tbody v-for="loan of loansInfo">
-                <tr>
-                     <td>{{loan.name}}</td>
-                     <td>{{formatCurrency(loan.maxAmount)}}</td>
-                     <td>{{loan.payments.sort((x, y) => x - y)}}</td>
-                     <td>{{loan.interest}}</td>
-                </tr>
-                </tbody>
-            </table>
+          <h2 class="text-center accountH2">Loan List</h2>
+          <table class="table table-columns w-50">
+              <thead>
+              <tr>
+                   <th class="text-light">Name</th>
+                   <th class="text-light">Max Amount</th>
+                   <th class="text-light">Payments</th>
+                   <th class="text-light">Interest</th>
+              </tr>
+              </thead>
+              <tbody v-for="loan of loansInfo">
+              <tr>
+                   <td class="text-light">{{loan.name}}</td>
+                   <td class="text-light">{{formatCurrency(loan.maxAmount)}}</td>
+                   <td class="text-light">{{loan.payments.sort((x, y) => x - y)}}</td>
+                   <td class="text-light">{{loan.interest}}</td>
+              </tr>
+              </tbody>
+          </table>
+            <form @submit.prevent="addLoan">
+                <h2 class="text-center accountH2">Create loans</h2>
+                  <div class="mb-3">
+                    <label class="text-light" for="loanName" class="form-label">Loan Name</label>
+                    <input v-model="name" type="text" class="form-control" id="loanName" placeholder="Example: House">
+                  </div>
+                  <div class="mb-3">
+                    <label class="text-light" for="loanMaxAmount" class="form-label">Loan Max Amount</label>
+                    <input v-model="maxAmount" type="number" class="form-control" id="loanMaxAmount" placeholder="Example: 1000000">
+                  </div>
+                  <h6 class="text-light">Payments</h6>
+                  <p class="text-light" style="margin: 0;"><span>Payments List: </span>{{payments}}</p>
+                    <input v-model="payment" type="number" class="form-control mb-3" id="loanPayments" placeholder="Example: 12">
+                  <button class="btn-create-cards mb-3" style="font-size: 15px;" type="button" @click="addPayment">Add Payment</button>
+                  <h6 class="text-light">Interest</h6>
+                  <div class="d-flex justify-content-evenly align-items-center gap-2">
+                  <div class="form-check">
+                    <input v-model="interest" class="form-check-input" name="interest" type="radio" value="1.05" id="interest5">
+                    <label class="text-light" class="form-check-label" for="interest5">5%</label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="interest" class="form-check-input" name="interest" type="radio" value="1.1" id="interest10">
+                    <label class="text-light" class="form-check-label" for="interest10">10%</label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="interest" class="form-check-input" name="interest" type="radio" value="1.15" id="interest15">
+                    <label class="text-light" class="form-check-label" for="interest15">15%</label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="interest" class="form-check-input" name="interest" type="radio" value="1.2" id="interest20">
+                    <label class="text-light" class="form-check-label" for="interest20">20%</label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="interest" class="form-check-input" name="interest" type="radio" value="1.25" id="interest25">
+                    <label class="text-light" class="form-check-label" for="interest25">25%</label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-center mt-2 mb-5"><button class="btn-create-cards" type="submit">Add Loan</button></div>
+                
+            </form>
         </section>
     </main>
 </body>

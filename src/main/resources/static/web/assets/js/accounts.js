@@ -12,6 +12,11 @@ const app = createApp({
       accountsActive: [],
       cardActive: [],
       totalBalance: null,
+      clientLoanId:[],
+      accountPayLoan:'',
+      payAmount: '',
+      payQuota:0,
+      payTotalAmount: 0
     };
   },
   created() {
@@ -27,12 +32,42 @@ const app = createApp({
           this.cardActive = this.cards.filter((card) => card.cardActive == true);
           this.accounts = this.data.accounts.sort((x, y) => x.id - y.id);
           this.accountsActive = this.accounts.filter((account) => account.accountActive == true);
-          this.loans = this.data.loans.sort((x, y) => x.id - y.id);
+          this.loans = this.data.loans.filter(loan => loan.finalAmount > 0).sort((x, y) => x.id - y.id);
           for (account of this.accounts) {
             this.totalBalance += account.balance;
           }
         })
         .catch((err) => console.log(err));
+    },
+    filterClientLoan(id){
+      this.clientLoanId = this.loans.filter(loan => loan.id == id)[0];
+      this.payTotalAmount = this.clientLoanId.finalAmount;
+      this.payQuota = this.clientLoanId.finalAmount / this.clientLoanId.payments;
+    },
+    payLoan(){
+      Swal.fire({
+        title: "Are you sure to pay this loan?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, pay it!",
+      })
+        .then((result) => {
+          if (result.isConfirmed) {
+            axios
+              .post("/api/loan/pay",`id=${this.clientLoanId.id}&account=${this.accountPayLoan}&amount=${this.payAmount}`)
+              .then((response) => (window.location.href = "/web/accounts.html"))
+              .catch((error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: error.response.data,
+                });
+              });
+          }
+        })
+        .catch((error) => console.log(error));
     },
     formatCurrency(balance) {
       let options = { style: "currency", currency: "USD" };
@@ -118,3 +153,7 @@ const app = createApp({
       },
     },
   }).mount("#app");
+  window.onload = function(){
+    $('#loader').fadeOut();
+    $('body').removeClass('hidden');
+  }
