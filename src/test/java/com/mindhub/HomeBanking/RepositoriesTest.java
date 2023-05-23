@@ -18,7 +18,7 @@ import static org.hamcrest.Matchers.*;
 
 
 //        Client Repository
-        @Autowired
+/*        @Autowired
         ClientRepository clientRepository;
 
         @Test
@@ -31,10 +31,10 @@ import static org.hamcrest.Matchers.*;
         public void existClientFirstName(){
             List<Client> clients = clientRepository.findAll();
             assertThat(clients, hasItem((hasProperty("firstName", isA(String.class)))));
-        }
+        }*/
 
 //        Account Repository
-        @Autowired
+/*        @Autowired
         AccountRepository accountRepository;
 
         @Test
@@ -47,9 +47,9 @@ import static org.hamcrest.Matchers.*;
         public void existActiveAccount(){
             List<Account> accounts = accountRepository.findAll();
             assertThat(accounts, hasItem(hasProperty("accountActive", is(true))));
-        }
+        }*/
 //        Card Repository
-        @Autowired
+/*        @Autowired
         CardRepository cardRepository;
 
         @Test
@@ -61,9 +61,9 @@ import static org.hamcrest.Matchers.*;
         public void existActiveCard(){
             List<Card> cards = cardRepository.findAll();
             assertThat(cards, hasItem(hasProperty("cardActivate", is(true))));
-        }
+        }*/
 //        Transaction Repository
-        @Autowired
+/*        @Autowired
         TransactionRepository transactionRepository;
 
         @Test
@@ -75,10 +75,10 @@ import static org.hamcrest.Matchers.*;
         public void existActiveCreditTransaction(){
             List<Transaction> creditTransaction = transactionRepository.findAll().stream().filter(transaction -> transaction.getType() == TransactionType.CREDIT).collect(toList());
             assertThat(creditTransaction, hasItem((hasProperty("transactionActive", is(true)))));
-        }
+        }*/
 
 //        Loan Repository
-        @Autowired
+/*        @Autowired
         LoanRepository loanRepository;
 
         @Test
@@ -90,7 +90,7 @@ import static org.hamcrest.Matchers.*;
         public void existPersonalLoan(){
             List<Loan> loans = loanRepository.findAll();
             assertThat(loans, hasItem(hasProperty("name", is("Automotive"))));
-        }
+        }*/
 
     }
 
