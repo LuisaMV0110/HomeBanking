@@ -37,11 +37,21 @@ public class AccountController {
     public List<AccountDTO> getAccounts (Authentication authentication) {
         return new ClientDTO(clientServices.findByEmail(authentication.getName())).getAccounts().stream().collect(toList());
     }
-    @GetMapping("/clients/current/accounts/{id}")
+/*    @GetMapping("/clients/current/accounts/{id}")
     public Optional<AccountDTO> getAccount(@PathVariable Long id){
         Optional<Account> optionalAccount = accountServices.findById(id);
         return optionalAccount.map(account -> new AccountDTO(account));
-    };
+    };*/
+    @GetMapping("/clients/current/accounts/{id}")
+    public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication auth){
+        Client client = clientServices.findByEmail(auth.getName());
+        Account account = accountServices.findById2(id);
+        if (account != null && account.getClient() == client){
+            AccountDTO accountDTO = new AccountDTO(account);
+            return new ResponseEntity<>(accountDTO,HttpStatus.OK);
+        }
+        return new ResponseEntity<>("This account is not owned by you",HttpStatus.FORBIDDEN);
+    }
     @PostMapping("/clients/current/accounts")
     public ResponseEntity<Object> newAccount(Authentication authentication, @RequestParam AccountType accountType){
         Client client = clientServices.findByEmail(authentication.getName());

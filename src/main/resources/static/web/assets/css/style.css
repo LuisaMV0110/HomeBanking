@@ -687,4 +687,9 @@ font-size: 1.6rem !important;
 font-size: 1.6em !important;
 margin: 20px;
 }
+.accountH1{
+font-size: 2rem;
+text-align: center;
+-webkit-text-stroke: 1px #006affcb !important;
+}
 }

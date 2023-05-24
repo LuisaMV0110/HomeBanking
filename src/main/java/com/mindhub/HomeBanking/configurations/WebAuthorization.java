@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -33,7 +34,6 @@ public class WebAuthorization{
                 .loginPage("/api/login");
         // Añadir método para eliminar la cookie
         http.logout().logoutUrl("/api/logout").deleteCookies( "JSESSIONID" );
-
         // Desactiva la verificación de tokens csrf para evitar conflictos
         http.csrf().disable();
         // Se desactiva la configuración por defecto para acceder a la H2-console
@@ -46,8 +46,16 @@ public class WebAuthorization{
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_BAD_REQUEST));
         // Devuelve un código de estado HTTP 200 (OK) después de que el usuario haya cerrado sesión correctamente.
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-        // Es solicitado por el SecurityFilterChain
+
+        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                .and()
+                .sessionManagement()
+                .invalidSessionUrl("/web/index.html")
+                .sessionFixation().none()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .maximumSessions(1);
         return http.build();
+        // Es solicitado por el SecurityFilterChain
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

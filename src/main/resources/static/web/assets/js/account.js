@@ -24,7 +24,13 @@ const app = createApp({
             (x, y) => y.id - x.id
           );
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.response.data,
+          });
+        });
     },
     loadData2() {
       axios
