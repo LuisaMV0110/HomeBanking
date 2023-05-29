@@ -19,8 +19,8 @@ const app = createApp({
       axios
         .get("/api/clients/current/accounts/" + this.id)
         .then((response) => {
-          this.accountId = response.data;
-          this.transactions = this.accountId.transactions.sort((x, y) => y.id - x.id);
+          this.accountsId = response.data;
+          this.transactions = this.accountsId.transactions.sort((x, y) => y.id - x.id);
         })
         .catch((error) => {
           Swal.fire({

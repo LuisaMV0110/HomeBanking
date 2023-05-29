@@ -63,10 +63,10 @@
         <div class="card-client2 mt-5" style="height: 150px;">
             <div class="content-client">
                 <div class="details-client">
-                    <h2 v-if="data">Account number<br><span>{{accountId.number}}</span></h2>
+                    <h2 v-if="accountsId">Account number<br><span>{{accountsId.number}}</span></h2>
                     <div class="data-client">
-                        <h3 v-if="data">Balance<br><span>{{formatCurrency(accountId.balance)}}</span></h3>
-                        <h3 v-if="data">Creation Date<br><span>{{accountId.creationDate.slice(0,10)}} at {{accountId.creationDate.slice(11,16)}}</span></h3>
+                        <h3 v-if="data">Balance<br><span>{{formatCurrency(accountsId.balance)}}</span></h3>
+                        <h3 v-if="data">Creation Date<br><span>{{accountsId.creationDate.slice(0,10)}} at {{accountsId.creationDate.slice(11,16)}}</span></h3>
                     </div>
                 </div>
             </div>
