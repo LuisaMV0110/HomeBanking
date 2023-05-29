@@ -123,6 +123,59 @@ font-size: 0.95em;
 font-weight: 400;
 opacity: 0.8;
 }
+/*  */
+.card-client2{
+  margin-top: 5rem;
+  position: relative;
+  width: 300px;
+  background-color: aliceblue;
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+  height: 270px;
+  }
+  .card-client2 .content-client{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  }
+  .card-client2 .content-client .details-client{
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  }
+  .card-client2:hover .content-client .details-client{
+  transform: translateY(0px);
+  }
+  .card-client2 .content-client .details-client h2{
+  font-size: 1.25em;
+  font-weight: 600;
+  color: #000653d7;
+  line-height: 1.2em;
+  }
+  .card-client2 .content-client .details-client h2 span{
+  font-size: 0.75em;
+  font-weight: 500;
+  opacity: 0.7;
+  }
+  .card-client2 .content-client .details-client .data-client{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  }
+  .card-client2 .content-client .details-client .data-client h3{
+  font-size: 1.1em;
+  line-height: 1.2em;
+  color: #0a5cb8;
+  font-weight: 600;
+  }
+  .card-client2 .content-client .details-client .data-client h3 span{
+  font-size: 0.95em;
+  font-weight: 400;
+  opacity: 0.8;
+  }
 /* Cards Accounts */
 .containerCardAccount{
 display: flex;
@@ -579,6 +632,9 @@ gap: 1rem;
 .social a{
 font-size: 2rem;
 }
+.social a:hover{
+color: rgb(154, 220, 253) !important;
+}
 
 @media screen and (min-width:885px) and (max-width:1205px){
 .containerAccounts, .containerTransaction{
@@ -640,7 +696,14 @@ width: 20rem;
 width: 250px;
 height: 410px !important;
 }
-.data-client{
+.card-client2{
+height: 200px !important;
+}
+.card-client2 .content-client .details-client .data-client{
+ justify-content:center;
+flex-direction: column; 
+}
+.card-client .content-client .details-client .data-client{
 justify-content:center;
 flex-direction: column;
 }

@@ -47,6 +47,7 @@
             <a href="#"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+            <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -58,6 +59,7 @@
         <a href="#"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
         <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+        <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
     </div>
     <main class="content d-flex align-items-center justify-content-center">
         <div class="containerAccounts d-flex flex-column justify-content-center align-items-center mt-5 mb-2">
@@ -73,7 +75,7 @@
                                 <div class="select-card-form mb-4">
                                 <select class="select-box" v-model="initialAccount">
                                     <option selected disabled value="">Initial Account</option>
-                                    <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                    <option v-for="account of accounts" :disabled="destinateAccount == account.number ? true : false" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                                 </select>
                                 <div class="icon-container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -82,7 +84,7 @@
                                 <div class="select-card-form mb-4">
                                     <select class="select-box" v-model="destinateAccount">
                                         <option selected disabled value="">Destinate Account</option>
-                                        <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                        <option  v-for="account of accounts" :disabled="initialAccount == account.number ? true : false" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                                 </select>
                                 <div class="icon-container">
                                     <i class="fa-solid fa-caret-down"></i>
@@ -99,7 +101,7 @@
                         <div class="select-card-form mb-4">
                             <select class="select-box" v-model="initialAccount">
                                 <option selected disabled value="">Initial Account</option>
-                                <option v-for="account of accountsActive" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
+                                <option v-for="account of accounts" :value="account.number">{{account.number}} | USD {{formatCurrency(account.balance)}}</option>
                             </select>
                             <div class="icon-container">
                                 <i class="fa-solid fa-caret-down"></i>

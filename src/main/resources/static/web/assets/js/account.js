@@ -20,9 +20,7 @@ const app = createApp({
         .get("/api/clients/current/accounts/" + this.id)
         .then((response) => {
           this.accountId = response.data;
-          this.transactions = this.accountId.transactions.sort(
-            (x, y) => y.id - x.id
-          );
+          this.transactions = this.accountId.transactions.sort((x, y) => y.id - x.id);
         })
         .catch((error) => {
           Swal.fire({

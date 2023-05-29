@@ -22,9 +22,9 @@ public class ClientDTO {
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
-        this.accounts = client.getAccounts().stream().map(account -> new AccountDTO(account)).collect(toList());
-        this.loans = client.getClientLoans().stream().map(loan -> new ClientLoanDTO(loan)).collect(toList());
-        this.cards = client.getCards().stream().map(card -> new CardDTO(card)).collect(toList());
+        this.accounts = client.getAccounts().stream().filter(account -> account.isAccountActive()).map(account -> new AccountDTO(account)).collect(toList());
+        this.loans = client.getClientLoans().stream().filter(clientLoan -> clientLoan.getFinalAmount() > 0).map(loan -> new ClientLoanDTO(loan)).collect(toList());
+        this.cards = client.getCards().stream().filter(card -> card.isCardActivate()).map(card -> new CardDTO(card)).collect(toList());
     }
     public long getId() {
         return id;

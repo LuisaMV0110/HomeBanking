@@ -13,6 +13,7 @@ const app = createApp({
       paymentsFilter:[],
       paymentsSort:[],
       amount:"",
+      maxAmount:"",
       destinateAccount:""
     };
   },
@@ -48,6 +49,7 @@ const app = createApp({
             return this.typeLoan.includes(loan.name);
         })[0];
         this.paymentsSort = this.paymentsFilter.payments.sort((x, y) => x - y)
+        this.maxAmount = this.paymentsFilter.maxAmount;
     },
     addLoans() {
       Swal.fire({

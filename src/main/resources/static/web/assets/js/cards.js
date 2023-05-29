@@ -6,7 +6,6 @@ const app = createApp({
       id: "",
       data: "",
       cardId: [],
-      cardActive: [],
       debit: [],
       credit: [],
       actDate : new Date().toLocaleDateString().split(",")[0].split("/").reverse().join("-"),
@@ -22,9 +21,8 @@ const app = createApp({
         .then((response) => {
           this.data = response.data;
           this.cardId = this.data.cards;
-          this.cardActive = this.cardId.filter((card) => card.cardActive == true);
-          this.debit = this.cardActive.filter((card) => card.type == "DEBIT");
-          this.credit = this.cardActive.filter((card) => card.type == "CREDIT");
+          this.debit = this.cardId.filter((card) => card.type == "DEBIT");
+          this.credit = this.cardId.filter((card) => card.type == "CREDIT");
         })
         .catch((err) => console.log(err));
     },

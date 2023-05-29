@@ -6,7 +6,6 @@ const app = createApp({
       id: "",
       data: "",
       accounts:[],
-      accountsActive:[],
       amount:"",
       description:"",
       initialAccount:"",
@@ -23,7 +22,6 @@ const app = createApp({
         .then((response) => {
           this.data = response.data;
           this.accounts = this.data.accounts.sort((x, y) => x.id - y.id);
-          this.accountsActive = this.accounts.filter((account) => account.accountActive == true);
         })
         .catch((err) => console.log(err));
     },

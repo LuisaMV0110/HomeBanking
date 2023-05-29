@@ -204,7 +204,7 @@ transition-property: clip-path;
 }
 /* Services */
 footer{
-min-height: 20vh;
+min-height: 10vh;
 background: rgb(9,9,121);
 background: linear-gradient(360deg, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
 }
@@ -214,18 +214,18 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-min-height: 80vh;
+min-height: 90vh;
 background: rgb(9,9,121);
 background: linear-gradient(180deg, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
 }
 .serviceH2{
-color: white;
+color: transparent;
+-webkit-text-stroke: 1px #ffffff;
 text-align: center;
 border-bottom: 2px solid white;
 font-size: 2.5rem;
 font-weight: 700;
 width: 100%;
-background-color: #0c007c;
 margin-bottom: 2rem;
 }
 .wrapper{

@@ -51,6 +51,7 @@
                 <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
                 <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
                 <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+                <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
             </div>
         </div>
         <div class="sidebar">
@@ -62,10 +63,11 @@
             <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+            <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
         </div>
         <main class="content d-flex align-items-center justify-content-center flex-column">
             <section class="containerAccounts d-flex align-items-center justify-content-center flex-column mt-5">
-            <div v-if="accountsActive.length <= 2">
+            <div v-if="accounts.length <= 2">
                 <div class="card-client">
                     <div class="imgbx">
                         <img src="./assets/img/user-image2.png" alt="">
@@ -74,9 +76,9 @@
                         <div class="details-client">
                             <h2 v-if="data">{{data.firstName}} {{data.lastName}}<br><span>MindBlue Client</span></h2>
                             <div class="data-client">
-                                <h3 v-if="data">{{accountsActive.length}}<br><span>Accounts</span></h3>
+                                <h3 v-if="data">{{accounts.length}}<br><span>Accounts</span></h3>
                                 <h3 v-if="data">{{loans.length}}<br><span>Loans</span></h3>
-                                <h3 v-if="data">{{cardActive.length}}<br><span>Cards</span></h3>
+                                <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
                                 <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
                             </div>
                             <button type="button" class="btn-create-account" data-bs-toggle="modal" data-bs-target="#accountModal"><i
@@ -94,9 +96,9 @@
                         <div class="details-client">
                             <h2 v-if="data">{{data.firstName}} {{data.lastName}}<br><span>MindBlue Client</span></h2>
                             <div class="data-client">
-                                <h3 v-if="data">{{accountsActive.length}}<br><span>Accounts</span></h3>
+                                <h3 v-if="data">{{accounts.length}}<br><span>Accounts</span></h3>
                                 <h3 v-if="data">{{loans.length}}<br><span>Loans</span></h3>
-                                <h3 v-if="data">{{cardActive.length}}<br><span>Cards</span></h3>
+                                <h3 v-if="data">{{cards.length}}<br><span>Cards</span></h3>
                                 <h3 v-if="data">{{formatCurrency(totalBalance)}}<br><span>Total Balance</span></h3>
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                 <div class="d-flex flex-column align-items-center justify-content-center cardsAccount mt-4">
                     <h2 class="accountH2">Your Accounts</h2>
                     <div class="containerCardAccount">
-                        <div class="cardAccount" v-if="accountsActive.length > 0" v-for="account of accountsActive">
+                        <div class="cardAccount" v-if="accounts.length > 0" v-for="account of accounts">
                             <div class="cardABox">
                                 <div class="contentCardA">
                                     <h2>0{{accounts.indexOf(account) + 1}}</h2>
@@ -173,7 +175,7 @@
                                     <h4 class="text-center text-dark">Account</h4>
                                     <select v-model="accountPayLoan" class="form-select form-select-sm mb-3 m-auto" aria-label=".form-select-sm example">
                                         <option selected value="">Select Account</option>
-                                            <option v-for="account of accountsActive" :value="account.number">{{account.number}} || Balance: USD{{formatCurrency(account.balance)}}</option>
+                                            <option v-for="account of accounts" :value="account.number">{{account.number}} || Balance: USD{{formatCurrency(account.balance)}}</option>
                                     </select>
                                     <div class="div-check mt-4 mb-4 m-auto">
                                         <div class="form-check m-auto">

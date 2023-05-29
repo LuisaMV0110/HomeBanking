@@ -47,6 +47,7 @@
             <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href="#"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+            <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -58,6 +59,7 @@
         <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
         <a href="#"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+        <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
     </div>
     <main class="content d-flex align-items-center justify-content-center">
         <div class="containerAccounts d-flex flex-column justify-content-center align-items-center mt-5 mb-2">
@@ -99,7 +101,8 @@
                                     <i class="fa-solid fa-caret-down"></i>
                                 </div>
                                 </div>
-                                <input class="mb-4" type="number" v-model="amount" name="amount" placeholder="Amount" required>
+                                <input type="number" v-model="amount" name="amount" placeholder="Amount" required>
+                                <h4 class="mt-1 mb-4" >Max amount: {{formatCurrency(maxAmount)}}</h4>
                                 <div class="d-flex flex-wrap gap-3 justify-content-center">
                                 <a href="" class="btn-create-cards" type="button" data-bs-toggle="modal" data-bs-target="#loanApplyModal">View request<i class="fa-regular fa-eye"></i></a>
                                 <button class="btn-create-cards" type="submit">Apply Loan<i class="fa-solid fa-coins"></i></button>

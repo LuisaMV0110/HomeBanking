@@ -17,7 +17,7 @@ const app = createApp({
   methods: {
 loadData() {
         axios
-        .get("http://localhost:8080/api/loans")
+        .get("/api/loans")
         .then((response) => {
           this.loansInfo = response.data.sort((x, y) => y.interest - x.interest);;
 

@@ -9,8 +9,6 @@ const app = createApp({
       accountType: "",
       loans: [],
       cards: [],
-      accountsActive: [],
-      cardActive: [],
       totalBalance: null,
       clientLoanId:[],
       accountPayLoan:'',
@@ -29,10 +27,8 @@ const app = createApp({
         .then((response) => {
           this.data = response.data;
           this.cards = this.data.cards;
-          this.cardActive = this.cards.filter((card) => card.cardActive == true);
           this.accounts = this.data.accounts.sort((x, y) => x.id - y.id);
-          this.accountsActive = this.accounts.filter((account) => account.accountActive == true);
-          this.loans = this.data.loans.filter(loan => loan.finalAmount > 0).sort((x, y) => x.id - y.id);
+          this.loans = this.data.loans.sort((x, y) => x.id - y.id);
           for (account of this.accounts) {
             this.totalBalance += account.balance;
           }
