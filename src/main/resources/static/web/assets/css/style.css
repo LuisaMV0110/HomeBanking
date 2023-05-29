@@ -127,7 +127,7 @@ opacity: 0.8;
 .card-client2{
   margin-top: 5rem;
   position: relative;
-  width: 300px;
+  width: 320px;
   background-color: aliceblue;
   border-radius: 20px;
   box-shadow: 0 25px 80px rgba(0,0,0,0.2);
@@ -140,6 +140,7 @@ opacity: 0.8;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  flex-wrap: wrap;
   }
   .card-client2 .content-client .details-client{
   padding: 20px;
