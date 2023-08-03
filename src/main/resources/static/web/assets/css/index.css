@@ -245,7 +245,6 @@ padding: 0 30px;
 .carousel .cardIndex{
 line-height: 350px;
 text-align: center;
-height: 420px;
 color: #fff;
 margin: 10px 0;
 border-radius: 10px;
@@ -254,7 +253,7 @@ box-shadow: 0px 4px 15px rgba(0,0,0, 0.3);
 .carousel .card-1{
 background: #0b006b;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-1 img{
 border-radius: 10px;
@@ -273,7 +272,7 @@ text-align: justify;
 .carousel .card-2{
 background: #0c007c;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-2 img{
 border-radius: 10px;
@@ -292,7 +291,7 @@ text-align: justify;
 .carousel .card-3{
 background: #0f0091;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-3 img{
 border-radius: 10px;
@@ -311,7 +310,7 @@ text-align: justify;
 .carousel .card-4{
 background: #1000a0;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-4 img{
 border-radius: 10px;
@@ -330,7 +329,7 @@ text-align: justify;
 .carousel .card-5{
 background: #1200b6;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-5 img{
 border-radius: 10px;
@@ -349,7 +348,7 @@ text-align: justify;
 .carousel .card-6{
 background: #1500d1;
 padding: 12px;
-height: 390px !important;
+height: 405px !important;
 }
 .carousel .card-6 img{
 border-radius: 10px;
