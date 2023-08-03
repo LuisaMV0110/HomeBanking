@@ -34,6 +34,7 @@
             </div>
         </div>
     </header>
+    <main>
     <section class="home" id="home">
         <video class="video-slide active" src="./assets/img/Videos-slider/5.mp4" autoplay muted loop></video>
         <video class="video-slide" src="./assets/img/Videos-slider/4.mp4" autoplay muted loop></video>
@@ -158,6 +159,7 @@
                     </div>
                 </div>
         </div>
+        </div>
         <component :is="'script'">
           $(".carousel").owlCarousel({
             margin:15,
@@ -182,10 +184,11 @@
            });
         </component>
     </section>
+</main>
     <footer class="d-flex justify-content-center align-items-center">
-        <section class="social_2 d-flex">
-            <a class="text-decoration-none text-white" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
-            "> <h5>&copy; 2023 Luisa Mendoza. All Rights Reserved</h5></a>
+        <section class="social_2 d-flex justify-content-center align-items-center">
+            <a class="text-decoration-none text-white text-center" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
+            "> <h5>&copy; 2023 Luisa Mendoza. <span>All Rights Reserved</span></h5></a>
         </section>
     </footer>
 </body>
