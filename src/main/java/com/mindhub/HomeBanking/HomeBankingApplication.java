@@ -64,47 +64,6 @@ public class HomeBankingApplication {
 			transaction.save(transaction3);
 			transaction.save(transaction4);
 
-			Client client2 = new Client("Nicoll","Laguna","nicoll@gmail.com",passwordEncoder.encode("nicoll1503"));
-			client.save(client2);
-
-			Card card4 = new Card(client2.getFirstName() + " " + client2.getLastName(),CardType.CREDIT,CardColor.SILVER,"6313" + " " + "0668" + " " + "8884" + " " + "8458",315,LocalDate.now(), LocalDate.now().plusYears(5),true);
-
-			Account account3 = new Account("VIN-003", LocalDateTime.now(),50000,true, AccountType.CURRENT);
-			Account account4 = new Account("VIN-004", LocalDateTime.now().plusDays(4),100000,true, AccountType.SAVING);
-
-			client2.addAccount(account3);
-			client2.addAccount(account4);
-			client2.addCard(card4);
-
-			card.save(card4);
-
-			Transaction transaction5 = new Transaction(TransactionType.CREDIT,10000,"Credit of Nicoll",LocalDateTime.now(),account3.getBalance(),true);
-			Transaction transaction6 = new Transaction(TransactionType.DEBIT,4570,"Debit of Nicoll",LocalDateTime.now(),account3.getBalance(),true);
-			Transaction transaction7 = new Transaction(TransactionType.DEBIT,1504,"Debit of Nicoll",LocalDateTime.now(),account3.getBalance(),true);
-
-			account.save(account3);
-			account.save(account4);
-
-			account3.addTransaction(transaction5);
-			account3.addTransaction(transaction6);
-			account3.addTransaction(transaction7);
-
-			transaction.save(transaction5);
-			transaction.save(transaction6);
-			transaction.save(transaction7);
-
-			Transaction transaction8 = new Transaction(TransactionType.CREDIT,78000,"Credit of Nicoll",LocalDateTime.now(),account4.getBalance(),true);
-			Transaction transaction9 = new Transaction(TransactionType.DEBIT,12000,"Debit of Nicoll",LocalDateTime.now(),account4.getBalance(),true);
-			Transaction transaction10 = new Transaction(TransactionType.CREDIT,7300,"Credit of Nicoll",LocalDateTime.now(),account4.getBalance(),true);
-
-			account4.addTransaction(transaction8);
-			account4.addTransaction(transaction9);
-			account4.addTransaction(transaction10);
-
-			transaction.save(transaction8);
-			transaction.save(transaction9);
-			transaction.save(transaction10);
-
 			Client client3 = new Client("Luisa", "Mendoza","luisafmv321@gmail.com", passwordEncoder.encode("luisa"));
 			client.save(client3);
 			Loan loan1 = new Loan("Mortgage",500000, Set.of(12,24,36,48,60),1.2);
@@ -129,13 +88,6 @@ public class HomeBankingApplication {
 			loan2.addClientLoan(clientLoan2);
 			clientLoan.save(clientLoan2);
 
-			client2.addClientLoan(clientLoan3);
-			loan2.addClientLoan(clientLoan3);
-			clientLoan.save(clientLoan3);
-
-			client2.addClientLoan(clientLoan4);
-			loan3.addClientLoan(clientLoan4);
-			clientLoan.save(clientLoan4);
 		};
 	}
 }

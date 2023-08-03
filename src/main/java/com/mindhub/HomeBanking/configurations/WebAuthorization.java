@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
@@ -22,7 +23,7 @@ public class WebAuthorization{
                 .antMatchers(HttpMethod.POST,"/api/login","/api/register").permitAll()
                 .antMatchers( "/web/index.html","/web/assets/js/index.js","/web/assets/css/index.css", "/web/assets/img/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards","/api/transactions","/api/logout","/api/loans","/api/loan/pay").hasAnyAuthority("CLIENT","ADMIN")
-                .antMatchers(HttpMethod.PUT, "/api/clients/current/cards","/api/accounts/{id}").hasAnyAuthority("ADMIN","CLIENT")
+                .antMatchers(HttpMethod.PUT, "/api/clients/current/cards/{id}","/api/accounts/{id}").hasAnyAuthority("ADMIN","CLIENT")
                 .antMatchers("/api/clients/current","/api/clients/current/accounts/{id}","/api/loans","/web/accounts.html" , "/web/account.html" , "/web/cards.html","/web/createCards.html","/web/transfers.html","/web/loan-application.html","/web/assets/js/**","/web/assets/css/**").hasAnyAuthority("CLIENT","ADMIN")
                 .antMatchers("/web/admin/**" , "/rest/**" , "/h2-console/**", "/api/clients").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/manager/loans").hasAuthority("ADMIN")
@@ -33,7 +34,6 @@ public class WebAuthorization{
                 .loginPage("/api/login");
         // Añadir método para eliminar la cookie
         http.logout().logoutUrl("/api/logout").deleteCookies( "JSESSIONID" );
-
         // Desactiva la verificación de tokens csrf para evitar conflictos
         http.csrf().disable();
         // Se desactiva la configuración por defecto para acceder a la H2-console
@@ -46,8 +46,16 @@ public class WebAuthorization{
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_BAD_REQUEST));
         // Devuelve un código de estado HTTP 200 (OK) después de que el usuario haya cerrado sesión correctamente.
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-        // Es solicitado por el SecurityFilterChain
+
+        http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+                .and()
+                .sessionManagement()
+                .invalidSessionUrl("/web/index.html")
+                .sessionFixation().none()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .maximumSessions(1);
         return http.build();
+        // Es solicitado por el SecurityFilterChain
     }
     private void clearAuthenticationAttributes(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

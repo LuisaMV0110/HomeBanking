@@ -68,7 +68,7 @@ public class TransactionsController {
         }
 //        Description
         if(description.isBlank()){
-            description = "Transaction to " + destinateAccount;
+            description = "Transaction to " + destinateAccount.toUpperCase();
         }
 //        Add transactions
 

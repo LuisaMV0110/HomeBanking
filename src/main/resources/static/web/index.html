@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="shortcut icon" href="./assets/img/FavI.ico" type="image/x-icon">
     <script src="https://kit.fontawesome.com/92e84a8749.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,6 +17,7 @@
     <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="./assets/js/index.js"></script>
     <title>Mind Blue | Home</title>
@@ -26,14 +28,14 @@
         <div class="menu-btn"></div>
         <div class="navigation">
             <div class="navigation-items">
-                <a href="#">Home</a>
-                <a href="">About</a>
-                <a href="">Contact</a>
+                <a id="infoHome" href="#home">Home</a>
+                <a id="infoServices" href="#services">Services</a>
                 <button class="button" id="form-open">Sign In</button>
             </div>
         </div>
     </header>
-    <section class="home">
+    <main>
+    <section class="home" id="home">
         <video class="video-slide active" src="./assets/img/Videos-slider/5.mp4" autoplay muted loop></video>
         <video class="video-slide" src="./assets/img/Videos-slider/4.mp4" autoplay muted loop></video>
         <video class="video-slide" src="./assets/img/Videos-slider/3.mp4" autoplay muted loop></video>
@@ -42,7 +44,6 @@
         <div class="content">
             <h1>Mind<span>Blue</span></h1>
             <h3>Think, buy and charge your money in <span>blue</span>.</h3>
-            <!-- <a href="">Read More</a> -->
         </div>
         <div class="media-icons">
             <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
@@ -111,5 +112,84 @@
             </div>
         </section>
     </section>
+    <section class="indexServices" id="services">
+        <h2 data-text="SERVICES" class="serviceH2">SERVICES</h2>
+        <div class="wrapper">
+            <div class="carousel owl-carousel">
+                <div class="cardIndex card-1">
+                    <img src="./assets/img/Carousel/Accounts.jpg" alt="">
+                    <div>
+                        <h4>Accounts</h4>
+                        <h6>We offer savings and current accounts so you can manage your finances as you wish.</h6>
+                    </div>
+                </div>
+                <div class="cardIndex card-2">
+                    <img src="./assets/img/Carousel/Cards.jpg" alt="">
+                    <div>
+                        <h4>Cards</h4>
+                        <h6>We offer you the possibility of having multiple debit and credit cards, so you can organize your purchases according to your preferences.</h6>
+                    </div>
+                </div>
+                <div class="cardIndex card-3">
+                    <img src="./assets/img/Carousel/Loans.jpg" alt="">
+                    <div>
+                        <h4>Loans</h4>
+                        <h6>We offer you the possibility to access different types of loans, which we continuously update so that you can find the one that is suitable for you and your needs.</h6>
+                    </div>
+                </div>
+                <div class="cardIndex card-4">
+                    <img src="./assets/img/Carousel/Transfers.jpg" alt="">
+                    <div>
+                        <h4>Transfers</h4>
+                        <h6>We offer you the possibility to transfer your money between your accounts or to the accounts of other clients, at no additional cost.</h6>
+                    </div>
+                </div>
+                <div class="cardIndex card-5">
+                    <img src="./assets/img/Carousel/Interest.jpg" alt="">
+                    <div>
+                        <h4>Low interest rates</h4>
+                        <h6>In general, we want to offer you the lowest possible interest rates, so you can see your goals getting closer every day without too much sacrifice.</h6>
+                    </div>
+                </div>
+                <div class="cardIndex card-6">
+                    <img src="./assets/img/Carousel/Ease.jpg" alt="">
+                    <div>
+                        <h4>User-friendly interface</h4>
+                        <h6>We offer you an intuitive interface that is far from being confusing, so exploring our bank is not a nightmare for you.</h6>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <component :is="'script'">
+          $(".carousel").owlCarousel({
+            margin:15,
+            loop:true,
+            autoplay: true,
+            autoplayTimeout: 6000,
+            autoplayHoverPause:true,
+            responsive: {
+                0:{
+                   items:1,
+                   nav: false 
+                },
+                600:{
+                   items:2,
+                   nav: false 
+                },
+                1000:{
+                    items:3,
+                    nav: false 
+                },
+            }
+           });
+        </component>
+    </section>
+</main>
+    <footer class="d-flex justify-content-center align-items-center">
+        <section class="social_2 d-flex justify-content-center align-items-center">
+            <a class="text-decoration-none text-white text-center" target="_blank" href="https://www.linkedin.com/in/luisa-fernanda-mendoza-valencia-lfmv10012003
+            "> <h5>&copy; 2023 Luisa Mendoza. <span>All Rights Reserved</span></h5></a>
+        </section>
+    </footer>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class ClientController {
     private AccountServices accountServices;
     @Autowired
     private PasswordEncoder passwordEncoder;
-//    Método número aleatorio
+
     @GetMapping("/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return clientServices.getClientDTOAuth(authentication);

@@ -202,6 +202,186 @@ clip-path: circle(150% at 0 50%);
 transition: 2s ease;
 transition-property: clip-path;
 }
+/* Services */
+footer{
+min-height: 10vh;
+background: rgb(9,9,121);
+background: linear-gradient(360deg, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
+}
+footer .social_2 a{
+opacity: 0.8;
+}
+footer .social_2 a:hover{
+opacity: 1;
+}
+/* Carousel */
+.indexServices{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+min-height: 90vh;
+background: rgb(9,9,121);
+background: linear-gradient(180deg, rgba(9,9,121,1) 7%, rgba(0,184,255,1) 100%);
+}
+.serviceH2{
+color: transparent;
+-webkit-text-stroke: 1px #ffffff;
+text-align: center;
+border-bottom: 2px solid white;
+font-size: 2.5rem;
+font-weight: 700;
+width: 100%;
+margin-bottom: 2rem;
+}
+.wrapper{
+width: 100%;
+}
+.wrapper .carousel{
+max-width: 1200px;
+margin: auto;
+padding: 0 30px;
+}
+.carousel .cardIndex{
+line-height: 350px;
+text-align: center;
+color: #fff;
+margin: 10px 0;
+border-radius: 10px;
+box-shadow: 0px 4px 15px rgba(0,0,0, 0.3);
+}
+.carousel .card-1{
+background: #0b006b;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-1 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-1 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-1 h6{
+font-weight: 400;
+text-align: justify;
+}
+.carousel .card-2{
+background: #0c007c;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-2 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-2 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-2 h6{
+font-weight: 400;
+text-align: justify;
+}
+.carousel .card-3{
+background: #0f0091;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-3 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-3 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-3 h6{
+font-weight: 400;
+text-align: justify;
+}
+.carousel .card-4{
+background: #1000a0;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-4 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-4 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-4 h6{
+font-weight: 400;
+text-align: justify;
+}
+.carousel .card-5{
+background: #1200b6;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-5 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-5 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-5 h6{
+font-weight: 400;
+text-align: justify;
+}
+.carousel .card-6{
+background: #1500d1;
+padding: 12px;
+height: 405px !important;
+}
+.carousel .card-6 img{
+border-radius: 10px;
+box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.203);
+height: 14rem !important;
+}
+.carousel .card-6 h4{
+margin-top: 1rem !important;
+font-weight: 600;
+text-shadow: 4px 4px 15px rgba(255, 255, 255, 0.587)!important;
+}
+.carousel .card-6 h6{
+font-weight: 400;
+text-align: justify;
+}
+.owl-dots{
+text-align: center;
+margin-top: 10px;
+}
+.owl-dot{
+height: 15px;
+width: 30px;
+border-radius: 25px;
+cursor: pointer;
+outline: none;
+margin: 0 5px;
+border: 2px solid #fff !important;
+transition: all .3s ease;
+}
+.owl-dot:hover,
+.owl-dot.active{
+background: #fff !important;
+}
 /* Login */
 .form-container{
 position: fixed;

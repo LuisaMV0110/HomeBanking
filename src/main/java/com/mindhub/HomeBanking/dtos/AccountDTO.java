@@ -23,7 +23,7 @@ public class AccountDTO {
         this.balance = account.getBalance();
         this.accountActive = account.isAccountActive();
         this.accountType = account.getAccountType();
-        this.transactions= account.getTransactions().stream().map(transaction -> new TransactionDTO(transaction)).collect(toSet());
+        this.transactions= account.getTransactions().stream().filter(transaction -> transaction.isTransactionActive()).map(transaction -> new TransactionDTO(transaction)).collect(toSet());
     }
     public long getId() {
         return id;

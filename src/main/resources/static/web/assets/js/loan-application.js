@@ -13,6 +13,7 @@ const app = createApp({
       paymentsFilter:[],
       paymentsSort:[],
       amount:"",
+      maxAmount:"",
       destinateAccount:""
     };
   },
@@ -23,7 +24,7 @@ const app = createApp({
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current")
+        .get("/api/clients/current")
         .then((response) => {
           this.data = response.data;
           this.accounts = this.data.accounts.sort((x, y) => x.id - y.id);
@@ -37,7 +38,7 @@ const app = createApp({
     },
     getLoans(){
         axios
-        .get("http://localhost:8080/api/loans")
+        .get("/api/loans")
         .then((response) => {
           this.loans = response.data;
         })
@@ -48,6 +49,7 @@ const app = createApp({
             return this.typeLoan.includes(loan.name);
         })[0];
         this.paymentsSort = this.paymentsFilter.payments.sort((x, y) => x - y)
+        this.maxAmount = this.paymentsFilter.maxAmount;
     },
     addLoans() {
       Swal.fire({

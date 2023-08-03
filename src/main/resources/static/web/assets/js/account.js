@@ -17,18 +17,22 @@ const app = createApp({
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current/accounts/" + this.id)
+        .get("/api/clients/current/accounts/" + this.id)
         .then((response) => {
-          this.accountId = response.data;
-          this.transactions = this.accountId.transactions.sort(
-            (x, y) => y.id - x.id
-          );
+          this.accountsId = response.data;
+          this.transactions = this.accountsId.transactions.sort((x, y) => y.id - x.id);
         })
-        .catch((err) => console.log(err));
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: error.response.data,
+          });
+        });
     },
     loadData2() {
       axios
-        .get("http://localhost:8080/api/clients/current")
+        .get("/api/clients/current")
         .then((response) => {
           this.data = response.data;
         })

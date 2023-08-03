@@ -51,6 +51,7 @@
       <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
       <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
       <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+      <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
     </div>
   </div>
   <div class="sidebar">
@@ -62,6 +63,7 @@
     <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
     <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
     <a href="#"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+    <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
   </div>
   <main class="content d-flex align-items-center justify-content-center">
     <div class="containerAccounts d-flex align-items-center justify-content-center flex-column mt-5">
@@ -69,7 +71,7 @@
         <h1 class="cardH1 text-center mt-2" style="font-weight: 600; -webkit-text-stroke: 0.7px #003785">
           Your Cards {{data.firstName}}
         </h1>
-        <a v-if="cardActive.length <= 5" class="btn-create-cards" href="./createCards.html"><i
+        <a v-if="cardId.length <= 5" class="btn-create-cards" href="./createCards.html"><i
             class="fa-regular fa-credit-card me-1"></i>Create Card</a>
       </section>
       <section class="sectionCard">

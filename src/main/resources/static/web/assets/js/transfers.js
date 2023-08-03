@@ -6,7 +6,6 @@ const app = createApp({
       id: "",
       data: "",
       accounts:[],
-      accountsActive:[],
       amount:"",
       description:"",
       initialAccount:"",
@@ -19,11 +18,10 @@ const app = createApp({
   methods: {
     loadData() {
       axios
-        .get("http://localhost:8080/api/clients/current")
+        .get("/api/clients/current")
         .then((response) => {
           this.data = response.data;
           this.accounts = this.data.accounts.sort((x, y) => x.id - y.id);
-          this.accountsActive = this.accounts.filter((account) => account.accountActive == true);
         })
         .catch((err) => console.log(err));
     },

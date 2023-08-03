@@ -45,6 +45,7 @@
             <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
             <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
             <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+            <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
         </div>
     </div>
     <div class="sidebar">
@@ -56,9 +57,21 @@
         <a href="./transfers.html"><i class="fa-solid fa-money-bill-transfer"></i><span>Transfers</span></a>
         <a href="./loan-application.html"><i class="fa-solid fa-sack-dollar"></i><span>Loans</span></a>
         <a href="./cards.html"><i class="fa-solid fa-credit-card"></i><span>Cards</span></a>
+        <a href="./admin/manager.html" v-if="data.email == 'luisafmv321@gmail.com'"><i class="fa-solid fa-user-secret"></i><span>Manager</span></a>
     </div>
     <main class="content d-flex flex-column align-items-center justify-content-center">
-        <section class="containerTransaction d-flex flex-column align-items-center mt-5">     
+        <div class="card-client2 mt-5" style="height: 170px;">
+            <div class="content-client">
+                <div class="details-client">
+                    <h2 v-if="accountsId">Account number<br><span>{{accountsId.number}}</span></h2>
+                    <div class="data-client">
+                        <h3 v-if="data">Balance<br><span>{{formatCurrency(accountsId.balance)}}</span></h3>
+                        <h3 v-if="data">Creation Date<br><span>{{accountsId.creationDate.slice(0,10)}} at {{accountsId.creationDate.slice(11,16)}}</span></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section v-if="transactions.length > 0" class="containerTransaction d-flex flex-column align-items-center mt-3">     
             <section class="table-header">
                 <h1>Your Transactions</h1>
             </section>
@@ -87,6 +100,9 @@
                     </tbody>
                 </table>
             </section>
+    </section>
+    <section class="containerTransaction d-flex flex-column align-items-center justify-content-center mt-3" v-else>
+        <h1 class="accountH1" style="-webkit-text-stroke: 2px #006affa0;">You have no transactions in this account.</h1>
     </section>
     </main>
     <footer class="d-flex justify-content-evenly align-items-center flex-wrap">

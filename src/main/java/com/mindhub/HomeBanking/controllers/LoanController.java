@@ -48,8 +48,11 @@ public class LoanController {
         Loan loan = loanServices.findById(loanApplicationDTO.getLoanID());
         Set<ClientLoan> clientLoans =  client.getClientLoans().stream().filter(clientLoan -> clientLoan.getLoan().getName().equalsIgnoreCase(loan.getName()) && clientLoan.getFinalAmount() > 0).collect(Collectors.toSet());
 
-        if (amount == 0 || payments == 0){
-            return new ResponseEntity<>("Invalid loan application data", HttpStatus.FORBIDDEN);
+        if (amount <= 0){
+            return new ResponseEntity<>("Choose an amount greater than 0.", HttpStatus.FORBIDDEN);
+        }
+        if (payments <= 0){
+            return new ResponseEntity<>("Payments of that amount are not allowed.", HttpStatus.FORBIDDEN);
         }
         if (loan == null){
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
